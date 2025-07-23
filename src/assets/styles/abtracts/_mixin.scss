@@ -1,0 +1,23 @@
+@use "../base/variables" as *;
+
+@mixin flexbox($align: center, $justify: flex-start, $direction: row, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+@mixin text-style(
+  $color: $grey-60,
+  $fsize: 1.8rem,
+  $fstyle: normal,
+  $fweight: 500,
+  $lheight: 2.7rem
+) {
+  color: $color;
+  font-size: $fsize;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  line-height: $lheight;
+}
