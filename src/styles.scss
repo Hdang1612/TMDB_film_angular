@@ -10,3 +10,12 @@ html {
   font-size: 10px;
   font-family: $font-family-base;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
