@@ -1,12 +1,15 @@
-<div class="card-container">
+<div class="card-container" [ngClass]="{ horizontal: isHorizontal }">
   <div class="img-container">
     <img class="movie-img" src="{{ movie.poster_path }}" alt="" />
-    <div class="rating-percent-container">
+    <div *ngIf="!isHorizontal" class="rating-percent-container">
       <div class="outer-ring"></div>
       <div class="rating-percent">{{ movie.vote_average }}</div>
     </div>
     <div class="option-icon">
       <img src="assets/icons/horizon-menu.svg" alt="" />
+    </div>
+    <div *ngIf="isHorizontal" class="play-btn">
+      <img src="assets/icons/play.svg" alt="" />
     </div>
   </div>
   <div class="movie-info">

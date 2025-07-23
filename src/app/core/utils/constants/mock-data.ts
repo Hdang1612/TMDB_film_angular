@@ -207,3 +207,33 @@ export const FOOTER_NAVS = [
     ],
   },
 ];
+
+export const HOME_SECTIONS = [
+  {
+    key: 'trending',
+    title: 'Trending',
+    btnGroup: [
+      { label: 'Today', value: 'today' },
+      { label: 'This Week', value: 'week' },
+    ],
+    data: [], 
+  },
+  {
+    key: 'trailer',
+    title: 'Lastest Trailer',
+    btnGroup: [
+      { label: 'Today', value: 'today' },
+      { label: 'This Week', value: 'week' },
+    ],
+    data: [],
+  },
+  {
+    key: 'popular',
+    title: 'Popular',
+    btnGroup: [
+      { label: 'Today', value: 'today' },
+      { label: 'This Week', value: 'week' },
+    ],
+    data: [],
+  },
+];

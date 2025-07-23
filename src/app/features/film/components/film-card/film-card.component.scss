@@ -53,4 +53,33 @@
       @include text-style($fweight: 500, $fsize: 1.2rem);
     }
   }
+  &.horizontal {
+    width: 40rem;
+    min-width: 40rem;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    .img-container {
+      transition: all 0.2s ease-in-out;
+    }
+    .img-container:hover {
+      transform: scale(1.05);
+    }
+    .movie-img {
+      height: 20rem;
+      object-fit: cover;
+    }
+    .play-btn img {
+      width: 6.4rem;
+      height: 6.4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .movie-info {
+      @include flexbox($direction: column, $justify: center);
+    }
+  }
 }
