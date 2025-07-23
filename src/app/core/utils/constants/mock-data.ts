@@ -176,3 +176,34 @@ export const POPULAR_MOVIE = [
     vote_count: 2100,
   },
 ];
+
+export const FOOTER_NAVS = [
+  {
+    title: 'Home',
+    items: ['Categories', 'Devices', 'Pricing', 'FAQ'],
+  },
+  {
+    title: 'Movies',
+    items: ['Genres', 'Trending', 'New Release', 'Popular'],
+  },
+  {
+    title: 'Shows',
+    items: ['Genres', 'Trending', 'New Release', 'Popular'],
+  },
+  {
+    title: 'Support',
+    items: ['Contact Us'],
+  },
+  {
+    title: 'Subscription',
+    items: ['Plans', 'Features'],
+  },
+  {
+    title: 'Connect With Us',
+    icons: [
+      { name: 'facebook', iconClass: 'assets/icons/social-fb.svg' },
+      { name: 'twitter', iconClass: 'assets/icons/social-X.svg' },
+      { name: 'linkedin', iconClass: 'assets/icons/social-linkedin.svg' },
+    ],
+  },
+];
