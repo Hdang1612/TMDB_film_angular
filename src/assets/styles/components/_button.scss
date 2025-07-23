@@ -1,0 +1,17 @@
+@use "../base/variables" as *;
+// @use "../abstracts/mixin" as *;
+
+.btn {
+  border-radius: 0.8rem;
+  border: 0;
+  background: var(--Red-45, #e50000);
+  padding: 1.8rem 2.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: $absolute-white;
+  font-weight: 600;
+  font-family: $font-family-base;
+  font-size: 1.8rem;
+  cursor: pointer;
+}

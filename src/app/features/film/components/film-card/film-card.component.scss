@@ -1,0 +1,56 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+.card-container {
+  width: 24rem;
+  min-width: 24rem;
+  border: 1px solid $black-15;
+  background: $black-10;
+  padding: 1rem 1rem 0 1rem;
+  cursor: pointer;
+  .img-container {
+    position: relative;
+    .movie-img {
+      width: 100%;
+      border-radius: 1rem;
+    }
+    .rating-percent-container {
+      position: absolute;
+      bottom: -1rem;
+      left: 1rem;
+      border-radius: 100%;
+      padding: 1rem;
+      width: 3.4rem;
+      height: 3.4rem;
+      background: #000;
+      font-size: 1rem;
+      font-weight: 800;
+      @include flexbox($justify: center);
+    }
+    .option-icon {
+      position: absolute;
+      @include flexbox;
+      top: 1rem;
+      right: 1rem;
+      //   padding: 1rem;
+      border-radius: 50%;
+      background: $grey-65;
+      opacity: 0.7;
+      img {
+        width: 18px;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .movie-info {
+    padding: 2.6rem 1rem 1rem;
+    &__name {
+      @include text-style($fweight: 700, $color: $absolute-white);
+      margin-bottom: 0.6rem;
+    }
+    &__date {
+      @include text-style($fweight: 500, $fsize: 1.2rem);
+    }
+  }
+}

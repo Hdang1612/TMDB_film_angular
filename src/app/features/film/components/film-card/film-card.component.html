@@ -1,1 +1,16 @@
-<p>film-card works!</p>
+<div class="card-container">
+  <div class="img-container">
+    <img class="movie-img" src="{{ movie.poster_path }}" alt="" />
+    <div class="rating-percent-container">
+      <div class="outer-ring"></div>
+      <div class="rating-percent">{{ movie.vote_average }}</div>
+    </div>
+    <div class="option-icon">
+      <img src="assets/icons/horizon-menu.svg" alt="" />
+    </div>
+  </div>
+  <div class="movie-info">
+    <p class="movie-info__name">{{ movie.title }}</p>
+    <p class="movie-info__date">{{ movie.release_date }}</p>
+  </div>
+</div>
