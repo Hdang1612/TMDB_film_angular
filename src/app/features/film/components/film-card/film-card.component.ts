@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class FilmCardComponent implements OnInit {
   @Input() movie!: any;
   @Input() isHorizontal: boolean = false;
+  @Input() isRecommendation: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}

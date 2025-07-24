@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SectionModel } from '../../models/section';
 
 @Component({
   selector: 'app-page-section',
@@ -6,14 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./page-section.component.scss'],
 })
 export class PageSectionComponent implements OnInit {
-  @Input() section!: {
-    key: string;
-    title: string;
-    btnGroup: { label: string }[];
-    isMovieHorizontal: boolean;
-    data: any[];
-    subNav: string;
+  @Input() section: SectionModel = {
+    key: '',
+    title: '',
+    btnGroup: [],
+    isMovieHorizontal: false,
+    isRecommendation: false,
+    data: [],
+    subNav: '',
   };
+  activeBtnIndex: number = 0;
 
   constructor() {}
 

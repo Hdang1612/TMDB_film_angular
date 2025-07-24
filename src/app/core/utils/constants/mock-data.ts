@@ -220,7 +220,8 @@ export const HOME_SECTIONS = [
     ],
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: '',
   },
   {
@@ -232,7 +233,8 @@ export const HOME_SECTIONS = [
     ],
     data: POPULAR_MOVIE,
     isMovieHorizontal: true,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: '',
   },
   {
@@ -244,7 +246,8 @@ export const HOME_SECTIONS = [
     ],
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: '',
   },
   // {
@@ -256,7 +259,7 @@ export const HOME_SECTIONS = [
   //   ],
   //   data: [],
   //   isMovieHorizontal: false,
-  //   activeBtnIndex: 0,
+  //
   // },
 ];
 export const DETAIL_SECTIONS = [
@@ -266,7 +269,8 @@ export const DETAIL_SECTIONS = [
     btnGroup: [],
     data: [],
     isMovieHorizontal: false,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: 'Full Cast & Crew',
   },
   {
@@ -275,7 +279,8 @@ export const DETAIL_SECTIONS = [
     btnGroup: [],
     data: [],
     isMovieHorizontal: true,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: 'View all season',
   },
   {
@@ -287,7 +292,8 @@ export const DETAIL_SECTIONS = [
     ],
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: '',
   },
   {
@@ -301,7 +307,8 @@ export const DETAIL_SECTIONS = [
     ],
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
-    activeBtnIndex: 0,
+    isRecommendation: false,
+
     subNav: '',
   },
   {
@@ -310,7 +317,8 @@ export const DETAIL_SECTIONS = [
     btnGroup: [],
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
-    activeBtnIndex: 0,
+    isRecommendation: true,
+
     subNav: '',
   },
   // {
