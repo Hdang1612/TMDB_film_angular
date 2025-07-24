@@ -26,93 +26,113 @@
   }
 }
 
-.home-content {
-  padding: 2rem 16.1rem;
-  margin-top: 12rem;
-  .section {
-    @include flexbox($direction: column, $align: flex-start, $gap: 6rem);
-    margin-bottom: 8rem;
-    .leaderboard-heading {
-      .leaderboard-note {
-        @include flexbox($gap: 1rem, $direction: column, $align: flex-start);
-        .leaderboard-note-container {
-          @include flexbox($gap: 1rem);
-          .all-time-dot {
-            display: block;
-            width: 1rem;
-            height: 1rem;
-            background: linear-gradient(to right, #a8edea, #01f3b4);
-            border-radius: 50%;
-          }
-          .week-dot {
-            display: block;
-            width: 1rem;
-            height: 1rem;
-            background: linear-gradient(to right, #ffe5e5, #e50000);
-            border-radius: 50%;
-          }
-          p {
-            @include text-style($fsize: 1rem, $color: $absolute-white);
+.home-content-container {
+  width: 100%;
+  @include flexbox($justify: center);
+  .home-content {
+    max-width: $maxw-xl;
+    padding: 2rem 0;
+    margin-top: 12rem;
+    .section {
+      @include flexbox($direction: column, $align: flex-start, $gap: 6rem);
+      margin-bottom: 8rem;
+      .leaderboard-heading {
+        .leaderboard-note {
+          @include flexbox($gap: 1rem, $direction: column, $align: flex-start);
+          .leaderboard-note-container {
+            @include flexbox($gap: 1rem);
+            .all-time-dot {
+              display: block;
+              width: 1rem;
+              height: 1rem;
+              background: linear-gradient(to right, #a8edea, #01f3b4);
+              border-radius: 50%;
+            }
+            .week-dot {
+              display: block;
+              width: 1rem;
+              height: 1rem;
+              background: linear-gradient(to right, #ffe5e5, #e50000);
+              border-radius: 50%;
+            }
+            p {
+              @include text-style($fsize: 1rem, $color: $absolute-white);
+            }
           }
         }
       }
+      .editor-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem 3rem;
+      }
     }
-    .editor-grid {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 3rem;
-    }
-  }
-  .section-heading {
-    @include flexbox();
-    &__text {
-      @include text-style($color: $absolute-white, $fsize: $heading-h4);
-      margin-right: 2rem;
-    }
-    &__btn-group {
+    .section-heading {
       @include flexbox();
-      @include text-style($fweight: 600);
-      border: 1px solid $absolute-white;
-      border-radius: 3rem;
-
-      //   overflow: hidden;
-      .trending-btn {
-        // border: 1px solid $absolute-white;
+      &__text {
+        @include text-style($color: $absolute-white, $fsize: $heading-h4);
+        margin-right: 2rem;
+      }
+      &__btn-group {
+        @include flexbox();
+        @include text-style($fweight: 600);
+        border: 1px solid $absolute-white;
         border-radius: 3rem;
-        padding: 0.4rem 2rem;
-        cursor: pointer;
-        &--active {
-          background: $absolute-white;
-          color: $absolute-black;
+
+        //   overflow: hidden;
+        .trending-btn {
+          // border: 1px solid $absolute-white;
+          border-radius: 3rem;
+          padding: 0.4rem 2rem;
+          cursor: pointer;
+          &--active {
+            background: $absolute-white;
+            color: $absolute-black;
+          }
         }
       }
     }
-  }
+    .scroll-wrapper-container {
+      width: 100%;
+      position: relative;
+      // overflow: hidden;
+      .scroll-wrapper {
+        overflow-x: auto;
+        width: 100%;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding-bottom: 3rem;
+        // position: relative;
 
-  .scroll-wrapper {
-    overflow-x: auto;
-    width: 100%;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-bottom: 3rem;
+        &::-webkit-scrollbar {
+          height: 8px;
+        }
 
-    &::-webkit-scrollbar {
-      height: 8px;
-    }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 4px;
+        }
 
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      border-radius: 4px;
-    }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          background-color: $grey-60;
+        }
 
-    &::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background-color: $grey-60;
-    }
-
-    .section-content {
-      @include flexbox($gap: 2rem);
+        .section-content {
+          @include flexbox($gap: 2rem);
+        }
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6rem;
+        height: 100%;
+        background: linear-gradient(to right, transparent, #000000);
+        pointer-events: none;
+      }
     }
   }
 }
