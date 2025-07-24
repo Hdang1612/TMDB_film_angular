@@ -221,6 +221,7 @@ export const HOME_SECTIONS = [
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
     activeBtnIndex: 0,
+    subNav: '',
   },
   {
     key: 'trailer',
@@ -232,6 +233,7 @@ export const HOME_SECTIONS = [
     data: POPULAR_MOVIE,
     isMovieHorizontal: true,
     activeBtnIndex: 0,
+    subNav: '',
   },
   {
     key: 'popular',
@@ -243,6 +245,73 @@ export const HOME_SECTIONS = [
     data: POPULAR_MOVIE,
     isMovieHorizontal: false,
     activeBtnIndex: 0,
+    subNav: '',
+  },
+  // {
+  //   key: 'leaderboard',
+  //   title: `Leaderboard`,
+  //   btnGroup: [
+  //     { label: 'Today', value: 'today' },
+  //     { label: 'This Week', value: 'week' },
+  //   ],
+  //   data: [],
+  //   isMovieHorizontal: false,
+  //   activeBtnIndex: 0,
+  // },
+];
+export const DETAIL_SECTIONS = [
+  {
+    key: 'cast',
+    title: 'Series Cast',
+    btnGroup: [],
+    data: [],
+    isMovieHorizontal: false,
+    activeBtnIndex: 0,
+    subNav: 'Full Cast & Crew',
+  },
+  {
+    key: 'season',
+    title: 'Current Season',
+    btnGroup: [],
+    data: [],
+    isMovieHorizontal: true,
+    activeBtnIndex: 0,
+    subNav: 'View all season',
+  },
+  {
+    key: 'social',
+    title: `Social`,
+    btnGroup: [
+      { label: 'Review', value: 'review' },
+      { label: 'Discussion', value: 'discussion' },
+    ],
+    data: POPULAR_MOVIE,
+    isMovieHorizontal: false,
+    activeBtnIndex: 0,
+    subNav: '',
+  },
+  {
+    key: 'media',
+    title: `Media`,
+    btnGroup: [
+      { label: 'Most Popular', value: 'review' },
+      { label: 'Video', value: 'video' },
+      { label: 'Backdrop', value: 'backdrop' },
+      { label: 'Poster', value: 'poster' },
+    ],
+    data: POPULAR_MOVIE,
+    isMovieHorizontal: false,
+    activeBtnIndex: 0,
+    subNav: '',
+  },
+  {
+    key: 'recommend',
+    title: `Recommendations`,
+    btnGroup: [],
+    data: POPULAR_MOVIE,
+    isMovieHorizontal: false,
+    activeBtnIndex: 0,
+    subNav: '',
   },
   // {
   //   key: 'leaderboard',
@@ -369,7 +438,7 @@ export const mockMovieDetail: MovieDetail = {
   original_language: 'en',
   original_title: 'Example Original Title',
   overview:
-    'This is a mock movie used for testing UI and layout in development.',
+    'This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.',
   popularity: 256.32,
   poster_path: 'assets/images/80b5d5c9724ee31a57bb49f721b164f6bc4f707f.png',
   production_companies: [

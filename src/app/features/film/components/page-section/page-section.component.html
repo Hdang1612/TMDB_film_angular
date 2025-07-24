@@ -1,0 +1,29 @@
+<div class="section">
+  <div class="section-heading">
+    <div class="section-heading__text">
+      <h2>{{ section.title }}</h2>
+    </div>
+    <ng-container *ngIf="section.btnGroup.length">
+      <div class="section-heading__btn-group">
+        <div *ngFor="let btn of section.btnGroup" class="trending-btn">
+          {{ btn.label }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="scroll-wrapper-container">
+    <div class="scroll-wrapper">
+      <div class="section-content">
+        <ng-container *ngFor="let movie of section.data">
+          <app-film-card
+            [isHorizontal]="section.isMovieHorizontal"
+            [movie]="movie"
+          ></app-film-card>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="section.subNav">
+    <a href="" class="sub-nav">{{ section.subNav }}</a>
+  </ng-container>
+</div>

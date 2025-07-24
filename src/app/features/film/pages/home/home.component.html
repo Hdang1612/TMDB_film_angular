@@ -15,34 +15,10 @@
 </div>
 <div class="home-content-container">
   <div class="home-content">
-    <div
-      class="section"
+    <app-page-section
       *ngFor="let section of homeSection"
-      [ngClass]="section.key + '-list'"
-    >
-      <div class="section-heading">
-        <div class="section-heading__text">
-          <h2>{{ section.title }}</h2>
-        </div>
-        <div class="section-heading__btn-group">
-          <div *ngFor="let btn of section.btnGroup" class="trending-btn">
-            {{ btn.label }}
-          </div>
-        </div>
-      </div>
-      <div class="scroll-wrapper-container">
-        <div class="scroll-wrapper">
-          <div class="section-content">
-            <ng-container *ngFor="let movie of section.data">
-              <app-film-card
-                [isHorizontal]="section.isMovieHorizontal"
-                [movie]="movie"
-              ></app-film-card>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </div>
+      [section]="section"
+    ></app-page-section>
     <div class="section">
       <div class="section-heading leaderboard-heading">
         <div class="section-heading__text">

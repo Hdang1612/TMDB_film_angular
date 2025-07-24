@@ -1,29 +1,72 @@
-<div class="film-detail-container">
-  <div class="header">
-    <div class="header-wrapper">
-      <div class="movie-poster">
-        <img src="" alt="" />
-      </div>
-      <div class="movie-info">
-        <div class="info-header">
-          <h1 class="movie-name">
-            Name<span class="release-year">(2025)</span>
-          </h1>
-          <div class="type">
-            <p class="movie-type">Drama</p>
-          </div>
+<div class="detail-container">
+  <div class="header-container">
+    <div class="header">
+      <div class="header__wrapper">
+        <div class="movie-poster">
+          <img src="assets/images/film.png" alt="" />
         </div>
-        <div class="score-wrapper"></div>
-        <div class="option-wrapper"></div>
-        <div class="text-container">
-          <p class="tag-line"></p>
-          <h2 class="overview">Overview</h2>
-          <p class="overview-content"></p>
+        <div class="movie-info">
+          <div class="info-header">
+            <h1 class="movie-name">
+              Name<span class="release-year">(2025)</span>
+            </h1>
+            <div class="type">
+              <p class="movie-type">Drama</p>
+            </div>
+          </div>
+          <div class="score-wrapper">
+            <div class="icon-wrapper">
+              <div class="score-icon"></div>
+              <div class="score-heading">
+                User <br />
+                Score
+              </div>
+            </div>
+            <div class="score-btn">What is your <span>Vibe</span> ?</div>
+          </div>
+          <div class="option-wrapper">
+            <ul>
+              <li class="option-btn">
+                <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
+              </li>
+              <li class="option-btn">
+                <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
+              </li>
+              <li class="option-btn">
+                <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
+              </li>
+              <li class="play-btn">
+                <a href=""
+                  ><img src="assets/icons/mini-play.svg" alt="" /> Play
+                  trailer</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="text-container">
+            <p class="tag-line">{{ detail.tagline }}</p>
+            <h2 class="overview">Overview</h2>
+            <p class="overview-content">{{ detail.overview }}</p>
+          </div>
+          <div class="creator-container"></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="content">
-    
+  <div class="content-container">
+    <div class="content">
+      <div class="content__main">
+        <app-page-section
+          *ngFor="let section of detailSection"
+          [section]="section"
+        ></app-page-section>
+        <!-- <div class="cast-container"></div>
+        <div class="season-container"></div>
+        <div class="social"></div>
+        <div class="media"></div>
+        <div class="recommendation"></div> -->
+      </div>
+      <div class="sub__content"></div>
+    </div>
   </div>
 </div>

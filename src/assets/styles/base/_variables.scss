@@ -29,6 +29,15 @@ $grey-95: #f1f1f3;
 $grey-97: #f7f7f8;
 $grey-99: #fcfcfd;
 
+$btn-bg: #032541;
+
+$linear: linear-gradient(
+  to right,
+  rgba(31.5, 10.5, 10.5, 1) calc((50vw - 170px) - 340px),
+  rgba(31.5, 10.5, 10.5, 0.84) 50%,
+  rgba(31.5, 10.5, 10.5, 0.84) 100%
+);
+
 // typo
 $font-family-base: "Manrope", sans-serif;
 

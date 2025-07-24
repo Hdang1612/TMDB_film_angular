@@ -1,33 +1,35 @@
-<div class="footer">
-  <div class="footer__grid">
-    <ng-container *ngFor="let nav of footerNavs">
-      <div class="footer__column">
-        <h4 class="footer__title">{{ nav.title }}</h4>
+<div class="footer-container">
+  <div class="footer">
+    <div class="footer__grid">
+      <ng-container *ngFor="let nav of footerNavs">
+        <div class="footer__column">
+          <h4 class="footer__title">{{ nav.title }}</h4>
 
-        <ul *ngIf="nav.items">
-          <li *ngFor="let item of nav.items" class="footer__item">
-            {{ item }}
-          </li>
-        </ul>
+          <ul *ngIf="nav.items">
+            <li *ngFor="let item of nav.items" class="footer__item">
+              {{ item }}
+            </li>
+          </ul>
 
-        <div class="footer__icons" *ngIf="nav.icons">
-          <a *ngFor="let icon of nav.icons" class="icon-btn">
-            <img src="{{ icon.iconClass }}" alt="" />
-          </a>
+          <div class="footer__icons" *ngIf="nav.icons">
+            <a *ngFor="let icon of nav.icons" class="icon-btn">
+              <img src="{{ icon.iconClass }}" alt="" />
+            </a>
+          </div>
         </div>
-      </div>
-    </ng-container>
-  </div>
-  <div class="footer__policy">
-    <div class="privacy">
-      <p>2023 streamvib, All Rights Reserved</p>
+      </ng-container>
     </div>
-    <div class="policy-nav">
-      <ul>
-        <li><a href="">Terms of Use</a></li>
-        <li><a href="">Privacy Policy</a></li>
-        <li><a href="">Cookie Policy</a></li>
-      </ul>
+    <div class="footer__policy">
+      <div class="privacy">
+        <p>2023 streamvib, All Rights Reserved</p>
+      </div>
+      <div class="policy-nav">
+        <ul>
+          <li><a href="">Terms of Use</a></li>
+          <li><a href="">Privacy Policy</a></li>
+          <li><a href="">Cookie Policy</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

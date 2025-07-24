@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { mockMovieDetail } from 'src/app/core/utils/constants/mock-data';
+import {
+  DETAIL_SECTIONS,
+  mockMovieDetail,
+} from 'src/app/core/utils/constants/mock-data';
 
 @Component({
   selector: 'app-film-detail',
@@ -8,6 +11,7 @@ import { mockMovieDetail } from 'src/app/core/utils/constants/mock-data';
 })
 export class FilmDetailComponent implements OnInit {
   detail = mockMovieDetail;
+  detailSection = DETAIL_SECTIONS;
   constructor() {}
 
   ngOnInit(): void {}

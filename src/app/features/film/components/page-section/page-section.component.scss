@@ -1,0 +1,82 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+.section {
+  @include flexbox($direction: column, $align: flex-start, $gap: 2rem);
+  margin-bottom: 8rem;
+  .editor-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 3rem;
+  }
+}
+.section-heading {
+  @include flexbox();
+  &__text {
+    @include text-style($color: $absolute-white, $fsize: $heading-h5);
+    margin-right: 2rem;
+  }
+  &__btn-group {
+    @include flexbox();
+    @include text-style($fweight: 600);
+    border: 1px solid $absolute-white;
+    border-radius: 3rem;
+
+    //   overflow: hidden;
+    .trending-btn {
+      // border: 1px solid $absolute-white;
+      border-radius: 3rem;
+      padding: 0.4rem 2rem;
+      cursor: pointer;
+      &--active {
+        background: $absolute-white;
+        color: $absolute-black;
+      }
+    }
+  }
+}
+.scroll-wrapper-container {
+  width: 100%;
+  position: relative;
+  // overflow: hidden;
+  .scroll-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 3rem;
+    // position: relative;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: $grey-60;
+    }
+
+    .section-content {
+      @include flexbox($gap: 2rem);
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6rem;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #000000);
+    pointer-events: none;
+  }
+}
+
+.sub-nav {
+  @include text-style($fweight: 600);
+}
