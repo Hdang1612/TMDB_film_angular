@@ -8,6 +8,8 @@ import { FilmCardComponent } from './components/film-card/film-card.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FilmDetailComponent } from './pages/film-detail/film-detail.component';
 import { MovieLayoutComponent } from './pages/movie-layout/movie-layout.component';
+import { UserLeaderboardItemComponent } from './components/user-leaderboard-item/user-leaderboard-item.component';
+import { EditorBarComponent } from './components/editor-bar/editor-bar.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { MovieLayoutComponent } from './pages/movie-layout/movie-layout.componen
     FilmCardComponent,
     HomeComponent,
     FilmDetailComponent,
-    MovieLayoutComponent
+    MovieLayoutComponent,
+    UserLeaderboardItemComponent,
+    EditorBarComponent
   ],
   imports: [
     CommonModule,

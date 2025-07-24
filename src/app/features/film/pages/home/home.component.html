@@ -14,64 +14,56 @@
   </div>
 </div>
 <div class="home-content">
-  <div class="trending-list section">
+  <div
+    class="section"
+    *ngFor="let section of homeSection"
+    [ngClass]="section.key + '-list'"
+  >
     <div class="section-heading">
       <div class="section-heading__text">
-        <h2>Trending</h2>
+        <h2>{{ section.title }}</h2>
       </div>
       <div class="section-heading__btn-group">
-        <div class="trending-today-btn trending-btn trending-btn--active">
-          Today
+        <div *ngFor="let btn of section.btnGroup" class="trending-btn">
+          {{ btn.label }}
         </div>
-        <div class="trending-week-btn trending-btn">This Week</div>
       </div>
     </div>
     <div class="scroll-wrapper">
       <div class="section-content">
-        <ng-container *ngFor="let movie of movies">
-          <app-film-card [movie]="movie"></app-film-card>
+        <ng-container *ngFor="let movie of section.data">
+          <app-film-card
+            [isHorizontal]="section.isMovieHorizontal"
+            [movie]="movie"
+          ></app-film-card>
         </ng-container>
       </div>
     </div>
   </div>
-  <div class="lastest-trailer-list section">
-    <div class="section-heading">
+  <div class="section">
+    <div class="section-heading leaderboard-heading">
       <div class="section-heading__text">
-        <h2>Lastest Trailer</h2>
+        <h2>Leaderboard</h2>
       </div>
-      <div class="section-heading__btn-group">
-        <div class="popular-today-btn popular-btn popular-btn--active">
-          Today
+      <div class="leaderboard-note">
+        <div class="all-time leaderboard-note-container">
+          <span class="all-time-dot"></span>
+          <p>All time edits</p>
         </div>
-        <div class="popular-week-btn popular-btn">This Week</div>
-      </div>
-    </div>
-    <div class="scroll-wrapper">
-      <div class="section-content">
-        <ng-container *ngFor="let movie of movies">
-          <app-film-card [isHorizontal]="true" [movie]="movie"></app-film-card>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-  <div class="popular-list section">
-    <div class="section-heading">
-      <div class="section-heading__text">
-        <h2>Trending</h2>
-      </div>
-      <div class="section-heading__btn-group">
-        <div class="popular-today-btn popular-btn popular-btn--active">
-          Today
+        <div class="week leaderboard-note-container">
+          <span class="week-dot"></span>
+          <p>Edits This Week</p>
         </div>
-        <div class="popular-week-btn popular-btn">This Week</div>
       </div>
     </div>
-    <div class="scroll-wrapper">
-      <div class="section-content">
-        <ng-container *ngFor="let movie of movies">
-          <app-film-card [movie]="movie"></app-film-card>
-        </ng-container>
-      </div>
+    <div class="editor-grid">
+      <ng-container *ngFor="let editor of leaderBoardData">
+        <app-user-leaderboard-item
+          [editorName]="editor.username"
+          [weekValue]="editor.weeklyEdits"
+          [allTimeValue]="editor.allTimeEdits"
+        ></app-user-leaderboard-item>
+      </ng-container>
     </div>
   </div>
 </div>

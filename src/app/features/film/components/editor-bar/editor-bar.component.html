@@ -1,0 +1,15 @@
+<!-- stats-bar.component.html -->
+<div class="container">
+  <div class="stat-bar-container">
+    <div
+      class="stat-bar"
+      [ngStyle]="{
+        width: getPercentage(value, max) + '%',
+        background: gradient
+      }"
+    ></div>
+    <div class="stat-value">
+      {{ value | number }}
+    </div>
+  </div>
+</div>

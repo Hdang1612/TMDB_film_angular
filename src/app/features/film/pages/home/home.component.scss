@@ -32,6 +32,37 @@
   .section {
     @include flexbox($direction: column, $align: flex-start, $gap: 6rem);
     margin-bottom: 8rem;
+    .leaderboard-heading {
+      .leaderboard-note {
+        @include flexbox($gap: 1rem, $direction: column, $align: flex-start);
+        .leaderboard-note-container {
+          @include flexbox($gap: 1rem);
+          .all-time-dot {
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            background: linear-gradient(to right, #a8edea, #01f3b4);
+            border-radius: 50%;
+          }
+          .week-dot {
+            display: block;
+            width: 1rem;
+            height: 1rem;
+            background: linear-gradient(to right, #ffe5e5, #e50000);
+            border-radius: 50%;
+          }
+          p {
+            @include text-style($fsize: 1rem, $color: $absolute-white);
+          }
+        }
+      }
+    }
+    .editor-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 3rem;
+    }
   }
   .section-heading {
     @include flexbox();

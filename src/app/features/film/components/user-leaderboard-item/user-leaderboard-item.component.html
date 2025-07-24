@@ -1,0 +1,24 @@
+<div class="editor">
+  <div class="editor__avt">
+    <img
+      src="assets/images/80b5d5c9724ee31a57bb49f721b164f6bc4f707f.png"
+      alt=""
+    />
+  </div>
+  <div class="editor__info">
+    <p class="editor__name">{{ editorName }}</p>
+    <div class="editor__data">
+      <app-editor-bar
+        [value]="allTimeValue"
+        [max]="allTimeMax"
+        gradient="linear-gradient(to right, #a8edea, #01f3b4)"
+      ></app-editor-bar>
+
+      <app-editor-bar
+        [value]="weekValue"
+        [max]="weekMax"
+        gradient="linear-gradient(to right, #ffe5e5, #e50000)"
+      ></app-editor-bar>
+    </div>
+  </div>
+</div>

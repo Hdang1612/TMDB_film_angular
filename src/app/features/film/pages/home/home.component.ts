@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { POPULAR_MOVIE } from 'src/app/core/utils/constants/mock-data';
+import {
+  HOME_SECTIONS,
+  leaderboardMockData,
+  POPULAR_MOVIE,
+} from 'src/app/core/utils/constants/mock-data';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +12,8 @@ import { POPULAR_MOVIE } from 'src/app/core/utils/constants/mock-data';
 })
 export class HomeComponent implements OnInit {
   movies = POPULAR_MOVIE;
+  homeSection = HOME_SECTIONS;
+  leaderBoardData = leaderboardMockData;
   constructor() {}
 
   ngOnInit(): void {}
