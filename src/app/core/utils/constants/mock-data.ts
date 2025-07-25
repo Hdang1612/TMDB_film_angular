@@ -217,12 +217,11 @@ export const HOME_SECTIONS: SectionModel[] = [
     key: 'trending',
     title: 'Trending',
     btnGroup: [
-      { label: 'Today', value: 'today' },
+      { label: 'Today', value: 'day' },
       { label: 'This Week', value: 'week' },
     ],
     data: [],
-    isMovieHorizontal: false,
-    isRecommendation: false,
+    dataType: 'default',
 
     subNav: '',
   },
@@ -234,8 +233,7 @@ export const HOME_SECTIONS: SectionModel[] = [
       { label: 'Intheater', value: 'intheater' },
     ],
     data: [],
-    isMovieHorizontal: true,
-    isRecommendation: false,
+    dataType: 'trailer',
 
     subNav: '',
   },
@@ -247,8 +245,7 @@ export const HOME_SECTIONS: SectionModel[] = [
       { label: 'This Week', value: 'week' },
     ],
     data: [],
-    isMovieHorizontal: false,
-    isRecommendation: false,
+    dataType: 'default',
 
     subNav: '',
   },
@@ -270,8 +267,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     title: 'Series Cast',
     btnGroup: [],
     data: [],
-    isMovieHorizontal: false,
-    isRecommendation: false,
+    dataType: 'cast',
 
     subNav: 'Full Cast & Crew',
   },
@@ -280,8 +276,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     title: 'Current Season',
     btnGroup: [],
     data: [],
-    isMovieHorizontal: true,
-    isRecommendation: false,
+    dataType: 'default',
 
     subNav: 'View all season',
   },
@@ -293,8 +288,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
       { label: 'Discussion', value: 'discussion' },
     ],
     data: [],
-    isMovieHorizontal: false,
-    isRecommendation: false,
+    dataType: 'default',
 
     subNav: '',
   },
@@ -308,8 +302,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
       { label: 'Poster', value: 'poster' },
     ],
     data: [],
-    isMovieHorizontal: false,
-    isRecommendation: false,
+    dataType: 'default',
 
     subNav: '',
   },
@@ -318,8 +311,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     title: `Recommendations`,
     btnGroup: [],
     data: [],
-    isMovieHorizontal: false,
-    isRecommendation: true,
+    dataType: 'recommendation',
 
     subNav: '',
   },

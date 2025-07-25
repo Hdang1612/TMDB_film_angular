@@ -18,6 +18,7 @@
     <app-page-section
       *ngFor="let section of homeSection"
       [section]="section"
+      (btnClick)="loadList($event)"
     ></app-page-section>
     <div class="section">
       <div class="section-heading leaderboard-heading">

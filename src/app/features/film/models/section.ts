@@ -2,8 +2,7 @@ export interface SectionModel {
   key: string;
   title: string;
   btnGroup: SectionBtn[];
-  isMovieHorizontal: boolean;
-  isRecommendation: boolean;
+  dataType: any;
   data: any[];
   subNav: string;
 }

@@ -1,35 +1,37 @@
 <div
   class="card-container"
-  [ngClass]="{ horizontal: isHorizontal, recommendation: isRecommendation }"
-  [style.min-height]="!isHorizontal ? '480px' : '300px'"
-  (click)="!isHorizontal ? navigate(movie.id) : null"
+  [ngClass]="cardType"
+  [style.min-height]="cardType != 'trailer' ? '480px' : '300px'"
+  (click)="cardType === 'default' ? navigate(movie.id) : null"
 >
   <div
     class="img-container"
-    (click)="isHorizontal && onClickGetTrailer(movie.id)"
+    [style.min-height]="cardType != 'trailer' ? '330px' : '220px'"
+    (click)="cardType === 'trailer' && onClickGetTrailer(movie.id)"
   >
-    <img
-      class="movie-img"
-      [src]="!isHorizontal ? movie.poster_path : movie.backdrop_path"
-      alt=""
-    />
-    <div
-      *ngIf="!isHorizontal && !isRecommendation"
-      class="rating-percent-container"
-    >
+    <img class="movie-img" [src]="imagePath" alt="" />
+    <div *ngIf="cardType === 'default'" class="rating-percent-container">
       <div class="outer-ring"></div>
       <div class="rating-percent">{{ movie.vote_average }}</div>
     </div>
-    <div *ngIf="!isRecommendation" class="option-icon">
+    <div
+      *ngIf="cardType === 'trailer' || cardType === 'default'"
+      class="option-icon"
+    >
       <img src="assets/icons/horizon-menu.svg" alt="" />
     </div>
-    <div *ngIf="isHorizontal" class="play-btn">
+    <div *ngIf="cardType === 'trailer'" class="play-btn">
       <img src="assets/icons/play.svg" alt="" />
     </div>
     <div *ngIf="isRecommendation" class="recommendation-info"></div>
   </div>
   <div class="movie-info">
-    <p class="movie-info__name">{{ movie.title }}</p>
+    <p class="movie-info__name">
+      {{ cardType !== "cast" ? movie.title : movie.name }}
+    </p>
+    <p *ngIf="cardType === 'cast'" class="character-name">
+      {{ movie.character }}
+    </p>
     <p class="movie-info__date">{{ movie.release_date }}</p>
   </div>
 </div>

@@ -26,25 +26,26 @@ export class HomeComponent implements OnInit {
     this.loadSectionData('trailer', () => this.movieService.getUpcomingList(1));
     this.loadSectionData('popular', () => this.movieService.getPopularList(1));
   }
-  // loadList(time_window: string) {
-  //   this.movieService.getTrendingList(time_window).subscribe({
-  //     next: (res) => {
-  //       const mappedMovies = res.results.map((movie: TrendingFilm) => ({
-  //         ...movie,
-  //         poster_path: getFullImageUrl(movie.poster_path),
-  //         backdrop_path: getFullImageUrl(movie.backdrop_path),
-  //       }));
-  //       const trendingSection = this.homeSection.find(
-  //         (section) => section.key === 'trending'
-  //       );
-  //       if (trendingSection) {
-  //         trendingSection.data = mappedMovies;
-  //       }
-  //     },
-  //     error: (err) => {
-  //       alert(err.error?.error);
-  //     },
-  //   });
+  loadList(time_window: string) {
+    this.movieService.getTrendingList(time_window).subscribe({
+      next: (res) => {
+        const mappedMovies = res.results.map((movie: TrendingFilm) => ({
+          ...movie,
+          poster_path: getFullImageUrl(movie.poster_path),
+          backdrop_path: getFullImageUrl(movie.backdrop_path),
+        }));
+        const trendingSection = this.homeSection.find(
+          (section) => section.key === 'trending'
+        );
+        if (trendingSection) {
+          trendingSection.data = mappedMovies;
+        }
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
+  }
   //   this.movieService.getUpcomingList(1).subscribe({
   //     next: (res) => {
   //       const mappedMovies = res.results.map((movie: TrendingFilm) => ({

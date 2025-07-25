@@ -10,6 +10,8 @@ import { Route, Router } from '@angular/router';
 })
 export class FilmCardComponent implements OnInit {
   @Input() movie!: any;
+  @Input() cardType: 'default' | 'trailer' | 'recommendation' | 'cast' =
+    'default';
   @Input() isHorizontal: boolean = false;
   @Input() isRecommendation: boolean = false;
   trailerKey!: string;
@@ -32,6 +34,17 @@ export class FilmCardComponent implements OnInit {
       },
     });
   }
+  get imagePath(): string {
+    if (this.cardType === 'cast') {
+      return this.movie.profile_path;
+    } else if (this.cardType === 'default') {
+      return this.movie.poster_path;
+    }
+
+    return this.movie.backdrop_path;
+  }
+
+  
 
   navigate(id: number) {
     this.router.navigate(['/movie/detail', id]);

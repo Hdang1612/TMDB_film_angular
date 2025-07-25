@@ -10,6 +10,7 @@
   cursor: pointer;
   .img-container {
     position: relative;
+    // min-height: 33rem;
     .movie-img {
       width: 100%;
       border-radius: 1rem;
@@ -51,11 +52,14 @@
       @include text-style($fweight: 700, $color: $absolute-white);
       margin-bottom: 0.6rem;
     }
+    .character-name {
+      @include text-style($color: $grey-60);
+    }
     &__date {
       @include text-style($fweight: 500, $fsize: 1.2rem);
     }
   }
-  &.horizontal {
+  &.trailer {
     width: 40rem;
     min-width: 40rem;
     border: 0;

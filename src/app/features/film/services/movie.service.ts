@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { TrendingFilmResponse } from '../models/trendingMovie';
 import { MovieDetail } from '../models/movieDetail';
 import { TMDBTrailer } from '../models/trailer';
+import { CastResponse } from '../models/credit';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
@@ -84,6 +85,16 @@ export class MovieService {
   getDetail(id: string | null): Observable<MovieDetail> {
     return this.http
       .get<MovieDetail>(`${environment.baseUrlMovie}movie/${id}`, {
+        ...this.options,
+        params: new HttpParams().set('language', 'en-US'),
+      })
+      .pipe(catchError(this.handleError()));
+  }
+
+
+  getCredit(id: string | null): Observable<CastResponse> {
+    return this.http
+      .get<CastResponse>(`${environment.baseUrlMovie}movie/${id}/credits`, {
         ...this.options,
         params: new HttpParams().set('language', 'en-US'),
       })

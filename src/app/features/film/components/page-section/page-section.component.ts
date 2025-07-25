@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SectionModel } from '../../models/section';
 
 @Component({
@@ -7,18 +7,22 @@ import { SectionModel } from '../../models/section';
   styleUrls: ['./page-section.component.scss'],
 })
 export class PageSectionComponent implements OnInit {
+  @Output() btnClick = new EventEmitter<string>();
   @Input() section: SectionModel = {
     key: '',
     title: '',
     btnGroup: [],
-    isMovieHorizontal: false,
-    isRecommendation: false,
+    dataType: '',
     data: [],
     subNav: '',
   };
   activeBtnIndex: number = 0;
 
   constructor() {}
+  onClickBtn(index: number) {
+    this.activeBtnIndex = index;
+    this.btnClick.emit(this.section.btnGroup[index].value);
+  }
 
   ngOnInit(): void {}
 }

@@ -9,6 +9,8 @@ import { MovieDetail } from '../../models/movieDetail';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { TMDBTrailer } from '../../models/trailer';
 import ColorThief from 'colorthief';
+import { CastMember } from '../../models/credit';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -29,6 +31,7 @@ export class FilmDetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const id = routeParams.get('id');
     this.loadDetail(id);
+    this.loadCredit(id);
   }
 
   loadDetail(id: string | null) {
@@ -43,6 +46,30 @@ export class FilmDetailComponent implements OnInit {
         if (this.detail.backdrop_path) {
           this.loadBackdropColor(this.detail.backdrop_path);
         }
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
+  }
+
+  loadCredit(id: string | null) {
+    this.movieService.getCredit(id).subscribe({
+      next: (res) => {
+        console.log('credit', res);
+        const mapped = res.cast.map((movie: CastMember) => ({
+          ...movie,
+          profile_path: !movie.profile_path
+            ? movie.gender === 1
+              ? environment.tempFemaleUserUrlImg
+              : environment.tempMaleUserUrlImg
+            : getFullImageUrl(movie.profile_path),
+
+          // backdrop_path: getFullImageUrl(movie.backdrop_path),
+        }));
+
+        const section = this.detailSection.find((s) => s.key === 'cast');
+        if (section) section.data = mapped;
       },
       error: (err) => {
         alert(err.error?.error);

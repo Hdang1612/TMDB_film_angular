@@ -9,7 +9,7 @@
           *ngFor="let btn of section.btnGroup; let i = index"
           class="trending-btn"
           [class.trending-btn--active]="i === activeBtnIndex"
-          (click)="activeBtnIndex = i"
+          (click)="onClickBtn(i)"
         >
           {{ btn.label }}
         </div>
@@ -21,8 +21,7 @@
       <div class="section-content">
         <ng-container *ngFor="let movie of section.data">
           <app-film-card
-            [isHorizontal]="section.isMovieHorizontal"
-            [isRecommendation]="section.isRecommendation"
+            [cardType]="section.dataType"
             [movie]="movie"
           ></app-film-card>
         </ng-container>
