@@ -1,3 +1,5 @@
+import { SectionModel } from 'src/app/features/film/models/section';
+import { TrendingFilm } from './../../../features/film/models/trendingMovie';
 import { MovieDetail } from 'src/app/features/film/models/movieDetail';
 
 export const POPULAR_MOVIE = [
@@ -210,7 +212,7 @@ export const FOOTER_NAVS = [
   },
 ];
 
-export const HOME_SECTIONS = [
+export const HOME_SECTIONS: SectionModel[] = [
   {
     key: 'trending',
     title: 'Trending',
@@ -218,7 +220,7 @@ export const HOME_SECTIONS = [
       { label: 'Today', value: 'today' },
       { label: 'This Week', value: 'week' },
     ],
-    data: POPULAR_MOVIE,
+    data: [],
     isMovieHorizontal: false,
     isRecommendation: false,
 
@@ -262,7 +264,7 @@ export const HOME_SECTIONS = [
   //
   // },
 ];
-export const DETAIL_SECTIONS = [
+export const DETAIL_SECTIONS: SectionModel[] = [
   {
     key: 'cast',
     title: 'Series Cast',

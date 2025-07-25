@@ -1,9 +1,17 @@
 <div
   class="card-container"
   [ngClass]="{ horizontal: isHorizontal, recommendation: isRecommendation }"
+  [style.min-height]="!isHorizontal ? '480px' : '300px'"
 >
-  <div class="img-container">
-    <img class="movie-img" src="{{ movie.poster_path }}" alt="" />
+  <div
+    class="img-container"
+    (click)="isHorizontal && onClickGetTrailer(movie.id)"
+  >
+    <img
+      class="movie-img"
+      src="{{ !isHorizontal ? movie.poster_path : movie.backdrop_path }}"
+      alt=""
+    />
     <div
       *ngIf="!isHorizontal && !isRecommendation"
       class="rating-percent-container"
@@ -24,3 +32,9 @@
     <p class="movie-info__date">{{ movie.release_date }}</p>
   </div>
 </div>
+<app-trailer-modal
+  [trailerKey]="trailerKey"
+  [isTrailerModalOpen]="isTrailerModalOpen"
+  (close)="isTrailerModalOpen = false"
+>
+</app-trailer-modal>
