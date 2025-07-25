@@ -1,21 +1,27 @@
 <div class="detail-container">
   <div
     class="header-container"
-    [style.backgroundImage]="'url(' + detail.backdrop_path + ')'"
+    [style.backgroundImage]="
+      detail?.backdrop_path ? 'url(' + detail.backdrop_path + ')' : ''
+    "
   >
-    <div class="header">
+    <div class="header" [ngStyle]="{ backgroundImage: backdropGradient }">
       <div class="header__wrapper">
         <div class="movie-poster">
-          <img src="{{ detail.poster_path }}" alt="" />
+          <img src="{{ detail?.poster_path }}" alt="" />
         </div>
         <div class="movie-info">
           <div class="info-header">
             <h1 class="movie-name">
-              {{ detail.title
-              }}<span class="release-year">({{ detail.release_date }})</span>
+              {{ detail?.title
+              }}<span class="release-year"
+                >({{ detail?.release_date?.slice(0, 4) }})</span
+              >
             </h1>
             <div class="type">
-              <p class="movie-type">Drama</p>
+              <p class="movie-type">
+                {{ genreNames }}
+              </p>
             </div>
           </div>
           <div class="score-wrapper">
@@ -48,9 +54,9 @@
             </ul>
           </div>
           <div class="text-container">
-            <p class="tag-line">{{ detail.tagline }}</p>
+            <p class="tag-line">{{ detail?.tagline }}</p>
             <h2 class="overview">Overview</h2>
-            <p class="overview-content">{{ detail.overview }}</p>
+            <p class="overview-content">{{ detail?.overview }}</p>
           </div>
           <div class="creator-container"></div>
         </div>

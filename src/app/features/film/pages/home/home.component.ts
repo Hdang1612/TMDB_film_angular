@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   HOME_SECTIONS,
   leaderboardMockData,
-  POPULAR_MOVIE,
 } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
 import { TrendingFilm } from '../../models/trendingMovie';

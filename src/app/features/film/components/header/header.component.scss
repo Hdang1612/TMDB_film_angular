@@ -4,15 +4,17 @@
   @include flexbox($justify: center);
   width: 100vw;
 }
+
 .header {
   //   background-color: #000;
   @include flexbox($justify: space-between);
   padding: 2.4rem 0;
   z-index: 99999;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   max-width: $maxw-xl;
+  transition: transform 0.3s ease;
 
   &__menu {
     border-radius: 1.2rem;
@@ -47,4 +49,7 @@
   &__icon {
     @include flexbox($gap: 3rem);
   }
+}
+.hide {
+  transform: translateY(-100%);
 }

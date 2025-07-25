@@ -7,8 +7,9 @@
   width: 100%;
   height: 66rem;
   background-position: left calc((50vw - 170px) - 340px) center;
+  background-repeat: no-repeat;
   .header {
-    background-image: $linear;
+    // background-image: $linear;
     @include flexbox($justify: center, $align: flex-end);
     padding-bottom: 4rem;
     height: 100%;

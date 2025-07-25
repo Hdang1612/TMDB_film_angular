@@ -233,7 +233,7 @@ export const HOME_SECTIONS: SectionModel[] = [
       { label: 'Popular', value: 'popular' },
       { label: 'Intheater', value: 'intheater' },
     ],
-    data: POPULAR_MOVIE,
+    data: [],
     isMovieHorizontal: true,
     isRecommendation: false,
 
@@ -246,7 +246,7 @@ export const HOME_SECTIONS: SectionModel[] = [
       { label: 'Today', value: 'today' },
       { label: 'This Week', value: 'week' },
     ],
-    data: POPULAR_MOVIE,
+    data: [],
     isMovieHorizontal: false,
     isRecommendation: false,
 
@@ -292,7 +292,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
       { label: 'Review', value: 'review' },
       { label: 'Discussion', value: 'discussion' },
     ],
-    data: POPULAR_MOVIE,
+    data: [],
     isMovieHorizontal: false,
     isRecommendation: false,
 
@@ -307,7 +307,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
       { label: 'Backdrop', value: 'backdrop' },
       { label: 'Poster', value: 'poster' },
     ],
-    data: POPULAR_MOVIE,
+    data: [],
     isMovieHorizontal: false,
     isRecommendation: false,
 
@@ -317,7 +317,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     key: 'recommend',
     title: `Recommendations`,
     btnGroup: [],
-    data: POPULAR_MOVIE,
+    data: [],
     isMovieHorizontal: false,
     isRecommendation: true,
 

@@ -10,7 +10,7 @@
   >
     <img
       class="movie-img"
-      src="{{ !isHorizontal ? movie.poster_path : movie.backdrop_path }}"
+      [src]="!isHorizontal ? movie.poster_path : movie.backdrop_path"
       alt=""
     />
     <div
