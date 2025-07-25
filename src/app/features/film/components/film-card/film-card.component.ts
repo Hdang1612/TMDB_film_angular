@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { TMDBTrailer } from '../../models/trailer';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-film-card',
@@ -13,26 +14,17 @@ export class FilmCardComponent implements OnInit {
   @Input() isRecommendation: boolean = false;
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
-  constructor(private trailerService: MovieService) {}
+  constructor(private trailerService: MovieService, private router: Router) {}
 
   ngOnInit(): void {}
   onClickGetTrailer(id: number) {
-    this.trailerService.getTrailer(id).subscribe({
-      next: (res) => {
-        console.log(res);
-        const mapOffical = res.results.find(
-          (video: TMDBTrailer) => video.name === 'Official Trailer'
-        );
-        const fallback = res.results.find(
-          (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-        );
-        console.log(mapOffical);
-        if (mapOffical) {
-          this.trailerKey = mapOffical.key;
+    this.trailerService.getBestTrailerKey(id).subscribe({
+      next: (key) => {
+        if (key) {
+          this.trailerKey = key;
           this.isTrailerModalOpen = true;
         } else {
-          this.trailerKey = fallback.key;
-          this.isTrailerModalOpen = true;
+          alert('Không tìm thấy trailer.');
         }
       },
       error: (err) => {
@@ -40,5 +32,8 @@ export class FilmCardComponent implements OnInit {
       },
     });
   }
-  
+
+  navigate(id: number) {
+    this.router.navigate(['/movie/detail', id]);
+  }
 }

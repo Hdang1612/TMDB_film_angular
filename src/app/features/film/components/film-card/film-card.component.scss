@@ -46,6 +46,7 @@
   }
   .movie-info {
     padding: 2.6rem 1rem 1rem;
+    text-align: center;
     &__name {
       @include text-style($fweight: 700, $color: $absolute-white);
       margin-bottom: 0.6rem;

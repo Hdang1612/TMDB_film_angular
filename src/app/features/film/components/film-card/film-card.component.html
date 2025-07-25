@@ -2,6 +2,7 @@
   class="card-container"
   [ngClass]="{ horizontal: isHorizontal, recommendation: isRecommendation }"
   [style.min-height]="!isHorizontal ? '480px' : '300px'"
+  (click)="!isHorizontal ? navigate(movie.id) : null"
 >
   <div
     class="img-container"

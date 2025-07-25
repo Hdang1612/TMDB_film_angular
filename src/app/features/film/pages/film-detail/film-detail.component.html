@@ -1,14 +1,18 @@
 <div class="detail-container">
-  <div class="header-container">
+  <div
+    class="header-container"
+    [style.backgroundImage]="'url(' + detail.backdrop_path + ')'"
+  >
     <div class="header">
       <div class="header__wrapper">
         <div class="movie-poster">
-          <img src="assets/images/film.png" alt="" />
+          <img src="{{ detail.poster_path }}" alt="" />
         </div>
         <div class="movie-info">
           <div class="info-header">
             <h1 class="movie-name">
-              Name<span class="release-year">(2025)</span>
+              {{ detail.title
+              }}<span class="release-year">({{ detail.release_date }})</span>
             </h1>
             <div class="type">
               <p class="movie-type">Drama</p>
@@ -36,7 +40,7 @@
                 <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
               </li>
               <li class="play-btn">
-                <a href=""
+                <a (click)="onClickGetTrailer(detail.id)"
                   ><img src="assets/icons/mini-play.svg" alt="" /> Play
                   trailer</a
                 >
@@ -70,3 +74,9 @@
     </div>
   </div>
 </div>
+<app-trailer-modal
+  [trailerKey]="trailerKey"
+  [isTrailerModalOpen]="isTrailerModalOpen"
+  (close)="isTrailerModalOpen = false"
+>
+</app-trailer-modal>

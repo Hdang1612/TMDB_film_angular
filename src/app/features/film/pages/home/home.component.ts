@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
-    // this.loadList('day');
     this.loadSectionData('trending', () =>
       this.movieService.getTrendingList('day')
     );
