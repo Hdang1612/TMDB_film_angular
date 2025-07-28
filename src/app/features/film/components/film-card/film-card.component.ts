@@ -19,7 +19,7 @@ export class FilmCardComponent implements OnInit {
   constructor(private trailerService: MovieService, private router: Router) {}
 
   ngOnInit(): void {}
-  onClickGetTrailer(id: number) {
+  onClickGetTrailer(id: string | null) {
     this.trailerService.getBestTrailerKey(id).subscribe({
       next: (key) => {
         if (key) {

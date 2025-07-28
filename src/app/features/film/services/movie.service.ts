@@ -52,12 +52,17 @@ export class MovieService {
       .pipe(catchError(this.handleError()));
   }
 
-  getTrailer(id: number): Observable<any> {
+  getTrailer(id: string | null): Observable<any> {
     return this.http
       .get<any>(`${environment.baseUrlMovie}movie/${id}/videos`, {
         ...this.options,
         params: new HttpParams().set('lang', 'en-US'),
       })
+      .pipe(catchError(this.handleError()));
+  }
+  getImages(id: string | null): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}movie/${id}/images`)
       .pipe(catchError(this.handleError()));
   }
 
@@ -66,7 +71,9 @@ export class MovieService {
   //     `https://api.themoviedb.org/3/movie/${id}/videos?...`
   //   );
   // }
-  getBestTrailerKey(id: number) {
+
+  //get ra video official trailer
+  getBestTrailerKey(id: string | null) {
     return this.getTrailer(id).pipe(
       map((res) => {
         const official = res.results.find(

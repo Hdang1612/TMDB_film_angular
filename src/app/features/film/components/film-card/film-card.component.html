@@ -1,7 +1,9 @@
 <div
   class="card-container"
   [ngClass]="cardType"
-  [style.min-height]="cardType != 'trailer' ? '480px' : '300px'"
+  [style.min-height]="
+    cardType != 'trailer' && cardType != 'recommendation' ? '480px' : '300px'
+  "
   (click)="cardType === 'default' ? navigate(movie.id) : null"
 >
   <div

@@ -14,6 +14,7 @@ import { PageSectionComponent } from './components/page-section/page-section.com
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TrailerModalComponent } from './components/trailer-modal/trailer-modal.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
+import { VideoCardComponent } from './components/video-card/video-card.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ReviewCardComponent } from './components/review-card/review-card.compon
     PageSectionComponent,
     TrailerModalComponent,
     ReviewCardComponent,
+    VideoCardComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

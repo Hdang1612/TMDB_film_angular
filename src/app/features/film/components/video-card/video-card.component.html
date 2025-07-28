@@ -1,0 +1,20 @@
+<div
+  class="media-card-container"
+  [style.cursor]="media.type === 'video' ? 'pointer' : 'default'"
+  (click)="media.type === 'video' ? onClickGetTrailer(media.key) : null"
+>
+  <img
+    class="media-thumbnail"
+    [src]="getYoutubeThumbnail()"
+    alt="Media Thumbnail"
+  />
+  <div class="media-overlay" *ngIf="media.type === 'video'">
+    <img src="assets/icons/play.svg" alt="Play Video" />
+  </div>
+</div>
+<app-trailer-modal
+  [trailerKey]="trailerKey"
+  [isTrailerModalOpen]="isTrailerModalOpen"
+  (close)="isTrailerModalOpen = false"
+>
+</app-trailer-modal>

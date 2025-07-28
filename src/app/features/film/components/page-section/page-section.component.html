@@ -21,18 +21,17 @@
     [class.review-container]="section.dataType === 'social'"
   >
     <div class="scroll-wrapper">
-      <div class="section-content">
-        <ng-container
+      <div
+        class="section-content"
+        [style.gap]="section.dataType === 'media' ? '0' : '20px'"
+      >
+        <!-- <ng-container
           *ngFor="
             let movie of section.dataType === 'social'
               ? section.data.slice(0, 2)
               : section.data
           "
         >
-          <!-- <app-film-card
-            [cardType]="section.dataType"
-            [movie]="movie"
-          ></app-film-card> -->
           <app-review-card
             *ngIf="section.dataType === 'social'; else filmCard"
             [reviewData]="movie"
@@ -44,6 +43,26 @@
               [movie]="movie"
             ></app-film-card>
           </ng-template>
+        </ng-container> -->
+        <ng-container [ngSwitch]="section.dataType">
+          <ng-container *ngSwitchCase="'social'">
+            <ng-container *ngFor="let movie of section.data.slice(0, 2)">
+              <app-review-card [reviewData]="movie"></app-review-card>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="'media'">
+            <ng-container *ngFor="let movie of section.data.slice(0, 10)">
+              <app-video-card [media]="movie"></app-video-card>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <ng-container *ngFor="let movie of section.data">
+              <app-film-card
+                [cardType]="section.dataType"
+                [movie]="movie"
+              ></app-film-card>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </div>
     </div>

@@ -23,10 +23,10 @@ export class ReviewCardComponent implements OnInit {
       : environment.tempFemaleUserUrlImg;
 
     this.rating = author?.rating != null ? author.rating * 10 : 0;
-    console.log('data review', this.reviewData);
+    // console.log('data review', this.reviewData);
   }
   navigate() {
     this.router.navigate([this.reviewData.url]);
-    console.log('navigate to review', this.reviewData.url);
+    // console.log('navigate to review', this.reviewData.url);
   }
 }

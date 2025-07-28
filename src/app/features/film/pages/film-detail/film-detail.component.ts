@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  DETAIL_SECTIONS,
-  mockMovieDetail,
-} from 'src/app/core/utils/constants/mock-data';
+import { DETAIL_SECTIONS } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
 import { MovieDetail } from '../../models/movieDetail';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
@@ -25,6 +22,11 @@ export class FilmDetailComponent implements OnInit {
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
   backdropGradient: string = '';
+  media = {
+    videos: [],
+    backdrops: [],
+    posters: [],
+  };
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService
@@ -39,6 +41,8 @@ export class FilmDetailComponent implements OnInit {
       this.movieService.getRecommendation(id)
     );
     this.loadSectionData('social', () => this.movieService.getReviews(id));
+    this.loadMediaData(id);
+    // this.onSectionBtnClick('media', 'popular');
   }
 
   loadDetail(id: string | null) {
@@ -83,7 +87,7 @@ export class FilmDetailComponent implements OnInit {
       },
     });
   }
-  onClickGetTrailer(id: number) {
+  onClickGetTrailer(id: string | null) {
     this.movieService.getBestTrailerKey(id).subscribe({
       next: (key) => {
         if (key) {
@@ -131,12 +135,13 @@ export class FilmDetailComponent implements OnInit {
   ): void {
     fetchFn().subscribe({
       next: (res) => {
-        const mapped = res.results.map((movie: any) => ({
+        const mapped = res.results?.map((movie: any) => ({
           ...movie,
           poster_path: getFullImageUrl(movie.poster_path),
           backdrop_path: getFullImageUrl(movie.backdrop_path),
         }));
         console.log(res.results);
+        console.log(res);
 
         const section = this.detailSection.find((s) => s.key === sectionKey);
         if (section) section.data = mapped;
@@ -146,5 +151,78 @@ export class FilmDetailComponent implements OnInit {
         console.error(`Error loading section [${sectionKey}]`, err);
       },
     });
+  }
+  loadMediaData(id: string | null): void {
+    let imagesLoaded = false;
+    let trailersLoaded = false;
+
+    const checkAndSetPopular = () => {
+      if (imagesLoaded && trailersLoaded) {
+        this.onSectionBtnClick('media', 'popular');
+      }
+    };
+
+    this.movieService.getImages(id).subscribe({
+      next: (res) => {
+        this.media.backdrops = res.backdrops.map((image: any) => ({
+          ...image,
+          type: 'image',
+          file_path: getFullImageUrl(image.file_path, 'w780'),
+        }));
+        this.media.posters = res.posters.map((image: any) => ({
+          ...image,
+          type: 'image',
+          file_path: getFullImageUrl(image.file_path, 'w200'),
+        }));
+        imagesLoaded = true;
+        checkAndSetPopular();
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
+
+    this.movieService.getTrailer(id).subscribe({
+      next: (res) => {
+        this.media.videos = res.results.map((video: any) => ({
+          ...video,
+          type: 'video',
+          key: video.key,
+        }));
+        trailersLoaded = true;
+        checkAndSetPopular();
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
+  }
+
+  onSectionBtnClick(sectionKey: string, value: string): void {
+    const section = this.detailSection.find((s) => s.key === sectionKey);
+    if (!section) return;
+
+    switch (value) {
+      case 'popular':
+        const popularItem = [
+          this.media.videos?.[0],
+          this.media.backdrops?.[0],
+          this.media.posters?.[0],
+        ];
+        section.data = popularItem ? popularItem : [];
+        break;
+
+      case 'video':
+        section.data = this.media.videos || [];
+        break;
+
+      case 'backdrop':
+        section.data = this.media.backdrops || [];
+        break;
+
+      case 'poster':
+        section.data = this.media.posters || [];
+        break;
+    }
   }
 }

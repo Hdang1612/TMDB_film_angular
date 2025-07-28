@@ -296,7 +296,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     key: 'media',
     title: `Media`,
     btnGroup: [
-      { label: 'Most Popular', value: 'review' },
+      { label: 'Most Popular', value: 'popular' },
       { label: 'Video', value: 'video' },
       { label: 'Backdrop', value: 'backdrop' },
       { label: 'Poster', value: 'poster' },
@@ -407,68 +407,3 @@ export const leaderboardMockData = [
     color: '#c11244',
   },
 ];
-
-export const mockMovieDetail: MovieDetail = {
-  adult: false,
-  backdrop_path: '/backdrop_example.jpg',
-  belongs_to_collection: {
-    id: 12345,
-    name: 'Example Collection',
-    poster_path: 'assets/images/80b5d5c9724ee31a57bb49f721b164f6bc4f707f.png',
-    backdrop_path: 'assets/images/thumbnail.jpg',
-  },
-  budget: 100000000,
-  genres: [
-    { id: 28, name: 'Action' },
-    { id: 12, name: 'Adventure' },
-  ],
-  homepage: 'https://www.examplemovie.com',
-  id: 999999,
-  imdb_id: 'tt1234567',
-  origin_country: ['US'],
-  original_language: 'en',
-  original_title: 'Example Original Title',
-  overview:
-    'This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.This is a mock movie used for testing UI and layout in development.',
-  popularity: 256.32,
-  poster_path: 'assets/images/80b5d5c9724ee31a57bb49f721b164f6bc4f707f.png',
-  production_companies: [
-    {
-      id: 101,
-      logo_path: '/logo1.png',
-      name: 'Example Studio',
-      origin_country: 'US',
-    },
-    {
-      id: 102,
-      logo_path: null,
-      name: 'Another Studio',
-      origin_country: 'GB',
-    },
-  ],
-  production_countries: [
-    { iso_3166_1: 'US', name: 'United States of America' },
-    { iso_3166_1: 'GB', name: 'United Kingdom' },
-  ],
-  release_date: '2025-07-24',
-  revenue: 500000000,
-  runtime: 132,
-  spoken_languages: [
-    {
-      english_name: 'English',
-      iso_639_1: 'en',
-      name: 'English',
-    },
-    {
-      english_name: 'Spanish',
-      iso_639_1: 'es',
-      name: 'Español',
-    },
-  ],
-  status: 'Released',
-  tagline: 'An epic mock adventure.',
-  title: 'Mock Movie Title',
-  video: false,
-  vote_average: 8.5,
-  vote_count: 10234,
-};
