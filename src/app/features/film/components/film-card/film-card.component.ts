@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { TMDBTrailer } from '../../models/trailer';
 import { Route, Router } from '@angular/router';
@@ -14,8 +14,10 @@ export class FilmCardComponent implements OnInit {
     'default';
   @Input() isHorizontal: boolean = false;
   @Input() isRecommendation: boolean = false;
+  @Output() openMenu = new EventEmitter<void>();
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
+  @Input() isMenuOpen: boolean = false;
   constructor(private trailerService: MovieService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -47,5 +49,10 @@ export class FilmCardComponent implements OnInit {
   navigate(id: number) {
     this.router.navigate(['/movie/detail', id]);
     console.log(id);
+  }
+
+  handleOpenMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.openMenu.emit();
   }
 }

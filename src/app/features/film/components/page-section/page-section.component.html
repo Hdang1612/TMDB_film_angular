@@ -41,6 +41,8 @@
               <app-film-card
                 [cardType]="section.dataType"
                 [movie]="movie"
+                [isMenuOpen]="selectedMenuCardId === movie.id"
+                (openMenu)="handleOpenMenu(movie.id)"
               ></app-film-card>
             </ng-container>
           </ng-container>
