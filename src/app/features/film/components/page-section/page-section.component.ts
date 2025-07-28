@@ -22,6 +22,7 @@ export class PageSectionComponent implements OnInit {
   onClickBtn(index: number) {
     this.activeBtnIndex = index;
     this.btnClick.emit(this.section.btnGroup[index].value);
+    // console.log('>>>', this.section.data);
   }
 
   ngOnInit(): void {}

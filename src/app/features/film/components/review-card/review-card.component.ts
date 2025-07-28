@@ -14,6 +14,7 @@ export class ReviewCardComponent implements OnInit {
   baseUrlImg = environment.baseUrlImg;
   avt: string = '';
   rating: number = 0;
+Object: any;
   constructor(private router: Router) {}
 
   ngOnInit(): void {

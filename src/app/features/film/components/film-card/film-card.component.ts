@@ -46,5 +46,6 @@ export class FilmCardComponent implements OnInit {
 
   navigate(id: number) {
     this.router.navigate(['/movie/detail', id]);
+    console.log(id);
   }
 }

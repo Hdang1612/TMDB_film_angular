@@ -4,7 +4,11 @@
   [style.min-height]="
     cardType != 'trailer' && cardType != 'recommendation' ? '480px' : '300px'
   "
-  (click)="cardType === 'default' ? navigate(movie.id) : null"
+  (click)="
+    cardType === 'default' || cardType === 'recommendation'
+      ? navigate(movie.id)
+      : null
+  "
 >
   <div
     class="img-container"

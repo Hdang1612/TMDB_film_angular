@@ -33,16 +33,18 @@ export class FilmDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const id = routeParams.get('id');
-    this.loadDetail(id);
-    this.loadCredit(id);
-    this.loadSectionData('recommend', () =>
-      this.movieService.getRecommendation(id)
-    );
-    this.loadSectionData('social', () => this.movieService.getReviews(id));
-    this.loadMediaData(id);
-    // this.onSectionBtnClick('media', 'popular');
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      console.log('Route changed, new ID:', id);
+
+      this.loadDetail(id);
+      this.loadCredit(id);
+      this.loadSectionData('recommend', () =>
+        this.movieService.getRecommendation(id)
+      );
+      this.loadSectionData('social', () => this.movieService.getReviews(id));
+      this.loadMediaData(id);
+    });
   }
 
   loadDetail(id: string | null) {
