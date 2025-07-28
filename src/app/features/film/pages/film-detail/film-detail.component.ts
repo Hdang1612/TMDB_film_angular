@@ -11,6 +11,9 @@ import { TMDBTrailer } from '../../models/trailer';
 import ColorThief from 'colorthief';
 import { CastMember } from '../../models/credit';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { TrendingFilm } from '../../models/trendingMovie';
+import { RecommendationFilm } from '../../models/recomendation';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -32,6 +35,10 @@ export class FilmDetailComponent implements OnInit {
     const id = routeParams.get('id');
     this.loadDetail(id);
     this.loadCredit(id);
+    this.loadSectionData('recommend', () =>
+      this.movieService.getRecommendation(id)
+    );
+    this.loadSectionData('social', () => this.movieService.getReviews(id));
   }
 
   loadDetail(id: string | null) {
@@ -117,5 +124,27 @@ export class FilmDetailComponent implements OnInit {
     const genres = this.detail?.genres || [];
     const names = genres.slice(0, 2).map((g) => g.name);
     return genres.length > 2 ? names.join(', ') + ', ...' : names.join(', ');
+  }
+  loadSectionData(
+    sectionKey: string,
+    fetchFn: () => Observable<{ results: any[] }>
+  ): void {
+    fetchFn().subscribe({
+      next: (res) => {
+        const mapped = res.results.map((movie: any) => ({
+          ...movie,
+          poster_path: getFullImageUrl(movie.poster_path),
+          backdrop_path: getFullImageUrl(movie.backdrop_path),
+        }));
+        console.log(res.results);
+
+        const section = this.detailSection.find((s) => s.key === sectionKey);
+        if (section) section.data = mapped;
+        console.log(sectionKey, section?.data);
+      },
+      error: (err) => {
+        console.error(`Error loading section [${sectionKey}]`, err);
+      },
+    });
   }
 }

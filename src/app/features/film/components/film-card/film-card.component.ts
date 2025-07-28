@@ -44,8 +44,6 @@ export class FilmCardComponent implements OnInit {
     return this.movie.backdrop_path;
   }
 
-  
-
   navigate(id: number) {
     this.router.navigate(['/movie/detail', id]);
   }

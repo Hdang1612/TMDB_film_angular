@@ -6,7 +6,6 @@
 >
   <div
     class="img-container"
-    [style.min-height]="cardType != 'trailer' ? '330px' : '220px'"
     (click)="cardType === 'trailer' && onClickGetTrailer(movie.id)"
   >
     <img class="movie-img" [src]="imagePath" alt="" />
@@ -23,7 +22,11 @@
     <div *ngIf="cardType === 'trailer'" class="play-btn">
       <img src="assets/icons/play.svg" alt="" />
     </div>
-    <div *ngIf="isRecommendation" class="recommendation-info"></div>
+    <div *ngIf="cardType === 'recommendation'" class="recommendation-info">
+      <p>
+        <img src="assets/icons/calendar.svg" alt="" />{{ movie.release_date }}
+      </p>
+    </div>
   </div>
   <div class="movie-info">
     <p class="movie-info__name">

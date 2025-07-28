@@ -13,6 +13,7 @@ import { EditorBarComponent } from './components/editor-bar/editor-bar.component
 import { PageSectionComponent } from './components/page-section/page-section.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TrailerModalComponent } from './components/trailer-modal/trailer-modal.component';
+import { ReviewCardComponent } from './components/review-card/review-card.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TrailerModalComponent } from './components/trailer-modal/trailer-modal.
     EditorBarComponent,
     PageSectionComponent,
     TrailerModalComponent,
+    ReviewCardComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

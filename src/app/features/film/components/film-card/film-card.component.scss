@@ -100,11 +100,12 @@
     .img-container {
       transition: all 0.2s ease-in-out;
     }
-    .img-container:hover {
-      transform: scale(1.05);
-    }
+    // .img-container:hover {
+    //   transform: scale(1.05);
+    // }
     .img-container:hover .recommendation-info {
-      display: block;
+      display: flex;
+      align-items: center;
     }
     .movie-img {
       height: 20rem;
@@ -113,12 +114,17 @@
     .recommendation-info {
       display: none;
       position: absolute;
+      padding: 0 2rem;
       bottom: 0;
       width: 100%;
       height: 30%;
-      background: #000;
-      opacity: 0.7;
+      background: rgba(255, 255, 255, 0.9);
+      // opacity: 0.7;
       transition: all 0.3s ease-in-out;
+      p {
+        @include flexbox($align: center, $gap: 1rem);
+        @include text-style($color: $absolute-black, $fsize: 1.4rem);
+      }
     }
   }
 }

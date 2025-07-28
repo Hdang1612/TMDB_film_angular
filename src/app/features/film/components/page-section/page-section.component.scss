@@ -75,6 +75,15 @@
     background: linear-gradient(to right, transparent, #000000);
     pointer-events: none;
   }
+
+  &.review-container {
+    .section-content {
+      flex-direction: column !important;
+    }
+    &::after {
+      display: none;
+    }
+  }
 }
 
 .sub-nav {

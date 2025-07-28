@@ -6,6 +6,8 @@ import { TrendingFilmResponse } from '../models/trendingMovie';
 import { MovieDetail } from '../models/movieDetail';
 import { TMDBTrailer } from '../models/trailer';
 import { CastResponse } from '../models/credit';
+import { RecommendationResponse } from '../models/recomendation';
+import { ReviewResponse } from '../models/review';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
@@ -91,10 +93,29 @@ export class MovieService {
       .pipe(catchError(this.handleError()));
   }
 
-
   getCredit(id: string | null): Observable<CastResponse> {
     return this.http
       .get<CastResponse>(`${environment.baseUrlMovie}movie/${id}/credits`, {
+        ...this.options,
+        params: new HttpParams().set('language', 'en-US'),
+      })
+      .pipe(catchError(this.handleError()));
+  }
+
+  // recommendations
+  getRecommendation(id: string | null): Observable<RecommendationResponse> {
+    return this.http
+      .get<RecommendationResponse>(
+        `${environment.baseUrlMovie}movie/${id}/recommendations`,
+        { ...this.options, params: new HttpParams().set('language', 'en-US') }
+      )
+      .pipe(catchError(this.handleError()));
+  }
+
+  // review
+  getReviews(id: string | null): Observable<ReviewResponse> {
+    return this.http
+      .get<ReviewResponse>(`${environment.baseUrlMovie}movie/${id}/reviews`, {
         ...this.options,
         params: new HttpParams().set('language', 'en-US'),
       })

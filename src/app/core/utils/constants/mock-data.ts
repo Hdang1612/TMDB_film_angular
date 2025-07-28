@@ -288,9 +288,9 @@ export const DETAIL_SECTIONS: SectionModel[] = [
       { label: 'Discussion', value: 'discussion' },
     ],
     data: [],
-    dataType: 'default',
+    dataType: 'social',
 
-    subNav: '',
+    subNav: 'View all review',
   },
   {
     key: 'media',
@@ -302,7 +302,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
       { label: 'Poster', value: 'poster' },
     ],
     data: [],
-    dataType: 'default',
+    dataType: 'media',
 
     subNav: '',
   },
@@ -315,17 +315,6 @@ export const DETAIL_SECTIONS: SectionModel[] = [
 
     subNav: '',
   },
-  // {
-  //   key: 'leaderboard',
-  //   title: `Leaderboard`,
-  //   btnGroup: [
-  //     { label: 'Today', value: 'today' },
-  //     { label: 'This Week', value: 'week' },
-  //   ],
-  //   data: [],
-  //   isMovieHorizontal: false,
-  //   activeBtnIndex: 0,
-  // },
 ];
 
 export const leaderboardMockData = [

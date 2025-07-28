@@ -1,0 +1,34 @@
+<div class="review-container" (click)="navigate()">
+  <div class="review-header">
+    <div class="reviewer-img">
+      <a href=""><img src="{{ avt }}" alt="" /></a>
+    </div>
+    <div class="reviewer-info">
+      <p class="write-by">
+        A review by
+        {{
+          reviewData.author_details.name
+            ? reviewData.author_details.name
+            : reviewData.author
+        }}
+      </p>
+      <div class="sub-info">
+        <span class="rating"
+          ><img src="assets/icons/star.svg" alt="" />{{ rating }} %
+        </span>
+        <p>
+          written by
+          {{
+            reviewData.author_details.name
+              ? reviewData.author_details.name
+              : reviewData.author
+          }}
+        </p>
+        <span>on {{ reviewData.created_at | date : "short" }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="review-content">
+    <p>{{ reviewData.content }}</p>
+  </div>
+</div>
