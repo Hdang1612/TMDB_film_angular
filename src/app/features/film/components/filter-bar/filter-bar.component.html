@@ -1,0 +1,54 @@
+<div class="filter-container">
+  <div *ngFor="let section of filterSections" class="section">
+    <div class="section-name">
+      <p>{{ section.title }}</p>
+      <img [src]="section.icon" alt="" />
+    </div>
+
+    <div class="section-content" *ngFor="let item of section.content">
+      <p class="sub-name">{{ item.label }}</p>
+
+      <ng-container *ngIf="item.type === 'select'">
+        <select>
+          <option *ngFor="let opt of item.options">{{ opt }}</option>
+        </select>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'radio'">
+        <label *ngFor="let opt of item.options">
+          <input type="radio" [name]="item.name" />
+          {{ opt }}
+        </label>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'date-range'">
+        <label>
+          <input type="checkbox" [checked]="item.searchAll" />
+          Search all releases?
+        </label>
+        <div class="date-container">
+          <label for="">From</label>
+          <input type="date" placeholder="from" />
+        </div>
+        <div class="date-container">
+          <label for="">To</label>
+          <input type="date" placeholder="to" />
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'multi-select'">
+        <div class="genre-btns">
+          <button *ngFor="let genre of item.options" class="genre-btn">
+            {{ genre }}
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="item.type === 'input'">
+        <div class="input-container">
+          <input type="text" placeholder="Search..." />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="search-btn">Search</div>
+</div>

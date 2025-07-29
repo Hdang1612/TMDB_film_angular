@@ -15,6 +15,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TrailerModalComponent } from './components/trailer-modal/trailer-modal.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
+import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { FilmListComponent } from './pages/film-list/film-list.component';
+import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { VideoCardComponent } from './components/video-card/video-card.component
     TrailerModalComponent,
     ReviewCardComponent,
     VideoCardComponent,
+    FilterBarComponent,
+    FilmListComponent,
+    MovieListLayoutComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

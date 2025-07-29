@@ -37,7 +37,7 @@
             </ng-container>
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <ng-container *ngFor="let movie of section.data">
+            <ng-container *ngFor="let movie of section.data.slice(0, 10)">
               <app-film-card
                 [cardType]="section.dataType"
                 [movie]="movie"
@@ -45,6 +45,11 @@
                 (openMenu)="handleOpenMenu(movie.id)"
               ></app-film-card>
             </ng-container>
+            <div class="view-more-container" *ngIf="section.data.length > 10">
+              <a class="view-more">
+                View more <img src="assets/icons/arow-right-btn.svg" alt="" />
+              </a>
+            </div>
           </ng-container>
         </ng-container>
       </div>

@@ -8,9 +8,18 @@ const routes: Routes = [
     component: FeatureComponent,
     children: [
       {
-        path: 'movie',
+        path: '',
         loadChildren: () =>
           import('./film/film.module').then((m) => m.FilmModule),
+      },
+      {
+        path: 'tv',
+        loadChildren: () => import('./tv/tv.module').then((m) => m.TvModule),
+      },
+      {
+        path: 'person',
+        loadChildren: () =>
+          import('./people/people.module').then((m) => m.PeopleModule),
       },
     ],
   },

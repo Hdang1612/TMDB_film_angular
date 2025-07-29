@@ -1,0 +1,57 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+.filter-container {
+  //   width: 25%;
+  .section {
+    border: 1px solid $black-30;
+    border-radius: 0.8rem;
+    box-shadow: 0 2rem 2rem rgba(253, 252, 252, 0.1);
+    margin-bottom: 2rem;
+    .section-name {
+      @include flexbox($align: center, $justify: space-between);
+      @include text-style($fsize: 2rem, $fweight: 700, $color: $absolute-white);
+      padding: 1.4rem 1.6rem;
+      border-bottom: 1px solid $black-15;
+      img {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    .section-content {
+      border-bottom: 1px solid $black-15;
+      padding: 1.4rem 1.6rem;
+      @include flexbox($gap: 1.2rem, $direction: column, $align: flex-start);
+      .sub-name {
+        @include text-style(
+          $fsize: 1.6rem,
+          $fweight: 300,
+          $color: $absolute-white
+        );
+        margin-bottom: 1rem;
+      }
+      .date-container {
+        width: 100%;
+        @include flexbox($justify: space-between, $align: center);
+        label {
+          @include text-style($fsize: 1.4rem, $color: $grey-60);
+        }
+        input {
+          width: 60%;
+          padding: 0.6rem;
+        }
+      }
+      label {
+        @include flexbox($align: center, $gap: 0.6rem);
+      }
+    }
+  }
+  .search-btn {
+    width: 100%;
+    border-radius: 3rem;
+    @include flexbox($justify: center, $align: center);
+    padding: 1.2rem 0;
+    background: $grey-60;
+    @include text-style($fsize: 1.6rem, $fweight: 600, $color: $absolute-white);
+    cursor: pointer;
+  }
+}

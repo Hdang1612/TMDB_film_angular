@@ -64,6 +64,27 @@
     .section-content {
       @include flexbox($gap: 2rem);
     }
+
+    .view-more-container {
+      padding: 0 4rem;
+      .view-more {
+        width: 12rem;
+        @include text-style($fweight: 600, $fsize: 1.6rem);
+        @include flexbox($align: center, $justify: center);
+        display: inline-flex;
+        color: $absolute-white;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        cursor: pointer;
+        img {
+          width: 2rem;
+          height: 2rem;
+        }
+        &:hover {
+          color: $grey-60;
+        }
+      }
+    }
   }
   &::after {
     content: "";
