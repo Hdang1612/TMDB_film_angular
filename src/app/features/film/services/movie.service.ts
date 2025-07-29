@@ -17,6 +17,7 @@ export class MovieService {
       // 'api-key': environment.apiKey,
     }),
   };
+  langParam = new HttpParams().set('language', 'en-US');
   private handleError() {
     return (error: any) => {
       return throwError(() => error);
@@ -29,7 +30,7 @@ export class MovieService {
         `${environment.baseUrlMovie}trending/movie/${time_window}`,
         {
           ...this.options,
-          params: new HttpParams().set('language', 'en-US'),
+          params: this.langParam,
           // .set('api_key', environment.apiKey),
         }
       )
@@ -41,7 +42,7 @@ export class MovieService {
       `${environment.baseUrlMovie}movie/${type}`,
       {
         ...this.options,
-        params: new HttpParams().set('lang', 'en-US').set('page', page),
+        params: this.langParam.set('page', page),
       }
     );
   }
@@ -89,7 +90,7 @@ export class MovieService {
     return this.http
       .get<MovieDetail>(`${environment.baseUrlMovie}movie/${id}`, {
         ...this.options,
-        params: new HttpParams().set('language', 'en-US'),
+        params: this.langParam,
       })
       .pipe(catchError(this.handleError()));
   }
@@ -98,7 +99,7 @@ export class MovieService {
     return this.http
       .get<CastResponse>(`${environment.baseUrlMovie}movie/${id}/credits`, {
         ...this.options,
-        params: new HttpParams().set('language', 'en-US'),
+        params: this.langParam,
       })
       .pipe(catchError(this.handleError()));
   }
@@ -108,7 +109,7 @@ export class MovieService {
     return this.http
       .get<RecommendationResponse>(
         `${environment.baseUrlMovie}movie/${id}/recommendations`,
-        { ...this.options, params: new HttpParams().set('language', 'en-US') }
+        { ...this.options, params: this.langParam }
       )
       .pipe(catchError(this.handleError()));
   }
@@ -118,7 +119,17 @@ export class MovieService {
     return this.http
       .get<ReviewResponse>(`${environment.baseUrlMovie}movie/${id}/reviews`, {
         ...this.options,
-        params: new HttpParams().set('language', 'en-US'),
+        params: this.langParam,
+      })
+      .pipe(catchError(this.handleError()));
+  }
+
+  //genres
+  getGenres(): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}genre/movie/list`, {
+        ...this.options,
+        params: this.langParam,
       })
       .pipe(catchError(this.handleError()));
   }

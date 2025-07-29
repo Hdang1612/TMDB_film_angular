@@ -20,6 +20,8 @@ import { FilmListComponent } from './pages/film-list/film-list.component';
 import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { CardSkeletonComponent } from './components/card-skeleton/card-skeleton.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { MovieRatingCircleComponent } from './components/movie-rating-circle/movie-rating-circle.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { CardSkeletonComponent } from './components/card-skeleton/card-skeleton.
     MovieListLayoutComponent,
     PaginationComponent,
     CardSkeletonComponent,
+    LoadingComponent,
+    MovieRatingCircleComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],
