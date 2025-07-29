@@ -35,22 +35,6 @@ export class MovieService {
       )
       .pipe(catchError(this.handleError()));
   }
-  getUpcomingList(page: number): Observable<TrendingFilmResponse> {
-    return this.http
-      .get<TrendingFilmResponse>(`${environment.baseUrlMovie}movie/upcoming`, {
-        ...this.options,
-        params: new HttpParams().set('lang', 'en-US').set('page', page),
-      })
-      .pipe(catchError(this.handleError()));
-  }
-  getPopularList(page: number): Observable<TrendingFilmResponse> {
-    return this.http
-      .get<TrendingFilmResponse>(`${environment.baseUrlMovie}movie/popular`, {
-        ...this.options,
-        params: new HttpParams().set('lang', 'en-US').set('page', page),
-      })
-      .pipe(catchError(this.handleError()));
-  }
 
   getListMovie(page: number, type: string): Observable<TrendingFilmResponse> {
     return this.http.get<TrendingFilmResponse>(

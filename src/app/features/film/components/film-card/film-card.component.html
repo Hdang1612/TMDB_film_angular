@@ -18,7 +18,9 @@
     <img class="movie-img" [src]="imagePath" alt="" />
     <div *ngIf="cardType === 'default'" class="rating-percent-container">
       <div class="outer-ring"></div>
-      <div class="rating-percent">{{ movie.vote_average }}</div>
+      <div class="rating-percent">
+        {{ movie.vote_average | number : "1.1-1" }}
+      </div>
     </div>
     <div
       *ngIf="cardType === 'trailer' || cardType === 'default'"

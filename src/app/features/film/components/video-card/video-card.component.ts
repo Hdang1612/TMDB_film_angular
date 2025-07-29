@@ -19,6 +19,7 @@ export class VideoCardComponent implements OnInit {
     if (this.media.type === 'video') {
       return `https://img.youtube.com/vi/${this.media.key}/hqdefault.jpg`;
     } else {
+      console.log('path', this.media.file_path);
       return this.media.file_path;
     }
   }

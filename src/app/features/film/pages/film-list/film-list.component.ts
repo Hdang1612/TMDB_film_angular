@@ -22,7 +22,6 @@ export class FilmListComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +31,6 @@ export class FilmListComponent implements OnInit {
       this.movieType = mapped.type;
       this.title = mapped.title;
       this.currentPage = 1;
-
       this.getMovies(this.currentPage);
     });
   }

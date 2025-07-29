@@ -30,7 +30,8 @@ export class FilmDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService
-  ) {}
+  ) // public loadingService: LoadingService
+  {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

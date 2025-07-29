@@ -25,7 +25,10 @@
         class="section-content"
         [style.gap]="section.dataType === 'media' ? '0' : '20px'"
       >
-        <ng-container [ngSwitch]="section.dataType">
+        <ng-container
+          *ngIf="!isLoading; else skeletonList"
+          [ngSwitch]="section.dataType"
+        >
           <ng-container *ngSwitchCase="'social'">
             <ng-container *ngFor="let movie of section.data.slice(0, 2)">
               <app-review-card [reviewData]="movie"></app-review-card>
@@ -37,21 +40,28 @@
             </ng-container>
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <ng-container *ngFor="let movie of section.data.slice(0, 10)">
-              <app-film-card
-                [cardType]="section.dataType"
-                [movie]="movie"
-                [isMenuOpen]="selectedMenuCardId === movie.id"
-                (openMenu)="handleOpenMenu(movie.id)"
-              ></app-film-card>
+            <ng-container>
+              <ng-container *ngFor="let movie of section.data.slice(0, 10)">
+                <app-film-card
+                  [cardType]="section.dataType"
+                  [movie]="movie"
+                  [isMenuOpen]="selectedMenuCardId === movie.id"
+                  (openMenu)="handleOpenMenu(movie.id)"
+                ></app-film-card>
+              </ng-container>
+              <div class="view-more-container" *ngIf="section.data.length > 10">
+                <a class="view-more">
+                  View more <img src="assets/icons/arow-right-btn.svg" alt="" />
+                </a>
+              </div>
             </ng-container>
-            <div class="view-more-container" *ngIf="section.data.length > 10">
-              <a class="view-more">
-                View more <img src="assets/icons/arow-right-btn.svg" alt="" />
-              </a>
-            </div>
           </ng-container>
         </ng-container>
+        <ng-template #skeletonList>
+          <ng-container *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+            <app-card-skeleton></app-card-skeleton>
+          </ng-container>
+        </ng-template>
       </div>
     </div>
   </div>

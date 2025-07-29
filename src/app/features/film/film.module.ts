@@ -19,6 +19,7 @@ import { FilterBarComponent } from './components/filter-bar/filter-bar.component
 import { FilmListComponent } from './pages/film-list/film-list.component';
 import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { CardSkeletonComponent } from './components/card-skeleton/card-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     FilmListComponent,
     MovieListLayoutComponent,
     PaginationComponent,
+    CardSkeletonComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

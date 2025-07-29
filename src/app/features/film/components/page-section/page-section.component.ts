@@ -8,6 +8,7 @@ import { SectionModel } from '../../models/section';
 })
 export class PageSectionComponent implements OnInit {
   @Output() btnClick = new EventEmitter<string>();
+  @Input() isLoading: boolean | null = null;
   @Input() section: SectionModel = {
     key: '',
     title: '',
