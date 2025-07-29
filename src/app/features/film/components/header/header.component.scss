@@ -28,20 +28,43 @@
 
     .menu-item {
       padding: 1.4rem 0;
+      position: relative;
       a {
         padding: 1.4rem 2.4rem;
       }
-      &--active {
-        @include text-style($color: #fff, $fweight: 500);
-        border-radius: 0.8rem;
-        border: 1px solid $black-10;
-        background: $black-10;
+      // &--active {
+      //   @include text-style($color: #fff, $fweight: 500);
+      //   border-radius: 0.8rem;
+      //   border: 1px solid $black-10;
+      //   background: $black-10;
+      // }
+      // &:hover {
+      //   @include text-style($color: #fff, $fweight: 500);
+      //   border-radius: 0.8rem;
+      //   // border: 1px solid $black-10;
+      //   background: $black-10;
+      // }
+      &:hover .sub-menu {
+        display: block;
       }
-      &:hover {
-        @include text-style($color: #fff, $fweight: 500);
+      .sub-menu {
+        display: none;
+        position: absolute;
+        top: 5rem;
+        width: 16rem;
         border-radius: 0.8rem;
-        // border: 1px solid $black-10;
-        background: $black-10;
+        background: $black-30;
+        ul {
+          li {
+            padding: 0.6rem 0;
+            &:hover {
+              background: $black-10;
+            }
+            a {
+              @include text-style($fsize: 1.4rem, $color: $absolute-white);
+            }
+          }
+        }
       }
     }
   }

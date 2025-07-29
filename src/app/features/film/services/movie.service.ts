@@ -52,6 +52,16 @@ export class MovieService {
       .pipe(catchError(this.handleError()));
   }
 
+  getListMovie(page: number, type: string): Observable<TrendingFilmResponse> {
+    return this.http.get<TrendingFilmResponse>(
+      `${environment.baseUrlMovie}movie/${type}`,
+      {
+        ...this.options,
+        params: new HttpParams().set('lang', 'en-US').set('page', page),
+      }
+    );
+  }
+
   getTrailer(id: string | null): Observable<any> {
     return this.http
       .get<any>(`${environment.baseUrlMovie}movie/${id}/videos`, {

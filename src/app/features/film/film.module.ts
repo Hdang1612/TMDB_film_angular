@@ -18,6 +18,7 @@ import { VideoCardComponent } from './components/video-card/video-card.component
 import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
 import { FilmListComponent } from './pages/film-list/film-list.component';
 import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-l
     FilterBarComponent,
     FilmListComponent,
     MovieListLayoutComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

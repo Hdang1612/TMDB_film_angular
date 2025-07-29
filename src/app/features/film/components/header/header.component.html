@@ -1,13 +1,45 @@
 <div class="header-container">
   <div class="header" [ngClass]="{ hide: isScrollingDown }">
-    <a class="header__logo" href="/movie">
+    <a class="header__logo" href="/">
       <img src="./assets/images/Logo.png" alt="" />
     </a>
     <div class="header__menu">
       <ul class="menu-container">
-        <li class="menu-item menu-item--active"><a href="/movie">Movie</a></li>
-        <li class="menu-item"><a href="">TV Show</a></li>
-        <li class="menu-item"><a href="">People</a></li>
+        <li class="menu-item menu-item--active">
+          <a href="/movies">Movie</a>
+          <div class="sub-menu movie-menu">
+            <ul>
+              <li class="movie-menu-item" *ngFor="let item of movieMenu">
+                <a
+                  [routerLink]="item.path ? ['/movies', item.path] : '/movies'"
+                  >{{ item.label }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a href="">TV Show</a>
+          <div class="sub-menu movie-menu">
+            <ul>
+              <li class="movie-menu-item" *ngFor="let item of tvShowMenu">
+                <a [routerLink]="item.path ? ['/tv', item.path] : '/tv'">{{
+                  item.label
+                }}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="menu-item">
+          <a href="">People</a>
+          <div class="sub-menu movie-menu">
+            <ul>
+              <li class="movie-menu-item" *ngFor="let item of peopleMenu">
+                <a [routerLink]="['/people']">{{ item.label }}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
         <li class="menu-item"><a href="">More</a></li>
       </ul>
     </div>

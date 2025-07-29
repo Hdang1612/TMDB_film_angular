@@ -20,22 +20,22 @@ const routes: Routes = [
         component: FilmDetailComponent,
       },
       {
-        path: 'movie',
-        component: MovieListLayoutComponent,
-        children: [
-          {
-            path: '',
-            component: FilmListComponent,
-          },
-          {
-            path: 'top-rated',
-            component: FilmListComponent,
-          },
-          {
-            path: 'upcoming',
-            component: FilmListComponent,
-          },
-        ],
+        path: 'movies',
+        component: FilmListComponent,
+        // children: [
+        //   {
+        //     path: '',
+        //     component: FilmListComponent,
+        //   },
+        //   {
+        //     path: ':type',
+        //     component: FilmListComponent,
+        //   },
+        // ],
+      },
+      {
+        path: 'movies/:type',
+        component: FilmListComponent,
       },
     ],
   },

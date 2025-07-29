@@ -32,6 +32,19 @@ export const FOOTER_NAVS = [
     ],
   },
 ];
+export const MOVIE_TYPE_MAP: Record<string, { type: string; title: string }> = {
+  '': { type: 'popular', title: 'Popular Movies' },
+  'upcoming': { type: 'upcoming', title: 'UpComing Movie' },
+  'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
+  'now-playing': { type: 'now_playing', title: 'Now Playing' },
+};
+export const TV_SHOW_TYPE_MAP: Record<string, { type: string; title: string }> = {
+  '': { type: 'popular', title: 'Popular Movies' },
+  'upcoming': { type: 'upcoming', title: 'UpComing Movie' },
+  'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
+  'now-playing': { type: 'now_playing', title: 'Now Playing' },
+};
+
 
 export const HOME_SECTIONS: SectionModel[] = [
   {

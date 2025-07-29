@@ -1,0 +1,28 @@
+<div class="pagination">
+  <span
+    class="prev-btn pagination__btns"
+    (click)="onPrevClick()"
+    [class.pagination__btns--disable]="currentPage === 1"
+  >
+    <img src="assets/icons/arrow-left-btn.svg" alt="" />
+  </span>
+
+  <div class="pagination__pages">
+    <button
+      *ngFor="let page of pageList"
+      class="pagination__item"
+      [class.pagination__item--active]="page === currentPage"
+      (click)="onPageClick(page)"
+    >
+      {{ page }}
+    </button>
+  </div>
+
+  <span
+    class="next-btn pagination__btns"
+    (click)="onNextClick()"
+    [class.pagination__btns--disable]="currentPage === totalPages"
+  >
+    <img src="assets/icons/arow-right-btn.svg" alt="" />
+  </span>
+</div>
