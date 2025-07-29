@@ -26,7 +26,9 @@
           </div>
           <div class="score-wrapper">
             <div class="icon-wrapper">
-              <div class="score-icon"></div>
+              <app-movie-rating-circle
+                [score]="detail.vote_average"
+              ></app-movie-rating-circle>
               <div class="score-heading">
                 User <br />
                 Score

@@ -3,12 +3,13 @@
 
 .score-container {
   position: relative;
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   background: $black-08;
   border-radius: 50%;
   &:hover {
     transform: scale(1.05);
+    cursor: pointer;
   }
 }
 
@@ -24,7 +25,7 @@
 
 .ring-progress {
   fill: none;
-  stroke: #00ff83;
+  // stroke: #00ff83;
   stroke-width: 6;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.4s ease;
@@ -35,12 +36,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-weight: bold;
-  font-size: 1.125rem;
-  color: white;
+  @include text-style($fsize: 1.4rem, $fweight: 700);
 
   span {
-    font-size: 1rem;
+    font-size: 0.8rem;
     vertical-align: top;
   }
 }

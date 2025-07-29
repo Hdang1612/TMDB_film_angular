@@ -8,15 +8,20 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MovieRatingCircleComponent implements OnInit {
   constructor() {}
 
-  @Input() score: number = 0; // từ 0–10
-  percent: number = 0; // chuyển về % (0–100)
+  @Input() score: number = 0;
+  percent: number = 0;
   strokeDashoffset: number = 0;
 
-  readonly radius = 15;
-  readonly circumference = 2 * Math.PI * this.radius;
+  radius = 20;
+  circumference = 2 * Math.PI * this.radius; // chu vi tròn
 
   ngOnInit(): void {
-    this.percent = Math.round(this.score * 10); // convert 7.1 -> 71%
-    this.strokeDashoffset = this.circumference * (1 - this.percent / 100);
+    this.percent = Math.round(this.score * 10);
+    this.strokeDashoffset = this.circumference * (1 - this.percent / 100); // phần bị ẩn
+  }
+  get strokeColor(): string {
+    if (this.percent >= 70) return '#21d07a';
+    if (this.percent >= 40) return '#d2d531';
+    return '#db2360';
   }
 }

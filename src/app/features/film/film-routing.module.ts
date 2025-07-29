@@ -1,3 +1,4 @@
+import { ReviewModule } from './../review/review.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,18 +21,18 @@ const routes: Routes = [
         component: FilmDetailComponent,
       },
       {
+        path: 'movie/:id/cast',
+        loadChildren: () =>
+          import('../people/people.module').then((m) => m.PeopleModule),
+      },
+      {
+        path: 'movie/:id/reviews',
+        loadChildren: () =>
+          import('../review/review.module').then((m) => m.ReviewModule),
+      },
+      {
         path: 'movies',
         component: FilmListComponent,
-        // children: [
-        //   {
-        //     path: '',
-        //     component: FilmListComponent,
-        //   },
-        //   {
-        //     path: ':type',
-        //     component: FilmListComponent,
-        //   },
-        // ],
       },
       {
         path: 'movies/:type',
