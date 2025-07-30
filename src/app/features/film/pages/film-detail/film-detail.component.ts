@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DETAIL_SECTIONS } from 'src/app/core/utils/constants/mock-data';
+import {
+  DETAIL_SECTIONS,
+  FILM_SUB_INFO,
+} from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
 import { MovieDetail } from '../../models/movieDetail';
-import { getFullImageUrl } from 'src/app/core/utils/img.utils';
+import { getFullImageUrl, loadSocialLinks } from 'src/app/core/utils/img.utils';
 import { TMDBTrailer } from '../../models/trailer';
 import ColorThief from 'colorthief';
 import { CastMember } from '../../models/credit';
@@ -11,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { TrendingFilm } from '../../models/trendingMovie';
 import { RecommendationFilm } from '../../models/recomendation';
+import { SubInfoSidebarConfig } from '../../models/section';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -27,11 +31,11 @@ export class FilmDetailComponent implements OnInit {
     backdrops: [],
     posters: [],
   };
+  subInfoSidebarConfig!: SubInfoSidebarConfig;
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
-  ) // public loadingService: LoadingService
-  {}
+    private movieService: MovieService // public loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -40,6 +44,7 @@ export class FilmDetailComponent implements OnInit {
 
       this.loadDetail(id);
       this.loadCredit(id);
+      this.loadSocialIcon(id);
       this.loadSectionData('recommend', () =>
         this.movieService.getRecommendation(id)
       );
@@ -60,6 +65,24 @@ export class FilmDetailComponent implements OnInit {
         if (this.detail.backdrop_path) {
           this.loadBackdropColor(this.detail.backdrop_path);
         }
+        this.subInfoSidebarConfig = {
+          socialLinks: [],
+          items: [
+            { label: 'Status', value: this.detail.status },
+            { label: 'Release', value: this.detail.release_date },
+            {
+              label: 'Original Language',
+              value: this.detail.original_language,
+            },
+            { label: 'Budget', value: this.detail.budget, isCurrency: true },
+            { label: 'Revenue', value: this.detail.revenue, isCurrency: true },
+            {
+              label: 'Keywords',
+              value: [],
+              isKeywordList: true,
+            },
+          ],
+        };
       },
       error: (err) => {
         alert(err.error?.error);
@@ -84,6 +107,18 @@ export class FilmDetailComponent implements OnInit {
 
         const section = this.detailSection.find((s) => s.key === 'cast');
         if (section) section.data = mapped;
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
+  }
+  loadSocialIcon(id: string | null) {
+    this.movieService.getExternalId(id, 'movie').subscribe({
+      next: (res) => {
+        const map = loadSocialLinks(res);
+        this.subInfoSidebarConfig.socialLinks = map;
+        console.log('>>>>>>>>', this.subInfoSidebarConfig.socialLinks);
       },
       error: (err) => {
         alert(err.error?.error);

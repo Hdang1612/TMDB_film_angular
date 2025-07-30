@@ -22,6 +22,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { CardSkeletonComponent } from './components/card-skeleton/card-skeleton.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MovieRatingCircleComponent } from './components/movie-rating-circle/movie-rating-circle.component';
+import { SubInfoSidebarComponent } from './components/sub-info-sidebar/sub-info-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MovieRatingCircleComponent } from './components/movie-rating-circle/mov
     CardSkeletonComponent,
     LoadingComponent,
     MovieRatingCircleComponent,
+    SubInfoSidebarComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

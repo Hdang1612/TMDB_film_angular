@@ -1,4 +1,7 @@
-import { SectionModel } from 'src/app/features/film/models/section';
+import {
+  SectionModel,
+  SubInfoSidebarConfig,
+} from 'src/app/features/film/models/section';
 import { TrendingFilm } from './../../../features/film/models/trendingMovie';
 import { MovieDetail } from 'src/app/features/film/models/movieDetail';
 
@@ -34,17 +37,17 @@ export const FOOTER_NAVS = [
 ];
 export const MOVIE_TYPE_MAP: Record<string, { type: string; title: string }> = {
   '': { type: 'popular', title: 'Popular Movies' },
-  'upcoming': { type: 'upcoming', title: 'UpComing Movie' },
+  upcoming: { type: 'upcoming', title: 'UpComing Movie' },
   'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
   'now-playing': { type: 'now_playing', title: 'Now Playing' },
 };
-export const TV_SHOW_TYPE_MAP: Record<string, { type: string; title: string }> = {
-  '': { type: 'popular', title: 'Popular Movies' },
-  'upcoming': { type: 'upcoming', title: 'UpComing Movie' },
-  'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
-  'now-playing': { type: 'now_playing', title: 'Now Playing' },
-};
-
+export const TV_SHOW_TYPE_MAP: Record<string, { type: string; title: string }> =
+  {
+    '': { type: 'popular', title: 'Popular Movies' },
+    upcoming: { type: 'upcoming', title: 'UpComing Movie' },
+    'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
+    'now-playing': { type: 'now_playing', title: 'Now Playing' },
+  };
 
 export const HOME_SECTIONS: SectionModel[] = [
   {
@@ -137,6 +140,49 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     dataType: 'recommendation',
 
     subNav: '',
+  },
+];
+
+export const FILM_SUB_INFO: SubInfoSidebarConfig = {
+  socialLinks: [],
+  items: [
+    { label: 'Status', value: 'hehehehehe' },
+    { label: 'Release', value: 'xádfasdfadf' },
+    { label: 'Original Language', value: 'en' },
+    { label: 'Budget', value: 60000000, isCurrency: true },
+    { label: 'Revenue', value: 150010239, isCurrency: true },
+    {
+      label: 'Keywords',
+      value: ['england', 'zombie', 'mourning', 'cruel'],
+      isKeywordList: true,
+    },
+  ],
+};
+
+export const CAST_SUB_INFO: SubInfoSidebarConfig = {
+  socialLinks: [],
+  items: [
+    { label: 'Known For', value: 'Acting' },
+    { label: 'Gender', value: 'Male' },
+    { label: 'Birthday', value: '1990-04-25' },
+    { label: 'Place of Birth', value: 'Los Angeles, California' },
+  ],
+};
+export const SOCIAL_ICON_MAP = [
+  {
+    key: 'facebook_id',
+    baseUrl: 'https://www.facebook.com/',
+    iconPath: 'assets/icons/social-fb.svg',
+  },
+  {
+    key: 'instagram_id',
+    baseUrl: 'https://www.instagram.com/',
+    iconPath: 'assets/icons/social-insta.svg',
+  },
+  {
+    key: 'twitter_id',
+    baseUrl: 'https://twitter.com/',
+    iconPath: 'assets/icons/social-X.svg',
   },
 ];
 

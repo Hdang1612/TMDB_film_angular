@@ -123,7 +123,14 @@
   width: 100%;
   @include flexbox($justify: center);
   .content {
+    @include flexbox($gap: 2rem, $align: flex-start);
     max-width: $maxw-xl;
     width: 100%;
+    &__main {
+      width: 80%;
+    }
+    .sidebar {
+      width: 100%;
+    }
   }
 }

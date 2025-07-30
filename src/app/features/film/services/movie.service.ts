@@ -133,4 +133,14 @@ export class MovieService {
       })
       .pipe(catchError(this.handleError()));
   }
+
+  // get các kênh social
+  getExternalId(id: string | null, type: string): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}${type}/${id}/external_ids`, {
+        ...this.options,
+        params: this.langParam,
+      })
+      .pipe(catchError(this.handleError()));
+  }
 }

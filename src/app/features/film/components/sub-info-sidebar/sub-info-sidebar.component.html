@@ -1,0 +1,31 @@
+<!-- sub-info-sidebar.component.html -->
+<div class="sidebar">
+  <div class="social-icons" *ngIf="config?.socialLinks?.length">
+    <a
+      *ngFor="let link of config?.socialLinks"
+      [href]="link?.url"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="{{ link?.icon }}" alt="" />
+    </a>
+  </div>
+
+  <div *ngFor="let item of config?.items" class="info-item">
+    <p class="label">{{ item?.label }}</p>
+    <ng-container [ngSwitch]="true">
+      <p *ngSwitchCase="item?.isCurrency">
+        {{ item.value | currency : "USD" : "symbol" }}
+      </p>
+
+      <div class="keyword-container" *ngSwitchCase="item?.isKeywordList">
+        <ng-container *ngFor="let keyword of item.value">
+          <span class="keyword-tag">{{ keyword }}</span>
+        </ng-container>
+      </div>
+      <p *ngSwitchDefault>
+        {{ item.value }}
+      </p>
+    </ng-container>
+  </div>
+</div>
