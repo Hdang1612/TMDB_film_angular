@@ -29,40 +29,56 @@
           *ngIf="!isLoading; else skeletonList"
           [ngSwitch]="section.dataType"
         >
-          <ng-container *ngSwitchCase="'social'">
-            <ng-container *ngFor="let movie of section.data.slice(0, 2)">
-              <app-review-card [reviewData]="movie"></app-review-card>
-            </ng-container>
-          </ng-container>
-          <ng-container *ngSwitchCase="'media'">
-            <ng-container *ngFor="let movie of section.data.slice(0, 10)">
-              <app-video-card [media]="movie"></app-video-card>
-            </ng-container>
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-            <ng-container>
-              <ng-container *ngFor="let movie of section.data.slice(0, 10)">
-                <app-film-card
-                  [cardType]="section.dataType"
-                  [movie]="movie"
-                  [isMenuOpen]="selectedMenuCardId === movie.id"
-                  (openMenu)="handleOpenMenu(movie.id)"
-                ></app-film-card>
+          <ng-container
+            *ngIf="section.data && section.data.length > 0; else noData"
+          >
+            <ng-container *ngSwitchCase="'social'">
+              <ng-container *ngFor="let movie of section.data.slice(0, 2)">
+                <app-review-card [reviewData]="movie"></app-review-card>
               </ng-container>
-              <div class="view-more-container" *ngIf="section.data.length > 10">
-                <a
-                  class="view-more"
-                  [routerLink]="
-                    id
-                      ? ['/movie', id, section.dataType]
-                      : ['/movies', section.dataType]
-                  "
+            </ng-container>
+            <ng-container *ngSwitchCase="'media'">
+              <ng-container *ngFor="let movie of section.data.slice(0, 10)">
+                <app-video-card [media]="movie"></app-video-card>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <ng-container>
+                <ng-container *ngFor="let movie of section.data.slice(0, 10)">
+                  <app-film-card
+                    [cardType]="section.dataType"
+                    [movie]="movie"
+                    [isMenuOpen]="selectedMenuCardId === movie.id"
+                    (openMenu)="handleOpenMenu(movie.id)"
+                  ></app-film-card>
+                </ng-container>
+                <div
+                  class="view-more-container"
+                  *ngIf="section.data.length > 10"
                 >
-                  View more <img src="assets/icons/arow-right-btn.svg" alt="" />
-                </a>
-              </div>
+                  <a
+                    class="view-more"
+                    [style.display]="
+                      section.data && section.data.length > 0 ? 'none' : 'block'
+                    "
+                    [routerLink]="
+                      id
+                        ? ['/movie', id, section.dataType]
+                        : ['/movies', section.dataType]
+                    "
+                  >
+                    View more
+                    <img src="assets/icons/arow-right-btn.svg" alt="" />
+                  </a>
+                </div>
+              </ng-container>
             </ng-container>
           </ng-container>
+          <ng-template #noData>
+            <div class="no-data-text">
+              {{ noDataTextMap[section.dataType] || "No data" }}
+            </div>
+          </ng-template>
         </ng-container>
         <ng-template #skeletonList>
           <ng-container *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
@@ -72,7 +88,7 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="section.subNav">
+  <ng-container *ngIf="section.subNav && section.data && section.data.length">
     <a
       [routerLink]="['/movie', id, section.dataType]"
       href=""

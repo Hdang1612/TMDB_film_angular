@@ -22,6 +22,12 @@ export class PageSectionComponent implements OnInit {
   activeBtnIndex: number = 0;
   selectedMenuCardId: number | null = null;
   id: string = '';
+  noDataTextMap: { [key: string]: string } = {
+    social: 'No reviews',
+    media: 'No videos',
+    movie: 'No movies',
+    season: 'No Seasons',
+  };
 
   constructor(private route: ActivatedRoute) {}
   onClickBtn(index: number) {

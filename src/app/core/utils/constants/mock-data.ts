@@ -106,8 +106,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     title: 'Current Season',
     btnGroup: [],
     data: [],
-    dataType: 'default',
-
+    dataType: 'season',
     subNav: 'View all season',
     subUrl: '',
   },

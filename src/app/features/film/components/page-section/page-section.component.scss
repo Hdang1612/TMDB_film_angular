@@ -63,6 +63,10 @@
 
     .section-content {
       @include flexbox($gap: 2rem);
+      .no-data-text {
+        width: 100%;
+        @include text-style();
+      }
     }
 
     .view-more-container {
