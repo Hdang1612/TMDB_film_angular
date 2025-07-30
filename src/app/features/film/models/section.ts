@@ -16,8 +16,6 @@ export interface SubInfoItem {
   label: string;
   value: any;
   isCurrency?: boolean;
-  // isLanguage?: boolean;
-  isKeywordList?: boolean;
 }
 export interface SocialLink {
   icon: string;
@@ -27,5 +25,6 @@ export interface SocialLink {
 export interface SubInfoSidebarConfig {
   title?: string;
   socialLinks?: SocialLink[];
+  keywords?: string[];
   items: SubInfoItem[];
 }

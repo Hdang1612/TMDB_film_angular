@@ -29,17 +29,22 @@
       @include text-style($fsize: 1.4rem, $fweight: 400);
       color: $absolute-white;
     }
-    .keyword-container {
-      @include flexbox($gap: 0.6rem);
-      flex-wrap: wrap;
-      margin-top: 0.8rem;
-      .keyword-tag {
-        padding: 0.4rem 1rem;
-        @include text-style($fsize: 1.2rem, $fweight: 400);
-        background-color: $grey-60;
-        border-radius: 0.4rem;
-        cursor: pointer;
-      }
+  }
+  .label {
+    @include text-style($fsize: 1.6rem, $fweight: 600);
+    color: $absolute-white;
+    margin-bottom: 0.8rem;
+  }
+  .keyword-container {
+    @include flexbox($gap: 0.6rem);
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+    .keyword-tag {
+      padding: 0.4rem 1rem;
+      @include text-style($fsize: 1.2rem, $fweight: 400);
+      background-color: $grey-60;
+      border-radius: 0.4rem;
+      cursor: pointer;
     }
   }
 }

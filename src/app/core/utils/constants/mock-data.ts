@@ -143,31 +143,6 @@ export const DETAIL_SECTIONS: SectionModel[] = [
   },
 ];
 
-export const FILM_SUB_INFO: SubInfoSidebarConfig = {
-  socialLinks: [],
-  items: [
-    { label: 'Status', value: 'hehehehehe' },
-    { label: 'Release', value: 'xádfasdfadf' },
-    { label: 'Original Language', value: 'en' },
-    { label: 'Budget', value: 60000000, isCurrency: true },
-    { label: 'Revenue', value: 150010239, isCurrency: true },
-    {
-      label: 'Keywords',
-      value: ['england', 'zombie', 'mourning', 'cruel'],
-      isKeywordList: true,
-    },
-  ],
-};
-
-export const CAST_SUB_INFO: SubInfoSidebarConfig = {
-  socialLinks: [],
-  items: [
-    { label: 'Known For', value: 'Acting' },
-    { label: 'Gender', value: 'Male' },
-    { label: 'Birthday', value: '1990-04-25' },
-    { label: 'Place of Birth', value: 'Los Angeles, California' },
-  ],
-};
 export const SOCIAL_ICON_MAP = [
   {
     key: 'facebook_id',

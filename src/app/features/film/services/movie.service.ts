@@ -143,4 +143,13 @@ export class MovieService {
       })
       .pipe(catchError(this.handleError()));
   }
+
+  getKeyword(id: string | null, type: string): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}${type}/${id}/keywords`, {
+        ...this.options,
+        params: this.langParam,
+      })
+      .pipe(catchError(this.handleError()));
+  }
 }

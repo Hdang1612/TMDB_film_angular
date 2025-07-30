@@ -18,14 +18,17 @@
         {{ item.value | currency : "USD" : "symbol" }}
       </p>
 
-      <div class="keyword-container" *ngSwitchCase="item?.isKeywordList">
-        <ng-container *ngFor="let keyword of item.value">
-          <span class="keyword-tag">{{ keyword }}</span>
-        </ng-container>
-      </div>
       <p *ngSwitchDefault>
         {{ item.value }}
       </p>
     </ng-container>
+  </div>
+  <div class="div">
+    <p class="label">Keywords</p>
+    <div class="keyword-container" *ngIf="config?.keywords?.length">
+      <ng-container *ngFor="let keyword of config?.keywords">
+        <span class="keyword-tag">{{ keyword }}</span>
+      </ng-container>
+    </div>
   </div>
 </div>

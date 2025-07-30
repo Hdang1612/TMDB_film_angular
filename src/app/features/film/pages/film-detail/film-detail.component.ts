@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   DETAIL_SECTIONS,
-  FILM_SUB_INFO,
 } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
 import { MovieDetail } from '../../models/movieDetail';
@@ -11,7 +10,7 @@ import { TMDBTrailer } from '../../models/trailer';
 import ColorThief from 'colorthief';
 import { CastMember } from '../../models/credit';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { TrendingFilm } from '../../models/trendingMovie';
 import { RecommendationFilm } from '../../models/recomendation';
 import { SubInfoSidebarConfig } from '../../models/section';
@@ -45,6 +44,7 @@ export class FilmDetailComponent implements OnInit {
       this.loadDetail(id);
       this.loadCredit(id);
       this.loadSocialIcon(id);
+      this.loadKeyword(id);
       this.loadSectionData('recommend', () =>
         this.movieService.getRecommendation(id)
       );
@@ -76,11 +76,6 @@ export class FilmDetailComponent implements OnInit {
             },
             { label: 'Budget', value: this.detail.budget, isCurrency: true },
             { label: 'Revenue', value: this.detail.revenue, isCurrency: true },
-            {
-              label: 'Keywords',
-              value: [],
-              isKeywordList: true,
-            },
           ],
         };
       },
@@ -118,7 +113,18 @@ export class FilmDetailComponent implements OnInit {
       next: (res) => {
         const map = loadSocialLinks(res);
         this.subInfoSidebarConfig.socialLinks = map;
-        console.log('>>>>>>>>', this.subInfoSidebarConfig.socialLinks);
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
+  }
+  loadKeyword(id: string | null) {
+    this.movieService.getKeyword(id, 'movie').subscribe({
+      next: (res) => {
+        this.subInfoSidebarConfig.keywords = res.keywords.map((item: any) => {
+          return item.name;
+        });
       },
       error: (err) => {
         alert(err.error?.error);
