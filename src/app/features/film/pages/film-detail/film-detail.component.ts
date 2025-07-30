@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  DETAIL_SECTIONS,
-} from 'src/app/core/utils/constants/mock-data';
+import { DETAIL_SECTIONS } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
 import { MovieDetail } from '../../models/movieDetail';
 import { getFullImageUrl, loadSocialLinks } from 'src/app/core/utils/img.utils';
@@ -14,6 +12,7 @@ import { Observable, map } from 'rxjs';
 import { TrendingFilm } from '../../models/trendingMovie';
 import { RecommendationFilm } from '../../models/recomendation';
 import { SubInfoSidebarConfig } from '../../models/section';
+import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -63,7 +62,12 @@ export class FilmDetailComponent implements OnInit {
           backdrop_path: getFullImageUrl(res.backdrop_path, 'w1920'),
         };
         if (this.detail.backdrop_path) {
-          this.loadBackdropColor(this.detail.backdrop_path);
+          getBackdropGradientFromImage(
+            this.detail.backdrop_path,
+            (gradient) => {
+              this.backdropGradient = gradient;
+            }
+          );
         }
         this.subInfoSidebarConfig = {
           socialLinks: [],
@@ -148,25 +152,25 @@ export class FilmDetailComponent implements OnInit {
   }
 
   // lấy  màu chủ đạo của backdrop
-  loadBackdropColor(imageUrl: string) {
-    const img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.src = imageUrl;
+  // loadBackdropColor(imageUrl: string) {
+  //   const img = new Image();
+  //   img.crossOrigin = 'Anonymous';
+  //   img.src = imageUrl;
 
-    img.onload = () => {
-      const colorThief = new ColorThief();
-      const [r, g, b] = colorThief.getColor(img);
+  //   img.onload = () => {
+  //     const colorThief = new ColorThief();
+  //     const [r, g, b] = colorThief.getColor(img);
 
-      this.backdropGradient = `
-      linear-gradient(
-        to right,
-        rgba(${r}, ${g}, ${b}, 1) calc((50vw - 170px) - 340px),
-        rgba(${r}, ${g}, ${b}, 0.84) 50%,
-        rgba(${r}, ${g}, ${b}, 0.84) 100%
-      )
-    `.trim();
-    };
-  }
+  //     this.backdropGradient = `
+  //     linear-gradient(
+  //       to right,
+  //       rgba(${r}, ${g}, ${b}, 1) calc((50vw - 170px) - 340px),
+  //       rgba(${r}, ${g}, ${b}, 0.84) 50%,
+  //       rgba(${r}, ${g}, ${b}, 0.84) 100%
+  //     )
+  //   `.trim();
+  //   };
+  // }
 
   get genreNames(): string {
     const genres = this.detail?.genres || [];

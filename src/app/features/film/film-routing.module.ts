@@ -6,6 +6,7 @@ import { FilmDetailComponent } from './pages/film-detail/film-detail.component';
 import { MovieLayoutComponent } from './pages/movie-layout/movie-layout.component';
 import { FilmListComponent } from './pages/film-list/film-list.component';
 import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
+import { FilmCastListComponent } from './pages/film-cast-list/film-cast-list.component';
 
 const routes: Routes = [
   {
@@ -22,8 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'movie/:id/cast',
-        loadChildren: () =>
-          import('../people/people.module').then((m) => m.PeopleModule),
+        component: FilmCastListComponent,
       },
       {
         path: 'movie/:id/reviews',

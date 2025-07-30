@@ -23,6 +23,8 @@ import { CardSkeletonComponent } from './components/card-skeleton/card-skeleton.
 import { LoadingComponent } from './components/loading/loading.component';
 import { MovieRatingCircleComponent } from './components/movie-rating-circle/movie-rating-circle.component';
 import { SubInfoSidebarComponent } from './components/sub-info-sidebar/sub-info-sidebar.component';
+import { FilmCastListComponent } from './pages/film-cast-list/film-cast-list.component';
+import { FullImageUrlPipe } from 'src/app/shared/pipes/image.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { SubInfoSidebarComponent } from './components/sub-info-sidebar/sub-info-
     LoadingComponent,
     MovieRatingCircleComponent,
     SubInfoSidebarComponent,
+    FilmCastListComponent,
+    FullImageUrlPipe,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],
