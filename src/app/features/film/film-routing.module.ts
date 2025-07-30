@@ -1,5 +1,5 @@
 import { ReviewModule } from './../review/review.module';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { FilmDetailComponent } from './pages/film-detail/film-detail.component';
@@ -7,6 +7,8 @@ import { MovieLayoutComponent } from './pages/movie-layout/movie-layout.componen
 import { FilmListComponent } from './pages/film-list/film-list.component';
 import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
 import { FilmCastListComponent } from './pages/film-cast-list/film-cast-list.component';
+import { MovieDetailLayoutComponent } from './pages/movie-detail-layout/movie-detail-layout.component';
+import { FilmReviewListComponent } from './pages/film-review-list/film-review-list.component';
 
 const routes: Routes = [
   {
@@ -19,17 +21,29 @@ const routes: Routes = [
       },
       {
         path: 'movie/:id',
-        component: FilmDetailComponent,
+        children: [
+          { path: '', component: FilmDetailComponent },
+          {
+            path: '',
+            component: MovieDetailLayoutComponent,
+            children: [
+              {
+                path: 'season',
+                component: FilmDetailComponent,
+              },
+              {
+                path: 'cast',
+                component: FilmCastListComponent,
+              },
+              {
+                path: 'social',
+                component: FilmReviewListComponent,
+              },
+            ],
+          },
+        ],
       },
-      {
-        path: 'movie/:id/cast',
-        component: FilmCastListComponent,
-      },
-      {
-        path: 'movie/:id/reviews',
-        loadChildren: () =>
-          import('../review/review.module').then((m) => m.ReviewModule),
-      },
+
       {
         path: 'movies',
         component: FilmListComponent,

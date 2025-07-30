@@ -61,6 +61,7 @@ export const HOME_SECTIONS: SectionModel[] = [
     dataType: 'default',
 
     subNav: '',
+    subUrl: '',
   },
   {
     key: 'trailer',
@@ -73,6 +74,7 @@ export const HOME_SECTIONS: SectionModel[] = [
     dataType: 'trailer',
 
     subNav: '',
+    subUrl: '',
   },
   {
     key: 'popular',
@@ -85,6 +87,7 @@ export const HOME_SECTIONS: SectionModel[] = [
     dataType: 'default',
 
     subNav: '',
+    subUrl: '',
   },
 ];
 export const DETAIL_SECTIONS: SectionModel[] = [
@@ -96,6 +99,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     dataType: 'cast',
 
     subNav: 'Full Cast & Crew',
+    subUrl: '',
   },
   {
     key: 'season',
@@ -105,6 +109,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     dataType: 'default',
 
     subNav: 'View all season',
+    subUrl: '',
   },
   {
     key: 'social',
@@ -117,6 +122,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     dataType: 'social',
 
     subNav: 'View all review',
+    subUrl: '',
   },
   {
     key: 'media',
@@ -131,6 +137,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     dataType: 'media',
 
     subNav: '',
+    subUrl: '',
   },
   {
     key: 'recommend',
@@ -140,6 +147,7 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     dataType: 'recommendation',
 
     subNav: '',
+    subUrl: '',
   },
 ];
 

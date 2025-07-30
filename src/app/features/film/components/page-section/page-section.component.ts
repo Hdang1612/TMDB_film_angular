@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SectionModel } from '../../models/section';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-section',
@@ -16,11 +17,13 @@ export class PageSectionComponent implements OnInit {
     dataType: '',
     data: [],
     subNav: '',
+    subUrl: '',
   };
   activeBtnIndex: number = 0;
   selectedMenuCardId: number | null = null;
+  id: string = '';
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
   onClickBtn(index: number) {
     this.activeBtnIndex = index;
     this.btnClick.emit(this.section.btnGroup[index].value);
@@ -30,5 +33,9 @@ export class PageSectionComponent implements OnInit {
     this.selectedMenuCardId = this.selectedMenuCardId === id ? null : id;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.id = params.get('id') ?? '';
+    });
+  }
 }

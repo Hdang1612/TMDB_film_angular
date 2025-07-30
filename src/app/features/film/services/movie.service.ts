@@ -115,11 +115,11 @@ export class MovieService {
   }
 
   // review
-  getReviews(id: string | null): Observable<ReviewResponse> {
+  getReviews(id: string | null, page: number): Observable<ReviewResponse> {
     return this.http
       .get<ReviewResponse>(`${environment.baseUrlMovie}movie/${id}/reviews`, {
         ...this.options,
-        params: this.langParam,
+        params: this.langParam.set('page', page),
       })
       .pipe(catchError(this.handleError()));
   }

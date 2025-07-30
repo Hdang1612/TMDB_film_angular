@@ -1,101 +1,39 @@
 @use "../../../../../assets/styles/abtracts/mixin" as *;
 @use "../../../../../assets/styles/base/variables" as *;
 
-.cast-list-container {
-  padding-top: 14rem;
-  @include flexbox($direction: column, $justify: center);
+.content {
+  max-width: $maxw-xl;
   width: 100%;
-  .movie-info {
-    padding: 2rem 0rem;
-    @include flexbox($gap: 2rem, $justify: center);
-    width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  .title {
+    @include text-style(
+      $fsize: $heading-h4,
+      $fweight: 600,
+      $color: $absolute-white
+    );
     margin-bottom: 2rem;
-    .info-content {
-      max-width: $maxw-xl;
-      width: 100%;
-      @include flexbox($gap: 2rem, $align: center);
-      img {
-        width: 8rem;
-        height: auto;
-      }
-      .info-text {
-        .movie-name {
-          @include text-style(
-            $fsize: $heading-h3,
-            $fweight: 800,
-            $color: $absolute-white
-          );
-          span {
-            @include text-style(
-              $fsize: $heading-h4,
-              $fweight: 600,
-              $color: $grey-65
-            );
-          }
-          margin-bottom: 2rem;
-        }
-        .nav {
-          @include flexbox($gap: 0.8rem, $align: center);
-
-          color: $absolute-white;
-          border: 0;
-          img {
-            width: 1.6rem;
-            height: 1.6rem;
-          }
-          p {
-            @include text-style(
-              $fsize: 1.6rem,
-              $fweight: 600,
-              $color: $grey-65
-            );
-          }
-        }
-      }
+    span {
+      margin-left: 1rem;
+      @include text-style($fsize: $heading-h5, $fweight: 500, $color: $grey-65);
     }
   }
-  .content {
-    max-width: $maxw-xl;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    .title {
-      @include text-style(
-        $fsize: $heading-h4,
-        $fweight: 600,
-        $color: $absolute-white
-      );
-      margin-bottom: 2rem;
-      span {
-        margin-left: 1rem;
-        @include text-style(
-          $fsize: $heading-h5,
-          $fweight: 500,
-          $color: $grey-65
-        );
+  .list {
+    .cast-item {
+      @include flexbox($gap: 1.6rem, $align: center);
+      margin-bottom: 3rem;
+      img {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 1rem;
+        object-fit: cover;
       }
-    }
-    .list {
-      .cast-item {
-        @include flexbox($gap: 1.6rem, $align: center);
-        margin-bottom: 3rem;
-        img {
-          width: 8rem;
-          height: 8rem;
-          border-radius: 1rem;
-          object-fit: cover;
+      .cast-info {
+        .cast-name {
+          @include text-style($fsize: 1.8rem, $fweight: 600);
         }
-        .cast-info {
-          .cast-name {
-            @include text-style($fsize: 1.8rem, $fweight: 600);
-          }
-          .cast-sub {
-            @include text-style(
-              $fsize: 1.4rem,
-              $fweight: 500,
-              $color: $grey-65
-            );
-          }
+        .cast-sub {
+          @include text-style($fsize: 1.4rem, $fweight: 500, $color: $grey-65);
         }
       }
     }

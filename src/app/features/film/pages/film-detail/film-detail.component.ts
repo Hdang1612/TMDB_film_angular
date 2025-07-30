@@ -47,7 +47,7 @@ export class FilmDetailComponent implements OnInit {
       this.loadSectionData('recommend', () =>
         this.movieService.getRecommendation(id)
       );
-      this.loadSectionData('social', () => this.movieService.getReviews(id));
+      this.loadSectionData('social', () => this.movieService.getReviews(id, 1));
       this.loadMediaData(id);
     });
   }

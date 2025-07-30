@@ -50,7 +50,14 @@
                 ></app-film-card>
               </ng-container>
               <div class="view-more-container" *ngIf="section.data.length > 10">
-                <a class="view-more" href="/movies/{{ section.dataType }}">
+                <a
+                  class="view-more"
+                  [routerLink]="
+                    id
+                      ? ['/movie', id, section.dataType]
+                      : ['/movies', section.dataType]
+                  "
+                >
                   View more <img src="assets/icons/arow-right-btn.svg" alt="" />
                 </a>
               </div>
@@ -66,6 +73,11 @@
     </div>
   </div>
   <ng-container *ngIf="section.subNav">
-    <a href="" class="sub-nav">{{ section.subNav }}</a>
+    <a
+      [routerLink]="['/movie', id, section.dataType]"
+      href=""
+      class="sub-nav"
+      >{{ section.subNav }}</a
+    >
   </ng-container>
 </div>

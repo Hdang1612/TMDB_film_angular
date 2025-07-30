@@ -1,64 +1,41 @@
-<div class="cast-list-container">
-  <div class="movie-info" [ngStyle]="{ backgroundImage: backdropGradient }">
-    <div class="info-content">
-      <img
-        [src]="detail?.poster_path | fullImageUrl : 'w300'"
-        alt="{{ detail?.title }}"
-        class="movie-img"
-      />
-      <div class="info-text">
-        <h2 class="movie-name">
-          {{ detail?.title }}
-          <span class="release-year"
-            >({{ detail?.release_date?.slice(0, 4) }})</span
-          >
-        </h2>
-        <a class="nav" href="/movie/{{ detail?.id }}">
-          <img src="assets/icons/arrow-left-btn.svg" alt="" />
-          <p>Back to main</p>
-        </a>
-      </div>
+<div class="content">
+  <div class="cast-cotainer">
+    <h2 class="cast-title title">
+      Cast <span>{{ result?.cast?.length }}</span>
+    </h2>
+    <div class="cast-list list">
+      <ng-container *ngIf="result?.cast?.length; else noCast">
+        <ng-container *ngFor="let cast of result?.cast">
+          <div class="cast-item">
+            <img [src]="cast.profile_path" alt="{{ cast.name }}" />
+            <div class="cast-info">
+              <p class="cast-name">{{ cast.name }}</p>
+              <p class="cast-character cast-sub">{{ cast.character }}</p>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #noCast>
+        <p>No cast information available.</p>
+      </ng-template>
     </div>
   </div>
-  <div class="content">
-    <div class="cast-cotainer">
-      <h2 class="cast-title title">
-        Cast <span>{{ result?.cast?.length }}</span>
-      </h2>
-      <div class="cast-list list">
-        <ng-container *ngIf="result?.cast?.length; else noCast">
-          <ng-container *ngFor="let cast of result?.cast">
-            <div class="cast-item">
-              <img [src]="cast.profile_path" alt="{{ cast.name }}" />
-              <div class="cast-info">
-                <p class="cast-name">{{ cast.name }}</p>
-                <p class="cast-character cast-sub">{{ cast.character }}</p>
-              </div>
+  <div class="crew-cotainer">
+    <h2 class="cast-title title">
+      Crew <span>{{ result?.crew?.length }}</span>
+    </h2>
+    <div class="crew-list list">
+      <ng-container *ngIf="result?.crew?.length; else noCast">
+        <ng-container *ngFor="let crew of result?.crew">
+          <div class="cast-item">
+            <img [src]="crew.profile_path" alt="{{ crew.name }}" />
+            <div class="cast-info">
+              <p class="cast-name">{{ crew.name }}</p>
+              <p class="cast-character cast-sub">{{ crew.department }}</p>
             </div>
-          </ng-container>
+          </div>
         </ng-container>
-        <ng-template #noCast>
-          <p>No cast information available.</p>
-        </ng-template>
-      </div>
-    </div>
-    <div class="crew-cotainer">
-      <h2 class="cast-title title">
-        Crew <span>{{ result?.crew?.length }}</span>
-      </h2>
-      <div class="crew-list list">
-        <ng-container *ngIf="result?.crew?.length; else noCast">
-          <ng-container *ngFor="let crew of result?.crew">
-            <div class="cast-item">
-              <img [src]="crew.profile_path" alt="{{ crew.name }}" />
-              <div class="cast-info">
-                <p class="cast-name">{{ crew.name }}</p>
-                <p class="cast-character cast-sub">{{ crew.department }}</p>
-              </div>
-            </div>
-          </ng-container>
-        </ng-container>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

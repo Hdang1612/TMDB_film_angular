@@ -25,6 +25,9 @@ import { MovieRatingCircleComponent } from './components/movie-rating-circle/mov
 import { SubInfoSidebarComponent } from './components/sub-info-sidebar/sub-info-sidebar.component';
 import { FilmCastListComponent } from './pages/film-cast-list/film-cast-list.component';
 import { FullImageUrlPipe } from 'src/app/shared/pipes/image.pipe';
+import { DetailHeaderComponent } from './components/detail-header/detail-header.component';
+import { MovieDetailLayoutComponent } from './pages/movie-detail-layout/movie-detail-layout.component';
+import { FilmReviewListComponent } from './pages/film-review-list/film-review-list.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { FullImageUrlPipe } from 'src/app/shared/pipes/image.pipe';
     SubInfoSidebarComponent,
     FilmCastListComponent,
     FullImageUrlPipe,
+    DetailHeaderComponent,
+    MovieDetailLayoutComponent,
+    FilmReviewListComponent,
   ],
   imports: [CommonModule, FilmRoutingModule, HttpClientModule],
   providers: [],

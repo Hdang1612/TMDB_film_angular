@@ -5,6 +5,7 @@ export interface SectionModel {
   dataType: any;
   data: any[];
   subNav: string;
+  subUrl: string;
 }
 
 export interface SectionBtn {

@@ -21,33 +21,13 @@ export class FilmCastListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.parent?.paramMap.subscribe((params) => {
       const id = params.get('id');
-      this.loadDetail(id);
+      console.log('id', id);
       this.loadCastList(id);
     });
   }
 
-  loadDetail(id: string | null) {
-    this.movieService.getDetail(id).subscribe({
-      next: (res) => {
-        console.log('detail', res);
-        this.detail = res;
-        if (this.detail.backdrop_path) {
-          getBackdropGradientFromImage(
-            getFullImageUrl(res.backdrop_path, 'w1920'),
-            (gradient) => {
-              this.backdropGradient = gradient;
-            }
-          );
-        }
-        console.log(this.backdropGradient);
-      },
-      error: (err) => {
-        alert(err.error?.error);
-      },
-    });
-  }
   loadCastList(id: string | null) {
     this.movieService.getCredit(id).subscribe({
       next: (res) => {
