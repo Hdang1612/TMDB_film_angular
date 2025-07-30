@@ -1,0 +1,158 @@
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
+.card-container {
+  width: 24rem;
+  // min-height: 48rem;
+  min-width: 24rem;
+  border: 1px solid $black-15;
+  background: $black-10;
+  padding: 1rem 1rem 0 1rem;
+  cursor: pointer;
+  .img-container {
+    position: relative;
+    // min-height: 33rem;
+    .movie-img {
+      width: 100%;
+      border-radius: 1rem;
+    }
+    .rating-percent-container {
+      position: absolute;
+      bottom: -1rem;
+      left: 1rem;
+      border-radius: 100%;
+      padding: 1rem;
+      width: 3.4rem;
+      height: 3.4rem;
+      background: #000;
+      font-size: 1rem;
+      font-weight: 800;
+      @include flexbox($justify: center);
+    }
+    .option-icon {
+      position: absolute;
+      @include flexbox;
+      top: 1rem;
+      right: 1rem;
+      //   padding: 1rem;
+      border-radius: 50%;
+      background: $grey-65;
+      opacity: 0.7;
+      img {
+        width: 18px;
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .menu-container {
+      position: absolute;
+      top: 3rem;
+      right: 1rem;
+      width: 14rem;
+      background: $absolute-white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      padding: 1rem;
+      display: none;
+      .menu-item {
+        @include flexbox($align: center);
+        padding: 0.8rem 1rem;
+        margin-bottom: 0.6rem;
+        cursor: pointer;
+        border-bottom: 1px solid $grey-65;
+        a {
+          @include flexbox($align: center);
+          @include text-style($fsize: 1.2rem, $color: $absolute-black);
+          img {
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-right: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+  .movie-info {
+    padding: 2.6rem 1rem 1rem;
+    text-align: center;
+    &__name {
+      @include text-style($fweight: 700, $color: $absolute-white);
+      margin-bottom: 0.6rem;
+    }
+    .character-name {
+      @include text-style($color: $grey-60);
+    }
+    &__date {
+      @include text-style($fweight: 500, $fsize: 1.2rem);
+    }
+  }
+  &.trailer {
+    width: 40rem;
+    min-width: 40rem;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    .img-container {
+      transition: all 0.2s ease-in-out;
+    }
+    .img-container:hover {
+      transform: scale(1.05);
+    }
+    .movie-img {
+      height: 20rem;
+      object-fit: cover;
+    }
+    .play-btn img {
+      width: 6.4rem;
+      height: 6.4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .movie-info {
+      @include flexbox($direction: column, $justify: center);
+    }
+  }
+
+  &.recommendation {
+    position: relative;
+    width: 40rem;
+    min-width: 40rem;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    .img-container {
+      transition: all 0.2s ease-in-out;
+    }
+    // .img-container:hover {
+    //   transform: scale(1.05);
+    // }
+    .img-container:hover .recommendation-info {
+      display: flex;
+      align-items: center;
+    }
+    .movie-img {
+      height: 20rem;
+      object-fit: cover;
+    }
+    .recommendation-info {
+      display: none;
+      position: absolute;
+      padding: 0 2rem;
+      bottom: 0;
+      width: 100%;
+      height: 30%;
+      background: rgba(255, 255, 255, 0.9);
+      // opacity: 0.7;
+      transition: all 0.3s ease-in-out;
+      p {
+        @include flexbox($align: center, $gap: 1rem);
+        @include text-style($color: $absolute-black, $fsize: 1.4rem);
+      }
+    }
+  }
+}

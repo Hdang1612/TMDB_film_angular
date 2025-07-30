@@ -1,0 +1,96 @@
+<div class="section">
+  <div class="section-heading">
+    <div class="section-heading__text">
+      <h2>{{ section.title }}</h2>
+    </div>
+    <ng-container *ngIf="section.btnGroup.length">
+      <div class="section-heading__btn-group">
+        <div
+          *ngFor="let btn of section.btnGroup; let i = index"
+          class="trending-btn"
+          [class.trending-btn--active]="i === activeBtnIndex"
+          (click)="onClickBtn(i)"
+        >
+          {{ btn.label }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div
+    class="scroll-wrapper-container"
+    [class.review-container]="section.dataType === 'social'"
+  >
+    <div class="scroll-wrapper">
+      <div
+        class="section-content"
+        [style.gap]="section.dataType === 'media' ? '0' : '20px'"
+      >
+        <ng-container [ngSwitch]="section.dataType">
+          <ng-container
+            *ngIf="section.data && section.data.length > 0; else noData"
+          >
+            <ng-container *ngSwitchCase="'social'">
+              <ng-container *ngFor="let movie of section.data.slice(0, 2)">
+                <app-review-card [reviewData]="movie"></app-review-card>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="'media'">
+              <ng-container *ngFor="let movie of section.data.slice(0, 10)">
+                <app-video-card [media]="movie"></app-video-card>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <ng-container>
+                <ng-container *ngFor="let movie of section.data.slice(0, 10)">
+                  <app-film-card
+                    [cardType]="section.dataType"
+                    [movie]="movie"
+                    [isMenuOpen]="selectedMenuCardId === movie.id"
+                    (openMenu)="handleOpenMenu(movie.id)"
+                  ></app-film-card>
+                </ng-container>
+                <div
+                  class="view-more-container"
+                  *ngIf="section.data.length > 10"
+                >
+                  <a
+                    class="view-more"
+                    [style.display]="
+                      section.data && section.data.length > 0 ? 'none' : 'block'
+                    "
+                    [routerLink]="
+                      id
+                        ? ['/movie', id, section.dataType]
+                        : ['/movies', section.dataType]
+                    "
+                  >
+                    View more
+                    <img src="assets/icons/arow-right-btn.svg" alt="" />
+                  </a>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-template #noData>
+            <div class="no-data-text">
+              {{ noDataTextMap[section.dataType] || "No data" }}
+            </div>
+          </ng-template>
+        </ng-container>
+        <!-- <ng-template #skeletonList>
+          <ng-container *ngFor="let n of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+            <app-card-skeleton></app-card-skeleton>
+          </ng-container>
+        </ng-template> -->
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="section.subNav && section.data && section.data.length">
+    <a
+      [routerLink]="['/movie', id, section.dataType]"
+      href=""
+      class="sub-nav"
+      >{{ section.subNav }}</a
+    >
+  </ng-container>
+</div>

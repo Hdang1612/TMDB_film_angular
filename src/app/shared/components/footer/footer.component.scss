@@ -1,0 +1,53 @@
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
+.footer-container {
+  width: 100%;
+  @include flexbox($justify: center);
+  background: $black-06;
+}
+.footer {
+  @include flexbox(
+    $direction: column,
+    $gap: 10rem,
+    $justify: flex-start,
+    $align: flex-start
+  );
+  padding: 10rem 0;
+  width: 100%;
+  max-width: $maxw-xl;
+
+  &__grid {
+    width: 100%;
+    @include flexbox($justify: space-between, $align: flex-start);
+  }
+  &__title {
+    @include text-style($fsize: 2rem, $fweight: 600, $color: $absolute-white);
+    margin-bottom: 2.4rem;
+  }
+  ul {
+    @include flexbox($direction: column, $gap: 1.4rem, $align: flex-start);
+  }
+  &__item {
+    @include text-style($fsize: 1.8rem);
+    cursor: pointer;
+    &:hover {
+      color: $absolute-white;
+    }
+  }
+  &__icons {
+    @include flexbox($gap: 2rem);
+  }
+  &__policy {
+    border-top: 0.1rem solid #262626;
+    width: 100%;
+    padding-top: 2.4rem;
+    @include text-style();
+    @include flexbox($justify: space-between);
+    .policy-nav ul {
+      @include flexbox($gap: 2rem);
+      li :hover {
+        color: $absolute-white;
+      }
+    }
+  }
+}

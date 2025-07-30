@@ -1,0 +1,59 @@
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
+.review-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 2rem 1rem;
+  border: 1px solid $grey-60;
+  border-radius: 8px;
+  //   background-color: #f9f9f9;
+  .review-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .reviewer-img {
+      img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        // width: 100%;
+        border-radius: 50%;
+      }
+    }
+    .reviewer-info {
+      .write-by {
+        @include text-style(
+          $fsize: 1.4rem,
+          $fweight: 600,
+          $color: $absolute-white
+        );
+      }
+      .sub-info {
+        @include text-style($fsize: 1.2rem, $color: $grey-60);
+        @include flexbox($align: center);
+        .rating {
+          @include flexbox($align: center, $gap: 0.5rem);
+          margin-right: 0.5rem;
+          color: $absolute-white;
+          font-weight: 700;
+          img {
+            width: 1.6rem;
+            height: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+  .review-content {
+    @include text-style($fsize: 1.4rem, $color: $absolute-white);
+    margin-top: 1rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
