@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { TrendingFilmResponse } from '../models/trendingMovie';
+import { TrendingFilmResponse } from '../../../core/model/trendingMovie';
 import { MovieDetail } from '../models/movieDetail';
 import { TMDBTrailer } from '../models/trailer';
-import { CastResponse } from '../models/credit';
+import { CastResponse } from '../../../core/model/credit';
 import { RecommendationResponse } from '../models/recomendation';
 import { ReviewResponse } from '../models/review';
 

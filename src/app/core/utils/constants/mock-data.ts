@@ -2,7 +2,7 @@ import {
   SectionModel,
   SubInfoSidebarConfig,
 } from 'src/app/features/film/models/section';
-import { TrendingFilm } from './../../../features/film/models/trendingMovie';
+import { TrendingFilm } from '../../model/trendingMovie';
 import { MovieDetail } from 'src/app/features/film/models/movieDetail';
 
 export const FOOTER_NAVS = [

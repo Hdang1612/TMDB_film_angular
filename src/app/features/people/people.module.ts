@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { PeopleRoutingModule } from './people-routing.module';
 import { CastListComponent } from './pages/cast-list/cast-list.component';
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PeopleLayoutComponent } from './pages/people-layout/people-layout.component';
+import { PeopleDetailComponent } from './pages/people-detail/people-detail.component';
 
 @NgModule({
-  declarations: [
-    CastListComponent
-  ],
-  imports: [
-    CommonModule,
-    PeopleRoutingModule
-  ]
+  declarations: [CastListComponent, PeopleLayoutComponent, PeopleDetailComponent],
+  imports: [PeopleRoutingModule, SharedModule],
 })
-export class PeopleModule { }
+export class PeopleModule {}

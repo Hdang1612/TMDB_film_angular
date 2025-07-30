@@ -21,6 +21,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./people/people.module').then((m) => m.PeopleModule),
       },
+      {
+        path: 'review',
+        loadChildren: () =>
+          import('./review/review.module').then((m) => m.ReviewModule),
+      },
     ],
   },
   { path: '**', redirectTo: 'notfound', pathMatch: 'full' },

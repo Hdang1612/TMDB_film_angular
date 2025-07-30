@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
-import { TrendingFilm } from '../../models/trendingMovie';
+import { TrendingFilm } from '../../../../core/model/trendingMovie';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { MOVIE_TYPE_MAP } from 'src/app/core/utils/constants/mock-data';
 
@@ -21,7 +21,7 @@ export class FilmListComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -35,8 +35,6 @@ export class FilmListComponent implements OnInit {
     });
   }
 
- 
-
   getMovies(page: number) {
     this.movieService.getListMovie(page, this.movieType).subscribe({
       next: (res) => {
@@ -48,7 +46,7 @@ export class FilmListComponent implements OnInit {
         this.totalPages = res.total_pages;
       },
       error: (err) => {
-        alert(err.error?.error || 'Lỗi khi lấy dữ liệu phim');
+        alert(err.error?.error);
       },
     });
   }

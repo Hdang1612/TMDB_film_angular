@@ -1,0 +1,13 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.container {
+  width: 100%;
+  height: auto;
+  background-color: $black-08;
+  .content-wrapper {
+    padding-top: 14rem;
+    // width: 100%;
+    // @include flexbox($justify: center);
+  }
+}

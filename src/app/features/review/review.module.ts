@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ReviewRoutingModule } from './review-routing.module';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    ReviewRoutingModule
-  ]
+  imports: [ReviewRoutingModule, SharedModule],
 })
-export class ReviewModule { }
+export class ReviewModule {}

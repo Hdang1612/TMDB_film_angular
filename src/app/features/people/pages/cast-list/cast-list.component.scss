@@ -1,0 +1,22 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+.container {
+  width: 100%;
+  @include flexbox($justify: center);
+  .list-person-container {
+    width: 100%;
+    max-width: $maxw-xl;
+    .header {
+      @include text-style($fsize: $heading-h4, $fweight: 800);
+      margin-bottom: 2rem;
+    }
+    .list-person {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 2rem;
+      .person-img {
+        width: 100%;
+      }
+    }
+  }
+}

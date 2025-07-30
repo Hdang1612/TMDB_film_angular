@@ -4,7 +4,7 @@ import {
   leaderboardMockData,
 } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
-import { TrendingFilm } from '../../models/trendingMovie';
+import { TrendingFilm } from '../../../../core/model/trendingMovie';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { finalize, Observable } from 'rxjs';
 import { LoadingService } from 'src/app/core/services/loading.service';
