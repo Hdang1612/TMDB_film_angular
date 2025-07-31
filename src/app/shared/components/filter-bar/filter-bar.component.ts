@@ -25,7 +25,17 @@ export class FilterBarComponent implements OnInit {
       section.content.forEach((item) => {
         switch (item.type) {
           case 'select':
+            this.filterForm.addControl(
+              item.name,
+              new FormControl(
+                item.defaultValue ||
+                  (item.options?.length ? item.options[0].value : '')
+              )
+            );
+            break;
           case 'radio':
+            new FormControl(item.defaultValue);
+            break;
           case 'input':
             this.filterForm.addControl(item.name, new FormControl(''));
             break;
