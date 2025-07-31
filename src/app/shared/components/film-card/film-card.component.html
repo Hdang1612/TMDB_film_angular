@@ -20,7 +20,7 @@
     <img class="movie-img" [src]="imagePath" alt="" />
     <div *ngIf="cardType === 'default'" class="rating-percent-container">
       <app-movie-rating-circle
-        [score]="movie.vote_average"
+        [score]="movie?.vote_average"
       ></app-movie-rating-circle>
     </div>
     <div

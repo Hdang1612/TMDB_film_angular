@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MovieRatingCircleComponent implements OnInit {
   constructor() {}
 
-  @Input() score: number = 0;
+  @Input() score: number | undefined = 0;
   percent: number = 0;
   strokeDashoffset: number = 0;
 
@@ -16,7 +16,7 @@ export class MovieRatingCircleComponent implements OnInit {
   circumference = 2 * Math.PI * this.radius; // chu vi tròn
 
   ngOnInit(): void {
-    this.percent = Math.round(this.score * 10);
+    if (this.score) this.percent = Math.round(this.score * 10);
     this.strokeDashoffset = this.circumference * (1 - this.percent / 100); // phần bị ẩn
   }
   get strokeColor(): string {

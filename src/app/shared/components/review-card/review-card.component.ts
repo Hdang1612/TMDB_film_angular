@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ReviewCardComponent implements OnInit {
   @Input() reviewData!: Review;
   @Input() movieId!: string | null;
-  @Input() type: 'full' | 'default' = 'full';
+  @Input() type: 'full' | 'default' = 'default';
   baseUrlImg = environment.baseUrlImg;
   avt: string = '';
   rating: number = 0;
