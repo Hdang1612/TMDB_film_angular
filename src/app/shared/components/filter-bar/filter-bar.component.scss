@@ -16,6 +16,13 @@
         width: 2rem;
         height: 2rem;
       }
+      .section-toggle {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      .rotate {
+        transform: rotate(-180deg);
+      }
     }
     .section-content {
       border-bottom: 1px solid $black-15;
@@ -42,6 +49,63 @@
       }
       label {
         @include flexbox($align: center, $gap: 0.6rem);
+      }
+      .genre-btns {
+        @include flexbox($gap: 0.8rem, $align: flex-start);
+        flex-wrap: wrap;
+        .genre-btn {
+          color: $absolute-white;
+          background: transparent;
+          cursor: pointer;
+          padding: 0.8rem 1rem;
+          border-radius: 2rem;
+          border: 0.1px solid $grey-60;
+          transition: all 0.2s ease;
+          &:hover {
+            background: $absolute-white;
+            color: $absolute-black;
+          }
+        }
+        .active {
+          background: $absolute-white;
+          color: $absolute-black;
+        }
+      }
+      input[type="text"],
+      input[type="date"] {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 1.4rem;
+        border: 1px solid $grey-60;
+        border-radius: 0.6rem;
+        background-color: $black-10;
+        color: $absolute-white;
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &:focus {
+          border-color: $absolute-white;
+        }
+
+        &::placeholder {
+          color: $grey-60;
+        }
+      }
+      select {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 1.4rem;
+        border: 1px solid $grey-60;
+        border-radius: 0.6rem;
+        background-color: $black-10;
+        color: $absolute-white;
+        outline: none;
+        appearance: none;
+
+        option {
+          background-color: $black-10;
+          color: $absolute-white;
+        }
       }
     }
   }

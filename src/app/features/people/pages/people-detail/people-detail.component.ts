@@ -39,6 +39,8 @@ export class PeopleDetailComponent implements OnInit {
           profile_path: getFullImageUrl(res.profile_path),
         };
         console.log('detail', this.detail);
+        this.loadPeopleMovie(id);
+        this.loadSocialIcon(id);
         this.subInfoSidebarConfig = {
           image: this.detail.profile_path,
           socialLinks: [],
@@ -61,8 +63,7 @@ export class PeopleDetailComponent implements OnInit {
           ],
           keywords: this.detail.also_known_as || [],
         };
-        this.loadPeopleMovie(id);
-        this.loadSocialIcon(id);
+
         const section = this.detailSection.find((s) => s.key === 'bio');
         if (section) section.data[0] = this.detail.biography;
       },
@@ -76,7 +77,6 @@ export class PeopleDetailComponent implements OnInit {
     this.peopleService.getPeopleSocial(id).subscribe({
       next: (res) => {
         const map = loadSocialLinks(res);
-        console.log(map);
         this.subInfoSidebarConfig.socialLinks = map;
       },
       error: (err) => {
@@ -93,7 +93,11 @@ export class PeopleDetailComponent implements OnInit {
           poster_path: getFullImageUrl(item.poster_path),
         }));
         const section = this.detailSection.find((s) => s.key === 'know-for');
+        const creditLength = this.subInfoSidebarConfig.items.find(
+          (s) => s.label === 'Known Credits'
+        );
         if (section) section.data = mapped;
+        if (creditLength) creditLength.value = mapped.length;
       },
       error: (err) => {
         alert(err.error);

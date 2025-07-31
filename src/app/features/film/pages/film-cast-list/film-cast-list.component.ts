@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
-import { MovieDetail } from '../../models/movieDetail';
+import { MovieDetail } from '../../../../core/model/movieDetail';
 import { CastResponse } from '../../../../core/model/credit';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';

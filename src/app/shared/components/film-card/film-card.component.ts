@@ -47,8 +47,11 @@ export class FilmCardComponent implements OnInit {
   }
 
   navigate(id: number) {
-    this.router.navigate(['/movie', id]);
-    console.log(id);
+    if (this.cardType === 'cast') {
+      this.router.navigate(['/person', id]);
+    } else {
+      this.router.navigate(['/movie', id]);
+    }
   }
 
   handleOpenMenu(event: MouseEvent) {

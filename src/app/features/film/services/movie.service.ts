@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrendingFilmResponse } from '../../../core/model/trendingMovie';
-import { MovieDetail } from '../models/movieDetail';
+import { MovieDetail } from '../../../core/model/movieDetail';
 import { TMDBTrailer } from '../models/trailer';
 import { CastResponse } from '../../../core/model/credit';
 import { RecommendationResponse } from '../models/recomendation';
@@ -151,5 +151,35 @@ export class MovieService {
         params: this.langParam,
       })
       .pipe(catchError(this.handleError()));
+  }
+  getConfigure(type: string | null): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}configuration/${type}`, {
+        ...this.options,
+        params: this.langParam,
+      })
+      .pipe(catchError(this.handleError()));
+  }
+
+  getDiscoveryMovies(params: {
+    sort_by?: string;
+    with_genres?: string;
+    'release_date.gte'?: string;
+    'release_date.lte'?: string;
+    page?: number;
+    lang?: string;
+    [key: string]: any;
+  }): Observable<any> {
+    let httpParams = new HttpParams();
+
+    for (const key in params) {
+      if (params[key]) {
+        httpParams = httpParams.set(key, params[key]);
+      }
+    }
+
+    return this.http.get(`${environment.baseUrlMovie}/discover/movie`, {
+      params: httpParams,
+    });
   }
 }

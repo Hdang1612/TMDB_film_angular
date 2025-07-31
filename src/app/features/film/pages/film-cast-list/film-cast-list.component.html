@@ -6,7 +6,7 @@
     <div class="cast-list list">
       <ng-container *ngIf="result?.cast?.length; else noCast">
         <ng-container *ngFor="let cast of result?.cast">
-          <div class="cast-item">
+          <div class="cast-item" [routerLink]="['/person', cast.id]">
             <img [src]="cast.profile_path" alt="{{ cast.name }}" />
             <div class="cast-info">
               <p class="cast-name">{{ cast.name }}</p>

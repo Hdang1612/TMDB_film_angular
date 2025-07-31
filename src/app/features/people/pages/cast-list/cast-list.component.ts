@@ -22,7 +22,9 @@ export class CastListComponent implements OnInit {
         this.result = res.results.map((item) => ({
           ...item,
           profile_path: getFullImageUrl(item.profile_path),
-          list_film: item.known_for.map((item) => item.title).join(' , '),
+          list_film: item.known_for
+            .map((item) => (item.title ? item.title : item.name))
+            .join(' , '),
         }));
         this.totalPages = res.total_pages;
         console.log('people', this.result);

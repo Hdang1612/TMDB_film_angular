@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MovieDetail } from '../../../features/film/models/movieDetail';
+import { MovieDetail } from '../../../core/model/movieDetail';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../../../features/film/services/movie.service';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';

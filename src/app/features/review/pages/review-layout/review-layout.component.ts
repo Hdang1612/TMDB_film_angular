@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MovieDetail } from 'src/app/core/model/movieDetail';
 import { TrendingFilm } from 'src/app/core/model/trendingMovie';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { MovieService } from 'src/app/features/film/services/movie.service';
@@ -10,7 +11,7 @@ import { MovieService } from 'src/app/features/film/services/movie.service';
   styleUrls: ['./review-layout.component.scss'],
 })
 export class ReviewLayoutComponent implements OnInit {
-  movie!: any;
+  movie!: MovieDetail;
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService

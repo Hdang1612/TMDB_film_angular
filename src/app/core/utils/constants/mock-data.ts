@@ -1,6 +1,6 @@
 import { SectionModel, SubInfoSidebarConfig } from 'src/app/core/model/section';
 import { TrendingFilm } from '../../model/trendingMovie';
-import { MovieDetail } from 'src/app/features/film/models/movieDetail';
+import { MovieDetail } from 'src/app/core/model/movieDetail';
 
 export const FOOTER_NAVS = [
   {
@@ -33,9 +33,9 @@ export const FOOTER_NAVS = [
   },
 ];
 export const MOVIE_TYPE_MAP: Record<string, { type: string; title: string }> = {
-  '': { type: 'popular', title: 'Popular Movies' },
-  upcoming: { type: 'upcoming', title: 'UpComing Movie' },
-  'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
+  '': { type: 'popular', title: 'Popular' },
+  upcoming: { type: 'upcoming', title: 'UpComing ' },
+  'top-rated': { type: 'top_rated', title: 'Top Rated ' },
   'now-playing': { type: 'now_playing', title: 'Now Playing' },
 };
 export const TV_SHOW_TYPE_MAP: Record<string, { type: string; title: string }> =
@@ -152,7 +152,7 @@ export const PEOPLE_DETAIL_SECTIONS: SectionModel[] = [
     key: 'bio',
     title: 'Biography',
     btnGroup: [],
-    data: [], 
+    data: [],
     dataType: 'text',
     subNav: '',
     subUrl: '',
@@ -161,16 +161,16 @@ export const PEOPLE_DETAIL_SECTIONS: SectionModel[] = [
     key: 'know-for',
     title: 'Know For',
     btnGroup: [],
-    data: [], 
+    data: [],
     dataType: 'default',
     subNav: '',
-    subUrl: '', 
+    subUrl: '',
   },
   {
     key: 'acting',
     title: 'Acting',
     btnGroup: [],
-    data: [], 
+    data: [],
     dataType: 'default',
     subNav: '',
     subUrl: '',
@@ -203,11 +203,14 @@ export const FILTER_SECTIONS = [
       {
         type: 'select',
         label: 'Sort Results By',
+        name: 'sort_by',
         options: [
-          'Popularity Descending',
-          'Popularity Ascending',
-          'Rating Descending',
-          'Rating Ascending',
+          { label: 'Popularity Descending', value: 'popularity.desc' },
+          { label: 'Popularity Ascending', value: 'popularity.asc' },
+          { label: 'Rating Descending', value: 'vote_average.desc' },
+          { label: 'Rating Ascending', value: 'vote_average.asc' },
+          { label: 'Release Date Descending', value: 'release_date.desc' },
+          { label: 'Release Date Ascending', value: 'release_date.asc' },
         ],
       },
     ],
@@ -219,33 +222,29 @@ export const FILTER_SECTIONS = [
       {
         type: 'radio',
         label: 'Show Me',
-        name: 'showMe',
-        options: ['Everything', "Movies I Haven't Seen", 'Movies I Have Seen'],
+        name: 'watch_status',
+        options: [
+          { label: 'Everything', value: 'all' },
+          { label: "Movies I Haven't Seen", value: 'not_seen' },
+          { label: 'Movies I Have Seen', value: 'seen' },
+        ],
       },
       {
         type: 'date-range',
         label: 'Release Dates',
+        name: 'release_date',
         searchAll: true,
       },
       {
         type: 'multi-select',
         label: 'Genres',
-        options: [
-          'Action',
-          'Adventure',
-          'Comedy',
-          'Drama',
-          'Horror',
-          'Romance',
-          'Science Fiction',
-          'Fantasy',
-          'Thriller',
-          'War',
-        ],
+        name: 'with_genres',
+        options: [],
       },
       {
-        type: 'input',
-        label: 'Keywords',
+        type: 'select',
+        label: 'Language',
+        name: 'lang',
         options: [],
       },
     ],

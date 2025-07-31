@@ -6,7 +6,9 @@
   "
   [style.backdrop-filter]="isMenuOpen ? 'blur(20px)' : 'none'"
   (click)="
-    cardType === 'default' || cardType === 'recommendation'
+    cardType === 'default' ||
+    cardType === 'recommendation' ||
+    cardType === 'cast'
       ? navigate(movie.id)
       : null
   "

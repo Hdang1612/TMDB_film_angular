@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DETAIL_SECTIONS } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
-import { MovieDetail } from '../../models/movieDetail';
+import { MovieDetail } from '../../../../core/model/movieDetail';
 import { getFullImageUrl, loadSocialLinks } from 'src/app/core/utils/img.utils';
 import { TMDBTrailer } from '../../models/trailer';
 import ColorThief from 'colorthief';
