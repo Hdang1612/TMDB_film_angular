@@ -50,6 +50,8 @@
     @include text-style($fsize: 1.4rem, $color: $absolute-white);
     margin-top: 1rem;
     line-height: 1.6;
+  }
+  .default {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;

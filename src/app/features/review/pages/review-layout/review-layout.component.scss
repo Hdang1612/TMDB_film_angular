@@ -1,0 +1,23 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.review-container {
+  padding: 5rem;
+  width: 100%;
+  height: 100vh;
+  background-color: $black-08;
+  @include flexbox($align: flex-start, $gap: 3rem);
+  .film-img {
+    width: 20%;
+    img {
+      margin-bottom: 1rem;
+      width: 90%;
+    }
+  }
+  .film-name {
+    @include text-style($fsize: $heading-h4, $fweight: 700);
+  }
+  .content {
+    width: 80%;
+  }
+}

@@ -5,6 +5,10 @@
   width: 100%;
   padding: 5rem 0;
   @include flexbox($direction: column, $align: flex-start, $gap: 3rem);
+  .image {
+    width: 100%;
+    border-radius: 1rem;
+  }
   .social-icons {
     @include flexbox($direction: row, $align: center, $gap: 2rem);
     a {

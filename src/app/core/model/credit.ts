@@ -52,6 +52,7 @@ export interface Person {
   popularity: number;
   profile_path: string | null;
   known_for: KnownForMovie[];
+  list_film?: string;
 }
 
 export interface PersonDetail {

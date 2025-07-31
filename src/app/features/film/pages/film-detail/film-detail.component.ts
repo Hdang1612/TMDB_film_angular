@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
 import { TrendingFilm } from '../../../../core/model/trendingMovie';
 import { RecommendationFilm } from '../../models/recomendation';
-import { SubInfoSidebarConfig } from '../../models/section';
+import { SubInfoSidebarConfig } from '../../../../core/model/section';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
 @Component({
   selector: 'app-film-detail',
@@ -150,27 +150,6 @@ export class FilmDetailComponent implements OnInit {
       },
     });
   }
-
-  // lấy  màu chủ đạo của backdrop
-  // loadBackdropColor(imageUrl: string) {
-  //   const img = new Image();
-  //   img.crossOrigin = 'Anonymous';
-  //   img.src = imageUrl;
-
-  //   img.onload = () => {
-  //     const colorThief = new ColorThief();
-  //     const [r, g, b] = colorThief.getColor(img);
-
-  //     this.backdropGradient = `
-  //     linear-gradient(
-  //       to right,
-  //       rgba(${r}, ${g}, ${b}, 1) calc((50vw - 170px) - 340px),
-  //       rgba(${r}, ${g}, ${b}, 0.84) 50%,
-  //       rgba(${r}, ${g}, ${b}, 0.84) 100%
-  //     )
-  //   `.trim();
-  //   };
-  // }
 
   get genreNames(): string {
     const genres = this.detail?.genres || [];

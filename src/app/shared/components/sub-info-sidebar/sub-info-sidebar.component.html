@@ -1,5 +1,6 @@
 <!-- sub-info-sidebar.component.html -->
 <div class="sidebar">
+  <img class="image" *ngIf="config?.image" src="{{ config.image }}" />
   <div class="social-icons" *ngIf="config?.socialLinks?.length">
     <a
       *ngFor="let link of config?.socialLinks"

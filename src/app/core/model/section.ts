@@ -24,6 +24,7 @@ export interface SocialLink {
 }
 
 export interface SubInfoSidebarConfig {
+  image?: string | null;
   title?: string;
   socialLinks?: SocialLink[];
   keywords?: string[];

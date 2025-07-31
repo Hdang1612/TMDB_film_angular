@@ -7,7 +7,7 @@ import { MovieDetail } from '../models/movieDetail';
 import { TMDBTrailer } from '../models/trailer';
 import { CastResponse } from '../../../core/model/credit';
 import { RecommendationResponse } from '../models/recomendation';
-import { ReviewResponse } from '../models/review';
+import { ReviewResponse } from '../../../core/model/review';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {

@@ -1,1 +1,28 @@
-<p>people-detail works!</p>
+<div class="container">
+  <div class="people-detail-container">
+    <div class="sub-detail">
+      <app-sub-info-sidebar
+        [config]="subInfoSidebarConfig"
+      ></app-sub-info-sidebar>
+    </div>
+    <div class="main-detail">
+      <h2 class="detail-name">
+        {{ detail?.name }}
+      </h2>
+      <!-- <div class="section">
+        <h3 class="section-header">Biography</h3>
+        <div class="section-content">
+          <p class="bio content-text">{{ detail?.biography }}</p>
+        </div>
+      </div>
+      <div class="section">
+        <h3 class="section-header">Know for</h3>
+        <div class="section-content"></div>
+      </div> -->
+      <app-page-section
+        *ngFor="let section of detailSection"
+        [section]="section"
+      ></app-page-section>
+    </div>
+  </div>
+</div>

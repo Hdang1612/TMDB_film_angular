@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Review } from '../../../features/film/models/review';
+import { Review } from '../../../core/model/review';
 import { environment } from 'src/environments/environment';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { Router } from '@angular/router';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ReviewCardComponent implements OnInit {
   @Input() reviewData!: Review;
+  @Input() movieId!: string | null;
+  @Input() type: 'full' | 'default' = 'full';
   baseUrlImg = environment.baseUrlImg;
   avt: string = '';
   rating: number = 0;
@@ -27,7 +29,10 @@ export class ReviewCardComponent implements OnInit {
     // console.log('data review', this.reviewData);
   }
   navigate() {
-    this.router.navigate([this.reviewData.url]);
-    // console.log('navigate to review', this.reviewData.url);
+    if (this.type === 'default') {
+      this.router.navigate(['/review', this.reviewData.id], {
+        queryParams: { movieId: this.movieId },
+      });
+    }
   }
 }

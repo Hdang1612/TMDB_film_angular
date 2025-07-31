@@ -36,4 +36,19 @@ export class PersonService {
       })
       .pipe(catchError(this.handleError()));
   }
+
+  getPeopleSocial(id: string | null): Observable<PersonDetail> {
+    return this.http
+      .get<PersonDetail>(`${environment.baseUrlMovie}person/${id}/external_ids`)
+      .pipe(catchError(this.handleError()));
+  }
+
+  getPeopleMovie(id: string | null): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}person/${id}/movie_credits`, {
+        ...this.options,
+        params: this.langParam,
+      })
+      .pipe(catchError(this.handleError()));
+  }
 }

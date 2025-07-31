@@ -31,11 +31,11 @@
           </div>
         </li>
         <li class="menu-item">
-          <a href="">People</a>
+          <a [routerLink]="['/person/popular']">People</a>
           <div class="sub-menu movie-menu">
             <ul>
               <li class="movie-menu-item" *ngFor="let item of peopleMenu">
-                <a [routerLink]="['/people']">{{ item.label }}</a>
+                <a [routerLink]="['/person/popular']">{{ item.label }}</a>
               </li>
             </ul>
           </div>

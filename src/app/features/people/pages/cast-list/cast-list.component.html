@@ -3,13 +3,21 @@
     <h2 class="header">Popular People</h2>
     <div class="list-person">
       <ng-container *ngFor="let person of result">
-        <div class="person-item">
+        <div class="person-item" [routerLink]="['/person', person.id]">
           <img src="{{ person.profile_path }}" class="person-img" />
           <div class="person-info">
             <p class="person-name">{{ person.name }}</p>
+            <p class="film-list">{{ person.list_film }}</p>
           </div>
         </div>
       </ng-container>
     </div>
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="paginate($event)"
+      (prev)="prevPage()"
+      (next)="nextPage()"
+    ></app-pagination>
   </div>
 </div>

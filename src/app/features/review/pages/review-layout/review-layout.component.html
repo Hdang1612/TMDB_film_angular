@@ -1,0 +1,9 @@
+<div class="review-container" *ngIf="movie">
+  <div class="film-img">
+    <img src="{{ movie.poster_path }}" alt="" />
+    <p class="film-name">{{ movie.title }} ({{ movie.release_date }})</p>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

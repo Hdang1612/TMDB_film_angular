@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SectionModel } from '../../../features/film/models/section';
+import { SectionModel } from '../../../core/model/section';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -1,0 +1,37 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.container {
+  width: 100%;
+  @include flexbox($justify: center);
+  .people-detail-container {
+    @include flexbox($gap: 3rem, $align: flex-start);
+    width: 100%;
+    max-width: $maxw-xl;
+    .sub-detail {
+      width: 30%;
+    }
+    .main-detail {
+      width: 70%;
+      padding: 5rem 0;
+      @include flexbox($direction: column, $gap: 4rem, $align: flex-start);
+      .detail-name {
+        @include text-style($fsize: $heading-h3, $fweight: 800);
+      }
+      app-page-section {
+        width: 100%;
+      }
+      .section {
+        .section-header {
+          @include text-style($fsize: 2rem, $fweight: 600);
+          margin-bottom: 2rem;
+        }
+        .section-content {
+          .content-text {
+            @include text-style($fsize: 1.4rem, $fweight: 400);
+          }
+        }
+      }
+    }
+  }
+}

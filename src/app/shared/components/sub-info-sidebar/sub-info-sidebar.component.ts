@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SubInfoSidebarConfig } from '../../../features/film/models/section';
+import { SubInfoSidebarConfig } from '../../../core/model/section';
 
 @Component({
   selector: 'app-sub-info-sidebar',

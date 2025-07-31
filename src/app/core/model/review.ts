@@ -14,6 +14,10 @@ export interface Review {
   id: string;
   updated_at: string;
   url: string;
+  iso_639_1?: string;
+  media_id?: number;
+  media_title?: string;
+  media_type?: string;
 }
 
 export interface AuthorDetails {

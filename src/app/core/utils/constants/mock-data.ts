@@ -1,7 +1,4 @@
-import {
-  SectionModel,
-  SubInfoSidebarConfig,
-} from 'src/app/features/film/models/section';
+import { SectionModel, SubInfoSidebarConfig } from 'src/app/core/model/section';
 import { TrendingFilm } from '../../model/trendingMovie';
 import { MovieDetail } from 'src/app/features/film/models/movieDetail';
 
@@ -145,6 +142,36 @@ export const DETAIL_SECTIONS: SectionModel[] = [
     data: [],
     dataType: 'recommendation',
 
+    subNav: '',
+    subUrl: '',
+  },
+];
+
+export const PEOPLE_DETAIL_SECTIONS: SectionModel[] = [
+  {
+    key: 'bio',
+    title: 'Biography',
+    btnGroup: [],
+    data: [], 
+    dataType: 'text',
+    subNav: '',
+    subUrl: '',
+  },
+  {
+    key: 'know-for',
+    title: 'Know For',
+    btnGroup: [],
+    data: [], 
+    dataType: 'default',
+    subNav: '',
+    subUrl: '', 
+  },
+  {
+    key: 'acting',
+    title: 'Acting',
+    btnGroup: [],
+    data: [], 
+    dataType: 'default',
     subNav: '',
     subUrl: '',
   },

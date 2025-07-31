@@ -1,4 +1,9 @@
-<div class="section">
+<div
+  class="section"
+  [ngStyle]="{
+    'margin-bottom': section.dataType === 'text' ? '2rem' : null
+  }"
+>
   <div class="section-heading">
     <div class="section-heading__text">
       <h2>{{ section.title }}</h2>
@@ -16,9 +21,13 @@
       </div>
     </ng-container>
   </div>
+  <ng-container *ngIf="section.dataType === 'text'">
+    <p class="content-text">{{ section.data[0] }}</p>
+  </ng-container>
   <div
     class="scroll-wrapper-container"
     [class.review-container]="section.dataType === 'social'"
+    *ngIf="section.dataType !== 'text'"
   >
     <div class="scroll-wrapper">
       <div

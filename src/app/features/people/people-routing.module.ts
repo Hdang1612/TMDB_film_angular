@@ -10,7 +10,7 @@ const routes: Routes = [
     component: PeopleLayoutComponent,
     children: [
       { path: 'popular', component: CastListComponent },
-      { path: '/:id', component: PeopleDetailComponent },
+      { path: ':id', component: PeopleDetailComponent },
     ],
   },
 ];

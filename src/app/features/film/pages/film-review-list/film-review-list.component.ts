@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { ActivatedRoute } from '@angular/router';
-import { Review, ReviewResponse } from '../../models/review';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Review, ReviewResponse } from '../../../../core/model/review';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 
 @Component({
@@ -17,7 +17,8 @@ export class FilmReviewListComponent implements OnInit {
   id!: string | null;
   constructor(
     private movieService: MovieService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -58,5 +59,11 @@ export class FilmReviewListComponent implements OnInit {
       this.currentPage--;
       this.loadReviewList(this.id, this.currentPage);
     }
+  }
+
+  navigateWrite() {
+    this.router.navigate(['review/new'], {
+      queryParams: { movieId: this.id },
+    });
   }
 }

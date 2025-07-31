@@ -1,10 +1,14 @@
-<div class="review-container" (click)="navigate()">
+<div class="review-container">
   <div class="review-header">
     <div class="reviewer-img">
       <a href=""><img src="{{ avt }}" alt="" /></a>
     </div>
     <div class="reviewer-info">
-      <p class="write-by">
+      <p
+        class="write-by"
+        (click)="navigate()"
+        [style.cursor]="type === 'default' ? 'pointer' : 'auto'"
+      >
         A review by
         {{
           reviewData.author_details.name
@@ -28,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="review-content">
+  <div class="review-content" [class.default]="type === 'default'">
     <p>{{ reviewData.content }}</p>
   </div>
 </div>
