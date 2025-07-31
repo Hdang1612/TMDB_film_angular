@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FILTER_SECTIONS } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from 'src/app/features/film/services/movie.service';
@@ -14,7 +14,7 @@ export class FilterBarComponent implements OnInit {
     isOpen: true,
   }));
   filterForm!: FormGroup;
-
+  @Output() searchResult = new EventEmitter<any>();
   constructor(private fb: FormBuilder, private movieService: MovieService) {}
 
   ngOnInit(): void {
@@ -50,7 +50,38 @@ export class FilterBarComponent implements OnInit {
     section.isOpen = !section.isOpen;
   }
   onSearch() {
-    console.log(this.filterForm.value);
+    const rawValue = this.filterForm.value;
+    const params: any = {};
+
+    for (const key in rawValue) {
+      const value = rawValue[key];
+      if (
+        value &&
+        typeof value === 'object' &&
+        'from' in value &&
+        'to' in value
+      ) {
+        if (!value.searchAll) {
+          if (value.from) params['release_date.gte'] = value.from;
+          if (value.to) params['release_date.lte'] = value.to;
+        }
+      } else if (Array.isArray(value)) {
+        if (key === 'with_genres' && value.length) {
+          params[key] = value.join(',');
+        }
+      } else if (value !== null && value !== '') {
+        params[key] = value;
+      }
+    }
+
+    this.movieService.getDiscoveryMovies(params).subscribe({
+      next: (res) => {
+        this.searchResult.emit(res); //
+      },
+      error: (err) => {
+        alert(err.error?.error);
+      },
+    });
   }
 
   toggleGenre(itemName: string, genre: string) {
@@ -62,7 +93,6 @@ export class FilterBarComponent implements OnInit {
       genres.push(genre);
     }
     this.filterForm.get(itemName)?.setValue(genres);
-    console.log(this.filterForm.get(itemName)?.value);
   }
   loadListLanguage() {
     this.movieService.getConfigure('languages').subscribe({

@@ -2,7 +2,9 @@
   <p class="header">{{ title }}</p>
   <div class="content">
     <div class="filter-bar-container">
-      <app-filter-bar></app-filter-bar>
+      <app-filter-bar
+        (searchResult)="handleSearchResult($event)"
+      ></app-filter-bar>
     </div>
     <div class="movie-list">
       <div class="film-list">

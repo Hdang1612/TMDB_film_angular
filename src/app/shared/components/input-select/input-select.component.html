@@ -1,1 +1,7 @@
-<p>input-select works!</p>
+<div class="select-container" [formGroup]="group">
+  <select [formControlName]="item.name" class="custom-select">
+    <option *ngFor="let opt of item.options" [value]="opt.value">
+      {{ opt.label }}
+    </option>
+  </select>
+</div>

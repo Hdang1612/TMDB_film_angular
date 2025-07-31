@@ -1,1 +1,27 @@
-<p>input-date-range works!</p>
+<div [formGroup]="subGroup" class="date-range-group">
+  <label class="search-all-checkbox">
+    <input type="checkbox" formControlName="searchAll" />
+    <span class="checkmark"></span>
+    Search all releases?
+  </label>
+
+  <div class="date-container">
+    <label for="from">From</label>
+    <input
+      type="date"
+      id="from"
+      formControlName="from"
+      [disabled]="subGroup.get('searchAll')?.value"
+    />
+  </div>
+
+  <div class="date-container">
+    <label for="to">To</label>
+    <input
+      type="date"
+      id="to"
+      formControlName="to"
+      [disabled]="subGroup.get('searchAll')?.value"
+    />
+  </div>
+</div>

@@ -1,1 +1,12 @@
-<p>input-radio works!</p>
+<div [formGroup]="group" class="radio-group">
+  <label *ngFor="let opt of item.options" class="radio-option">
+    <input
+      type="radio"
+      [formControlName]="item.name"
+      [value]="opt.value"
+      [name]="item.name"
+    />
+    <span class="custom-radio"></span>
+    {{ opt.label }}
+  </label>
+</div>

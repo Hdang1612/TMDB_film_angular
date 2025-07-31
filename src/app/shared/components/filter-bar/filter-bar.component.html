@@ -10,70 +10,46 @@
         alt=""
       />
     </div>
+
     <ng-container *ngIf="section.isOpen">
       <div class="section-content" *ngFor="let item of section.content">
         <p class="sub-name">{{ item.label }}</p>
 
-        <ng-container *ngIf="item.type === 'select'">
-          <select [formControlName]="item.name">
-            <option *ngFor="let opt of item.options">{{ opt.label }}</option>
-          </select>
-        </ng-container>
+        <ng-container [ngSwitch]="item.type">
+          <app-input-select
+            *ngSwitchCase="'select'"
+            [item]="item"
+            [group]="filterForm"
+          ></app-input-select>
 
-        <ng-container *ngIf="item.type === 'radio'">
-          <label *ngFor="let opt of item.options">
-            <input
-              [formControlName]="item.name"
-              type="radio"
-              [name]="item.name"
-              [value]="opt.value"
-            />
-            {{ opt.label }}
-          </label>
-        </ng-container>
+          <app-input-radio
+            *ngSwitchCase="'radio'"
+            [item]="item"
+            [group]="filterForm"
+          ></app-input-radio>
 
-        <ng-container *ngIf="item.type === 'date-range'">
-          <div [formGroupName]="item.name">
-            <label>
-              <input type="checkbox" formControlName="searchAll" />
-              Search all releases?
-            </label>
-            <div class="date-container">
-              <label>From</label>
-              <input type="date" formControlName="from" />
-            </div>
-            <div class="date-container">
-              <label>To</label>
-              <input type="date" formControlName="to" />
-            </div>
-          </div>
-        </ng-container>
+          <app-input-date-range
+            *ngSwitchCase="'date-range'"
+            [item]="item"
+            [group]="filterForm"
+          ></app-input-date-range>
 
-        <ng-container *ngIf="item.type === 'multi-select'">
-          <div class="genre-btns">
-            <button
-              *ngFor="let genre of item.options"
-              class="genre-btn"
-              (click)="toggleGenre(item.name, genre.value)"
-              [class.active]="
-                filterForm.get(item.name)?.value.includes(genre.value)
-              "
-            >
-              {{ genre.label }}
-            </button>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="item.type === 'input'">
-          <div class="input-container">
-            <input
-              [formControlName]="item.name"
-              type="text"
-              placeholder="Search..."
-            />
-          </div>
+          <app-input-multi-select
+            *ngSwitchCase="'multi-select'"
+            [item]="item"
+            [group]="filterForm"
+            (genreToggled)="toggleGenre($event.name, $event.value)"
+          ></app-input-multi-select>
+
+          <app-input-text
+            *ngSwitchCase="'input'"
+            [item]="item"
+            [group]="filterForm"
+          ></app-input-text>
         </ng-container>
       </div>
     </ng-container>
   </div>
+
   <div (click)="onSearch()" class="search-btn">Search</div>
 </form>

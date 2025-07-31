@@ -1,1 +1,7 @@
-<p>input-text works!</p>
+<div [formGroup]="group">
+  <input
+    type="text"
+    [formControlName]="item.name"
+    [placeholder]="item.placeholder || 'Search...'"
+  />
+</div>

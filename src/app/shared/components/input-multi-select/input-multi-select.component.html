@@ -1,1 +1,10 @@
-<p>input-multi-select works!</p>
+<div  class="genre-btns">
+  <button
+    *ngFor="let genre of item.options"
+    class="genre-btn"
+    (click)="onToggle(genre.value)"
+    [class.active]="group.get(item.name)?.value.includes(genre.value)"
+  >
+    {{ genre.label }}
+  </button>
+</div>

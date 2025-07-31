@@ -204,6 +204,7 @@ export const FILTER_SECTIONS = [
         type: 'select',
         label: 'Sort Results By',
         name: 'sort_by',
+        defaultValue: 'popularity.desc',
         options: [
           { label: 'Popularity Descending', value: 'popularity.desc' },
           { label: 'Popularity Ascending', value: 'popularity.asc' },
@@ -223,6 +224,7 @@ export const FILTER_SECTIONS = [
         type: 'radio',
         label: 'Show Me',
         name: 'watch_status',
+        defaultValue: 'all',
         options: [
           { label: 'Everything', value: 'all' },
           { label: "Movies I Haven't Seen", value: 'not_seen' },
@@ -239,12 +241,14 @@ export const FILTER_SECTIONS = [
         type: 'multi-select',
         label: 'Genres',
         name: 'with_genres',
+        defaultValue: [],
         options: [],
       },
       {
         type: 'select',
         label: 'Language',
         name: 'lang',
+        defaultValue: '',
         options: [],
       },
     ],

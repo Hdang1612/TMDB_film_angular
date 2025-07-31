@@ -1,0 +1,24 @@
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
+
+.select-container {
+  @include flexbox();
+  width: 100%;
+  .custom-select {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    border-radius: 1rem;
+    color: #000;
+    appearance: none;
+    color: $absolute-white;
+    background-image: url("/assets/icons/arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: right 1.2rem center;
+    background-size: 1.2rem;
+    option {
+      color: $absolute-white;
+      background-color: $black-10;
+    }
+  }
+}

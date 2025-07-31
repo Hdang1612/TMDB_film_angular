@@ -1,0 +1,24 @@
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
+
+.genre-btns {
+  @include flexbox($gap: 0.8rem, $align: flex-start);
+  flex-wrap: wrap;
+  .genre-btn {
+    color: $absolute-white;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    border-radius: 2rem;
+    border: 0.1px solid $grey-60;
+    transition: all 0.2s ease;
+    &:hover {
+      background: $absolute-white;
+      color: $absolute-black;
+    }
+  }
+  .active {
+    background: $absolute-white;
+    color: $absolute-black;
+  }
+}

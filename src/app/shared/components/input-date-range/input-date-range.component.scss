@@ -1,0 +1,47 @@
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
+
+.date-range-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  color: $absolute-white;
+
+  .search-all-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      margin-right: 0.8rem;
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+
+  .date-container {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    input[type="date"] {
+      padding: 0.8rem 1rem;
+      border: 1px solid $grey-60;
+      border-radius: 0.6rem;
+      background-color: $black-10;
+      color: $absolute-white;
+      font-size: 1.4rem;
+
+      &:disabled {
+        background-color: $black-15;
+        color: $grey-60;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

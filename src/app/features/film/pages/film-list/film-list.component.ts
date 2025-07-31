@@ -73,4 +73,15 @@ export class FilmListComponent implements OnInit {
   handleOpenMenu(id: number) {
     this.selectedMenuCardId = this.selectedMenuCardId === id ? null : id;
   }
+
+  handleSearchResult(res: any) {
+    console.log(res);
+    this.filmList = res.results.map((movie: TrendingFilm) => ({
+      ...movie,
+      poster_path: getFullImageUrl(movie.poster_path),
+      backdrop_path: getFullImageUrl(movie.backdrop_path),
+    }));
+    this.totalPages = res.total_pages;
+    this.currentPage = 1;
+  }
 }
