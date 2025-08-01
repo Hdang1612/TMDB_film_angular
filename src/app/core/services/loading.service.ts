@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingService {
-  _loading = new BehaviorSubject<boolean>(false);
-  loading$ = this._loading.asObservable();
-  constructor() {}
-  show() {
-    console.log('loading ');
-    this._loading.next(true);
+  private loadingMap = new Map<string, BehaviorSubject<boolean>>();
+
+  setLoading(key: string, value: boolean): void {
+    if (!this.loadingMap.has(key)) {
+      this.loadingMap.set(key, new BehaviorSubject<boolean>(value));
+    } else {
+      this.loadingMap.get(key)!.next(value);
+    }
   }
-  hide() {
-    console.log('unloading ');
-    this._loading.next(false);
+
+  isLoading(key: string): Observable<boolean> {
+    if (!this.loadingMap.has(key)) {
+      this.loadingMap.set(key, new BehaviorSubject<boolean>(false));
+    }
+    return this.loadingMap.get(key)!.asObservable();
   }
 }

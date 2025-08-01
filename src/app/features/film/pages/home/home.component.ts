@@ -58,23 +58,20 @@ export class HomeComponent implements OnInit {
     sectionKey: string,
     fetchFn: () => Observable<{ results: TrendingFilm[] }>
   ): void {
-    this.loadingService.show();
-    fetchFn()
-      .pipe(finalize(() => this.loadingService.hide()))
-      .subscribe({
-        next: (res) => {
-          const mapped = res.results.map((movie: TrendingFilm) => ({
-            ...movie,
-            poster_path: getFullImageUrl(movie.poster_path),
-            backdrop_path: getFullImageUrl(movie.backdrop_path),
-          }));
+    fetchFn().subscribe({
+      next: (res) => {
+        const mapped = res.results.map((movie: TrendingFilm) => ({
+          ...movie,
+          poster_path: getFullImageUrl(movie.poster_path),
+          backdrop_path: getFullImageUrl(movie.backdrop_path),
+        }));
 
-          const section = this.homeSection.find((s) => s.key === sectionKey);
-          if (section) section.data = mapped;
-        },
-        error: (err) => {
-          console.error(`Error loading section [${sectionKey}]`, err);
-        },
-      });
+        const section = this.homeSection.find((s) => s.key === sectionKey);
+        if (section) section.data = mapped;
+      },
+      error: (err) => {
+        console.error(`Error loading section [${sectionKey}]`, err);
+      },
+    });
   }
 }

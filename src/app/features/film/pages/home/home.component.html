@@ -19,7 +19,6 @@
       *ngFor="let section of homeSection"
       [section]="section"
       (btnClick)="loadList($event)"
-      [isLoading]="loadingService.loading$ | async"
     ></app-page-section>
     <div class="section">
       <div class="section-heading leaderboard-heading">
