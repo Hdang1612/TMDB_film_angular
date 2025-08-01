@@ -11,7 +11,7 @@
       type="date"
       id="from"
       formControlName="from"
-      [disabled]="subGroup.get('searchAll')?.value"
+      [readonly]="subGroup.get('searchAll')?.value"
     />
   </div>
 
@@ -21,7 +21,7 @@
       type="date"
       id="to"
       formControlName="to"
-      [disabled]="subGroup.get('searchAll')?.value"
+      [readonly]="subGroup.get('searchAll')?.value"
     />
   </div>
 </div>

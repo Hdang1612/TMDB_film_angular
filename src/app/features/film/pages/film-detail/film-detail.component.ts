@@ -81,6 +81,7 @@ export class FilmDetailComponent implements OnInit {
             { label: 'Budget', value: this.detail.budget, isCurrency: true },
             { label: 'Revenue', value: this.detail.revenue, isCurrency: true },
           ],
+          keywords: [],
         };
       },
       error: (err) => {

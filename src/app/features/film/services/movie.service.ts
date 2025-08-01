@@ -178,7 +178,7 @@ export class MovieService {
       }
     }
 
-    return this.http.get(`${environment.baseUrlMovie}/discover/movie`, {
+    return this.http.get(`${environment.baseUrlMovie}discover/movie`, {
       params: httpParams,
     });
   }

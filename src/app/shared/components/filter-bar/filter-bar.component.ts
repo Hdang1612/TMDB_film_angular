@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FILTER_SECTIONS } from 'src/app/core/utils/constants/mock-data';
@@ -15,7 +16,11 @@ export class FilterBarComponent implements OnInit {
   }));
   filterForm!: FormGroup;
   @Output() searchResult = new EventEmitter<any>();
-  constructor(private fb: FormBuilder, private movieService: MovieService) {}
+  constructor(
+    private fb: FormBuilder,
+    private movieService: MovieService,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({});
@@ -34,7 +39,10 @@ export class FilterBarComponent implements OnInit {
             );
             break;
           case 'radio':
-            new FormControl(item.defaultValue);
+            this.filterForm.addControl(
+              item.name,
+              new FormControl(item.defaultValue || '')
+            );
             break;
           case 'input':
             this.filterForm.addControl(item.name, new FormControl(''));
@@ -61,6 +69,7 @@ export class FilterBarComponent implements OnInit {
   }
   onSearch() {
     const rawValue = this.filterForm.value;
+    console.log('param', rawValue);
     const params: any = {};
 
     for (const key in rawValue) {
@@ -72,8 +81,14 @@ export class FilterBarComponent implements OnInit {
         'to' in value
       ) {
         if (!value.searchAll) {
-          if (value.from) params['release_date.gte'] = value.from;
-          if (value.to) params['release_date.lte'] = value.to;
+          if (value.from) {
+            const fromDate = this.datePipe.transform(value.from, 'yyyy-MM-dd');
+            if (fromDate) params['release_date.gte'] = fromDate;
+          }
+          if (value.to) {
+            const toDate = this.datePipe.transform(value.to, 'yyyy-MM-dd');
+            if (toDate) params['release_date.lte'] = toDate;
+          }
         }
       } else if (Array.isArray(value)) {
         if (key === 'with_genres' && value.length) {
@@ -82,6 +97,7 @@ export class FilterBarComponent implements OnInit {
       } else if (value !== null && value !== '') {
         params[key] = value;
       }
+      console.log('parammm', params);
     }
 
     this.movieService.getDiscoveryMovies(params).subscribe({

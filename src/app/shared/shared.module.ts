@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { components } from './components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -14,7 +14,15 @@ import { InputRadioComponent } from './components/input-radio/input-radio.compon
 const COMPONENTS = [...components];
 const PIPES = [...pipes];
 @NgModule({
-  declarations: [...COMPONENTS, ...PIPES, InputTextComponent, InputSelectComponent, InputDateRangeComponent, InputMultiSelectComponent, InputRadioComponent],
+  declarations: [
+    ...COMPONENTS,
+    ...PIPES,
+    InputTextComponent,
+    InputSelectComponent,
+    InputDateRangeComponent,
+    InputMultiSelectComponent,
+    InputRadioComponent,
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -31,5 +39,6 @@ const PIPES = [...pipes];
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [DatePipe],
 })
 export class SharedModule {}
