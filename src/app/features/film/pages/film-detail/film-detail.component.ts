@@ -26,6 +26,7 @@ import { RecommendationFilm } from '../../models/recomendation';
 import { SubInfoSidebarConfig } from '../../../../core/model/section';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { GlobalFeedbackService } from 'src/app/core/services/feedback.service';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -48,8 +49,6 @@ export class FilmDetailComponent implements OnInit {
   };
   movieId!: string | null;
   subInfoSidebarConfig!: SubInfoSidebarConfig;
-  feedbackMessage = '';
-  isFeedbackVisible = false;
   loadingDetail$ = this.loadingService.isLoading('detail-film');
   loadingActor$ = this.loadingService.isLoading('actor');
   movieState$!: Observable<MovieState>;
@@ -70,7 +69,8 @@ export class FilmDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService, // public loadingService: LoadingService
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private feedBack: GlobalFeedbackService
   ) {}
 
   ngOnInit(): void {
@@ -298,11 +298,11 @@ export class FilmDetailComponent implements OnInit {
           this.stateIcon.favorite = newState.favorite
             ? 'assets/icons/heart-fill.svg'
             : 'assets/icons/heart-white.svg';
-          this.showFeedback(res.status_message);
+          this.feedBack.show(res.status_message, 'success');
         }
       },
       error: (err) => {
-        this.showFeedback(err.error.status_message);
+        this.feedBack.show(err.error.status_message, 'error');
       },
     });
   }
@@ -321,21 +321,12 @@ export class FilmDetailComponent implements OnInit {
           this.stateIcon.watchList = newState.watchlist
             ? 'assets/icons/watch-list-fill.svg'
             : 'assets/icons/watch-list-white.svg';
-          this.showFeedback(res.status_message);
+          this.feedBack.show(res.status_message, 'success');
         }
       },
       error: (err) => {
-        this.showFeedback(err.error.status_message);
+        this.feedBack.show(err.error.status_message, 'error');
       },
     });
-  }
-
-  showFeedback(message: string) {
-    this.feedbackMessage = message;
-    this.isFeedbackVisible = true;
-
-    setTimeout(() => {
-      this.isFeedbackVisible = false;
-    }, 3000);
   }
 }

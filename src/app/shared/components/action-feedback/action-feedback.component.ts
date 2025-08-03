@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GlobalFeedbackService } from 'src/app/core/services/feedback.service';
 
 @Component({
   selector: 'app-action-feedback',
@@ -6,13 +7,26 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./action-feedback.component.scss'],
 })
 export class ActionFeedbackComponent implements OnInit {
-  @Input() message: string = '';
-  @Input() visible: boolean = false;
+  message = '';
+  type: 'success' | 'error' | 'info' = 'success';
+  visible = false;
+  timeoutRef: any; // cleat timeout khi có message mới 
 
-  hideMessage() {
-    this.visible = false;
+  constructor(private feedbackService: GlobalFeedbackService) {}
+
+  ngOnInit(): void {
+    this.feedbackService.message$.subscribe(({ message, type }) => {
+      this.message = message;
+      this.type = type;
+      this.visible = true;
+
+      clearTimeout(this.timeoutRef);
+      this.timeoutRef = setTimeout(() => (this.visible = false), 2000);
+    });
   }
-  constructor() {}
 
-  ngOnInit(): void {}
+  close() {
+    this.visible = false;
+    clearTimeout(this.timeoutRef);
+  }
 }

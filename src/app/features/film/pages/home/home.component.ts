@@ -8,6 +8,7 @@ import { TrendingFilm } from '../../../../core/model/trendingMovie';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { finalize, Observable } from 'rxjs';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { ProfileService } from 'src/app/features/profile/services/profile.service';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +21,12 @@ export class HomeComponent implements OnInit {
   leaderBoardData = leaderboardMockData;
   constructor(
     private movieService: MovieService,
-    public loadingService: LoadingService
+    public loadingService: LoadingService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
+    this.loadUserProfile();
     this.loadSectionData('trending', () =>
       this.movieService.getTrendingList('day')
     );
@@ -79,6 +82,23 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         console.error(`Error loading section [${sectionKey}]`, err);
+      },
+    });
+  }
+  loadUserProfile() {
+    const profile = localStorage.getItem('userProfile');
+    if (profile) {
+      console.log('User profile already exists in localStorage');
+      return;
+    }
+
+    this.profileService.getUserProfile().subscribe({
+      next: (res) => {
+        localStorage.setItem('userProfile', JSON.stringify(res));
+        console.log('User profile saved:', res);
+      },
+      error: (err) => {
+        console.error('Failed to get user profile:', err);
       },
     });
   }
