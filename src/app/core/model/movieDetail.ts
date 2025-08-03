@@ -56,3 +56,21 @@ export interface SpokenLanguage {
   iso_639_1: string;
   name: string;
 }
+
+export interface FavoriteReq {
+  media_type: 'movie' | 'tv';
+  media_id: number;
+  favorite: boolean;
+}
+export interface WatchListReq {
+  media_type: 'movie' | 'tv';
+  media_id: number;
+  watchlist: boolean;
+}
+
+export interface MovieState {
+  id: string | null;
+  favorite: boolean;
+  rated: boolean;
+  watchlist: boolean;
+}

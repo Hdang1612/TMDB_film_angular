@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TrendingFilmResponse } from '../../../core/model/trendingMovie';
-import { MovieDetail } from '../../../core/model/movieDetail';
+import {
+  FavoriteReq,
+  MovieDetail,
+  MovieState,
+  WatchListReq,
+} from '../../../core/model/movieDetail';
 import { TMDBTrailer } from '../models/trailer';
 import { CastResponse } from '../../../core/model/credit';
 import { RecommendationResponse } from '../models/recomendation';
@@ -181,5 +186,66 @@ export class MovieService {
     return this.http.get(`${environment.baseUrlMovie}discover/movie`, {
       params: httpParams,
     });
+  }
+
+  //favorite & watchlist
+  getFavorite(type: string, page: number): Observable<any> {
+    return this.http
+      .get<any>(
+        `${environment.baseUrlMovie}account/${environment.accountId}/favorite/${type}`,
+        {
+          ...this.options,
+          params: this.langParam.set('page', page),
+        }
+      )
+      .pipe(catchError(this.handleError()));
+  }
+  updateFavorite(body: FavoriteReq): Observable<any> {
+    return this.http
+      .post<any>(
+        `${environment.baseUrlMovie}account/${environment.accountId}/favorite`,
+        body,
+        {
+          ...this.options,
+          params: this.langParam,
+        }
+      )
+      .pipe(catchError(this.handleError()));
+  }
+
+  getWatchList(type: string, page: number): Observable<any> {
+    return this.http
+      .get<any>(
+        `${environment.baseUrlMovie}account/${environment.accountId}/watchlist/${type}`,
+        {
+          ...this.options,
+          params: this.langParam.set('page', page),
+        }
+      )
+      .pipe(catchError(this.handleError()));
+  }
+
+  updateWatchList(body: WatchListReq): Observable<any> {
+    return this.http
+      .post<any>(
+        `${environment.baseUrlMovie}account/${environment.accountId}/watchlist`,
+        body,
+        {
+          ...this.options,
+          params: this.langParam,
+        }
+      )
+      .pipe(catchError(this.handleError()));
+  }
+
+  getMovieState(id: string | null): Observable<MovieState> {
+    return this.http
+      .get<MovieState>(
+        `${environment.baseUrlMovie}movie/${id}/account_states`,
+        {
+          ...this.options,
+        }
+      )
+      .pipe(catchError(this.handleError()));
   }
 }
