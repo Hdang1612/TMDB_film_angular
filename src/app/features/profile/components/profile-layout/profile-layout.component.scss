@@ -7,5 +7,32 @@
   background-color: $black-08;
   .content-wrapper {
     padding-top: 14rem;
+    .user-info-header {
+      background-color: #0f0f0f;
+      @include flexbox($gap: 4rem, $justify: center);
+      padding: 3rem 5rem;
+      .container-header {
+        @include flexbox($gap: 4rem);
+        max-width: $maxw-xl;
+        width: 100%;
+        .user-info-img {
+          overflow: hidden;
+        }
+        img {
+          border-radius: 50%;
+          width: 15rem;
+          height: 15rem;
+          object-fit: cover;
+        }
+      }
+    }
+    // .outlet-container {
+    //   @include flexbox($gap: 4rem, $justify: center);
+    //   width: 100%;
+    //   router-outlet {
+    //     max-width: $maxw-xl;
+    //     width: 100%;
+    //   }
+    // }
   }
 }

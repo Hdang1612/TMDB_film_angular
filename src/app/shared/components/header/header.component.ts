@@ -9,6 +9,8 @@ import { MOVIE_TYPE_MAP } from 'src/app/core/utils/constants/mock-data';
 export class HeaderComponent implements OnInit {
   isScrollingDown = false;
   lastScrollTop = 0;
+  userData: { username: string } | null = null;
+
   movieMenu = [
     { path: '', label: 'Popular' },
     { path: 'upcoming', label: 'Upcoming' },
@@ -39,5 +41,10 @@ export class HeaderComponent implements OnInit {
   }
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const stored = localStorage.getItem('userProfile');
+    if (stored) {
+      this.userData = JSON.parse(stored);
+    }
+  }
 }

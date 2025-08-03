@@ -1,1 +1,7 @@
-<p>favorite works!</p>
+<div class="favorite-container">
+  <div class="favorite-list">
+    <div *ngFor="let movie of favoriteMovies">
+      <app-big-film-card [film]="movie"></app-big-film-card>
+    </div>
+  </div>
+</div>

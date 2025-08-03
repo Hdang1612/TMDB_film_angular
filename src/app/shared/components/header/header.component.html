@@ -50,6 +50,13 @@
       <div class="header__search-icon">
         <img src="./assets/icons/notification.svg" alt="" />
       </div>
+      <a
+        *ngIf="userData?.username"
+        class="header__search-icon"
+        [routerLink]="['/u', userData?.username]"
+      >
+        <img src="./assets/icons/user.svg" alt="" />
+      </a>
     </div>
   </div>
 </div>

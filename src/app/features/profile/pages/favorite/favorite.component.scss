@@ -1,0 +1,11 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.favorite-container {
+  @include flexbox($justify: center, $align: flex-start);
+  width: 100%;
+  .favorite-list {
+    max-width: $maxw-xl;
+    width: 100%;
+  }
+}

@@ -1,7 +1,19 @@
 <div class="container">
   <app-header></app-header>
   <div class="content-wrapper">
-    <router-outlet></router-outlet>
+    <div class="user-info-header">
+      <div class="container-header">
+        <div class="user-info-img">
+          <img src="assets/images/thumbnail.jpg" alt="" />
+        </div>
+        <div class="user-info-text">
+          <h3 class="user-name">hello</h3>
+        </div>
+      </div>
+    </div>
+    <div class="outlet-container">
+      <router-outlet></router-outlet>
+    </div>
   </div>
   <app-footer></app-footer>
 </div>

@@ -1,0 +1,25 @@
+<div class="big-film-card">
+  <div class="poster">
+    <img [src]="film.poster_path" alt="poster" />
+  </div>
+
+  <div class="info">
+    <div class="header">
+      <app-movie-rating-circle
+        [score]="film.vote_average"
+      ></app-movie-rating-circle>
+      <div class="titles">
+        <h2>{{ film.title }}</h2>
+        <p class="release-date">{{ film.release_date | date : "longDate" }}</p>
+      </div>
+    </div>
+
+    <p class="overview">{{ film.overview }}</p>
+
+    <div class="actions">
+      <a><img src="assets/icons/heart-white.svg" /> Favorite</a>
+      <a><img src="assets/icons/watch-list-white.svg" /> Add to list</a>
+      <a><img src="assets/icons/close.svg" /> Remove</a>
+    </div>
+  </div>
+</div>

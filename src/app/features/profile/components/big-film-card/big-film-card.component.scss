@@ -1,0 +1,89 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.big-film-card {
+  display: flex;
+  //   background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border: 1px solid $grey-65;
+  .poster {
+    flex-shrink: 0;
+    img {
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+
+  .info {
+    flex-grow: 1;
+    margin-left: 1rem;
+
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      .score-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: #1abc9c;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+
+        span {
+          font-size: 0.6em;
+          margin-left: 2px;
+        }
+      }
+
+      .titles {
+        h2 {
+          margin: 0;
+        }
+
+        .release-date {
+          color: #888;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .overview {
+      margin-bottom: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        background: none;
+        border: none;
+        color: #444;
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        i {
+          font-size: 1rem;
+        }
+
+        &:hover {
+          color: #1abc9c;
+        }
+      }
+    }
+  }
+}

@@ -71,6 +71,11 @@
 
   &__icon {
     @include flexbox($gap: 3rem);
+
+    a img {
+      width: 3.4rem;
+      height: 3.4rem;
+    }
   }
 }
 .hide {
