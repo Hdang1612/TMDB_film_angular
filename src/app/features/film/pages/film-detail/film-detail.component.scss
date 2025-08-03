@@ -83,10 +83,17 @@
           .option-btn {
             width: 4.6rem;
             height: 4.6rem;
-            @include flexbox($justify: center);
+            @include flexbox($justify: center, $align: center);
             background-color: $btn-bg;
             border-radius: 50%;
             cursor: pointer;
+            a {
+              @include flexbox($justify: center, $align: center);
+              img {
+                width: 2.8rem;
+                height: 2.8rem;
+              }
+            }
           }
           .play-btn a {
             @include flexbox($align: center, $gap: 0.8rem);

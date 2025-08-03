@@ -10,6 +10,7 @@ import { InputSelectComponent } from './components/input-select/input-select.com
 import { InputDateRangeComponent } from './components/input-date-range/input-date-range.component';
 import { InputMultiSelectComponent } from './components/input-multi-select/input-multi-select.component';
 import { InputRadioComponent } from './components/input-radio/input-radio.component';
+import { ActionFeedbackComponent } from './components/action-feedback/action-feedback.component';
 
 const COMPONENTS = [...components];
 const PIPES = [...pipes];
@@ -22,6 +23,7 @@ const PIPES = [...pipes];
     InputDateRangeComponent,
     InputMultiSelectComponent,
     InputRadioComponent,
+    ActionFeedbackComponent,
   ],
   imports: [
     CommonModule,

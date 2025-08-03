@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MovieService } from '../../../features/film/services/movie.service';
 import { TMDBTrailer } from '../../../features/film/models/trailer';
 import { Route, Router } from '@angular/router';
@@ -23,8 +32,13 @@ export class FilmCardComponent implements OnInit {
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
   @Input() isMenuOpen: boolean = false;
+  @ViewChild('cardContainer', { static: true }) cardContainer!: ElementRef;
   movieState?: MovieState;
-  constructor(private trailerService: MovieService, private router: Router) {}
+  constructor(
+    private trailerService: MovieService,
+    private router: Router,
+    private eRef: ElementRef
+  ) {}
 
   ngOnInit(): void {}
   onClickGetTrailer(id: string | null) {
@@ -62,13 +76,25 @@ export class FilmCardComponent implements OnInit {
 
   handleOpenMenu(event: MouseEvent) {
     event.stopPropagation();
-    this.openMenu.emit();
     if (!this.movieState) {
       this.trailerService.getMovieState(this.movie.id).subscribe({
         next: (state) => {
           this.movieState = state;
+          this.openMenu.emit();
         },
       });
+    } else {
+      this.openMenu.emit();
+    }
+  }
+  @HostListener('document:click', ['$event']) // lắng nghe sk click trê trâng , sau đó truyền mouse event vào hàm 
+  onClickOutside(event: MouseEvent) {
+    if (
+      this.isMenuOpen &&  //menu đang mở
+      this.eRef.nativeElement && // có Dom element
+      !this.eRef.nativeElement.contains(event.target) // ko click vâo comp card-container
+    ) {
+      this.isMenuOpen = false;
     }
   }
 
@@ -94,7 +120,7 @@ export class FilmCardComponent implements OnInit {
     const newState: WatchListReq = {
       media_type: 'movie',
       media_id: this.movie.id,
-      watchlist: !this.movieState?.favorite,
+      watchlist: !this.movieState?.watchlist,
     };
 
     this.trailerService.updateWatchList(newState).subscribe({

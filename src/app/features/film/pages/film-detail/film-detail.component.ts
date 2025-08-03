@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DETAIL_SECTIONS } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
-import { MovieDetail } from '../../../../core/model/movieDetail';
+import {
+  FavoriteReq,
+  MovieDetail,
+  MovieState,
+  WatchListReq,
+} from '../../../../core/model/movieDetail';
 import { getFullImageUrl, loadSocialLinks } from 'src/app/core/utils/img.utils';
 import { TMDBTrailer } from '../../models/trailer';
 import ColorThief from 'colorthief';
@@ -37,9 +42,18 @@ export class FilmDetailComponent implements OnInit {
     backdrops: [],
     posters: [],
   };
+  stateIcon = {
+    favorite: '',
+    watchList: '',
+  };
+  movieId!: string | null;
   subInfoSidebarConfig!: SubInfoSidebarConfig;
+  feedbackMessage = '';
+  isFeedbackVisible = false;
   loadingDetail$ = this.loadingService.isLoading('detail-film');
   loadingActor$ = this.loadingService.isLoading('actor');
+  movieState$!: Observable<MovieState>;
+  movieState!: MovieState;
   detail$!: Observable<MovieDetail>;
   cast$!: Observable<CastMember[]>;
   socialLinks$!: Observable<any>;
@@ -130,7 +144,6 @@ export class FilmDetailComponent implements OnInit {
         }
       })
     );
-    this.keywords$.subscribe((res) => console.log('res keywword', res));
 
     this.recommendations$ = id$.pipe(
       switchMap((id) => this.movieService.getRecommendation(id)),
@@ -147,7 +160,6 @@ export class FilmDetailComponent implements OnInit {
         console.log(this.subInfoSidebarConfig);
       })
     );
-    this.recommendations$.subscribe((res) => console.log('>>>>>>>>>>>>>', res));
 
     this.reviews$ = id$.pipe(
       switchMap((id) => this.movieService.getReviews(id, 1)),
@@ -193,6 +205,22 @@ export class FilmDetailComponent implements OnInit {
       }),
       shareReplay(1)
     );
+    this.movieState$ = id$.pipe(
+      switchMap((id) => this.movieService.getMovieState(id)),
+      tap((res) => {
+        this.movieState = res;
+        this.stateIcon.favorite = res.favorite
+          ? 'assets/icons/heart-fill.svg'
+          : 'assets/icons/heart-white.svg';
+        this.stateIcon.watchList = res.watchlist
+          ? 'assets/icons/watch-list-fill.svg'
+          : 'assets/icons/watch-list-white.svg';
+        console.log('first', this.stateIcon);
+      })
+    );
+    id$.subscribe((id) => {
+      this.movieId = id;
+    });
   }
 
   private setPopularToSection(media: any): void {
@@ -253,5 +281,61 @@ export class FilmDetailComponent implements OnInit {
         section.data = this.media.posters || [];
         break;
     }
+  }
+
+  // toggle favorite/watchlist
+  toggleFavorite() {
+    const newState: FavoriteReq = {
+      media_type: 'movie',
+      media_id: this.movieId,
+      favorite: !this.movieState?.favorite,
+    };
+
+    this.movieService.updateFavorite(newState).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.movieState.favorite = newState.favorite;
+          this.stateIcon.favorite = newState.favorite
+            ? 'assets/icons/heart-fill.svg'
+            : 'assets/icons/heart-white.svg';
+          this.showFeedback(res.status_message);
+        }
+      },
+      error: (err) => {
+        this.showFeedback(err.error.status_message);
+      },
+    });
+  }
+
+  toggleWatchList() {
+    const newState: WatchListReq = {
+      media_type: 'movie',
+      media_id: this.movieId,
+      watchlist: !this.movieState?.watchlist,
+    };
+
+    this.movieService.updateWatchList(newState).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.movieState.watchlist = newState.watchlist;
+          this.stateIcon.watchList = newState.watchlist
+            ? 'assets/icons/watch-list-fill.svg'
+            : 'assets/icons/watch-list-white.svg';
+          this.showFeedback(res.status_message);
+        }
+      },
+      error: (err) => {
+        this.showFeedback(err.error.status_message);
+      },
+    });
+  }
+
+  showFeedback(message: string) {
+    this.feedbackMessage = message;
+    this.isFeedbackVisible = true;
+
+    setTimeout(() => {
+      this.isFeedbackVisible = false;
+    }, 3000);
   }
 }

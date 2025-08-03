@@ -4,102 +4,108 @@
 <ng-container *ngIf="reviews$ | async as review"></ng-container>
 <ng-container *ngIf="media$ | async as mediaData"></ng-container>
 <ng-container *ngIf="cast$ | async as cast"></ng-container>
-<ng-container *ngIf="detail$ | async as filmDetail">
-  <div class="detail-container">
-    <div
-      class="header-container"
-      [style.backgroundImage]="
-        filmDetail.backdrop_path ? 'url(' + filmDetail.backdrop_path + ')' : ''
-      "
-    >
-      <div class="header" [ngStyle]="{ backgroundImage: backdropGradient }">
-        <div
-          class="header__wrapper"
-          *ngIf="!(loadingDetail$ | async); else showLoading"
-        >
-          <div class="movie-poster">
-            <img src="{{ filmDetail.poster_path }}" alt="" />
-          </div>
-          <div class="movie-info">
-            <div class="info-header">
-              <h1 class="movie-name">
-                {{ filmDetail.title
-                }}<span class="release-year"
-                  >({{ filmDetail.release_date?.slice(0, 4) }})</span
-                >
-              </h1>
-              <div class="type">
-                <p class="movie-type">
-                  {{ genreNames }}
-                </p>
-              </div>
+<ng-container *ngIf="movieState$ | async as state">
+  <ng-container *ngIf="detail$ | async as filmDetail">
+    <div class="detail-container">
+      <div
+        class="header-container"
+        [style.backgroundImage]="
+          filmDetail.backdrop_path
+            ? 'url(' + filmDetail.backdrop_path + ')'
+            : ''
+        "
+      >
+        <div class="header" [ngStyle]="{ backgroundImage: backdropGradient }">
+          <div
+            class="header__wrapper"
+            *ngIf="!(loadingDetail$ | async); else showLoading"
+          >
+            <div class="movie-poster">
+              <img src="{{ filmDetail.poster_path }}" alt="" />
             </div>
-            <div class="score-wrapper">
-              <div class="icon-wrapper">
-                <app-movie-rating-circle
-                  [score]="filmDetail.vote_average"
-                ></app-movie-rating-circle>
-                <div class="score-heading">
-                  User <br />
-                  Score
+            <div class="movie-info">
+              <div class="info-header">
+                <h1 class="movie-name">
+                  {{ filmDetail.title
+                  }}<span class="release-year"
+                    >({{ filmDetail.release_date?.slice(0, 4) }})</span
+                  >
+                </h1>
+                <div class="type">
+                  <p class="movie-type">
+                    {{ genreNames }}
+                  </p>
                 </div>
               </div>
-              <div class="score-btn">What is your <span>Vibe</span> ?</div>
+              <div class="score-wrapper">
+                <div class="icon-wrapper">
+                  <app-movie-rating-circle
+                    [score]="filmDetail.vote_average"
+                  ></app-movie-rating-circle>
+                  <div class="score-heading">
+                    User <br />
+                    Score
+                  </div>
+                </div>
+                <div class="score-btn">What is your <span>Vibe</span> ?</div>
+              </div>
+              <div class="option-wrapper">
+                <ul>
+                  <li class="option-btn">
+                    <a><img src="assets/icons/plus.svg" alt="" /></a>
+                  </li>
+                  <li class="option-btn" (click)="toggleFavorite()">
+                    <a><img [src]="stateIcon.favorite" alt="" /></a>
+                  </li>
+                  <li class="option-btn" (click)="toggleWatchList()">
+                    <a><img [src]="stateIcon.watchList" alt="" /></a>
+                  </li>
+                  <li class="play-btn">
+                    <a (click)="onClickGetTrailer(filmDetail.id)"
+                      ><img src="assets/icons/mini-play.svg" alt="" /> Play
+                      trailer</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="text-container">
+                <p class="tag-line">{{ filmDetail.tagline }}</p>
+                <h2 class="overview">Overview</h2>
+                <p class="overview-content">{{ filmDetail.overview }}</p>
+              </div>
+              <div class="creator-container"></div>
             </div>
-            <div class="option-wrapper">
-              <ul>
-                <li class="option-btn">
-                  <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
-                </li>
-                <li class="option-btn">
-                  <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
-                </li>
-                <li class="option-btn">
-                  <a href=""><img src="assets/icons/plus.svg" alt="" /></a>
-                </li>
-                <li class="play-btn">
-                  <a (click)="onClickGetTrailer(filmDetail.id)"
-                    ><img src="assets/icons/mini-play.svg" alt="" /> Play
-                    trailer</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="text-container">
-              <p class="tag-line">{{ filmDetail.tagline }}</p>
-              <h2 class="overview">Overview</h2>
-              <p class="overview-content">{{ filmDetail.overview }}</p>
-            </div>
-            <div class="creator-container"></div>
+          </div>
+          <ng-template #showLoading>
+            <app-loading></app-loading>
+          </ng-template>
+        </div>
+      </div>
+      <div class="content-container">
+        <div class="content">
+          <div class="content__main">
+            <app-page-section
+              *ngFor="let section of detailSection"
+              [section]="section"
+              (btnClick)="onSectionBtnClick(section.key, $event)"
+            ></app-page-section>
+          </div>
+          <div class="sub__content"></div>
+          <div class="sidebar">
+            <app-sub-info-sidebar
+              [config]="subInfoSidebarConfig"
+            ></app-sub-info-sidebar>
           </div>
         </div>
-        <ng-template #showLoading>
-          <app-loading></app-loading>
-        </ng-template>
       </div>
     </div>
-    <div class="content-container">
-      <div class="content">
-        <div class="content__main">
-          <app-page-section
-            *ngFor="let section of detailSection"
-            [section]="section"
-            (btnClick)="onSectionBtnClick(section.key, $event)"
-          ></app-page-section>
-        </div>
-        <div class="sub__content"></div>
-        <div class="sidebar">
-          <app-sub-info-sidebar
-            [config]="subInfoSidebarConfig"
-          ></app-sub-info-sidebar>
-        </div>
-      </div>
-    </div>
-  </div>
+  </ng-container>
+  <app-trailer-modal
+    [trailerKey]="trailerKey"
+    [isTrailerModalOpen]="isTrailerModalOpen"
+    (close)="isTrailerModalOpen = false"
+  >
+  </app-trailer-modal>
 </ng-container>
-<app-trailer-modal
-  [trailerKey]="trailerKey"
-  [isTrailerModalOpen]="isTrailerModalOpen"
-  (close)="isTrailerModalOpen = false"
->
-</app-trailer-modal>
+<app-action-feedback [message]="feedbackMessage" [visible]="isFeedbackVisible">
+</app-action-feedback>
