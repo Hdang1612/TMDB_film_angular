@@ -59,12 +59,12 @@ export interface SpokenLanguage {
 
 export interface FavoriteReq {
   media_type: 'movie' | 'tv';
-  media_id: number;
+  media_id: string | null;
   favorite: boolean;
 }
 export interface WatchListReq {
   media_type: 'movie' | 'tv';
-  media_id: number;
+  media_id: string | null;
   watchlist: boolean;
 }
 

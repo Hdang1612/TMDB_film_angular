@@ -19,7 +19,6 @@ export class MovieService {
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'api-key': environment.apiKey,
     }),
   };
   langParam = new HttpParams().set('language', 'en-US');
@@ -202,7 +201,7 @@ export class MovieService {
   }
   updateFavorite(body: FavoriteReq): Observable<any> {
     return this.http
-      .post<any>(
+      .post<FavoriteReq>(
         `${environment.baseUrlMovie}account/${environment.accountId}/favorite`,
         body,
         {
@@ -227,7 +226,7 @@ export class MovieService {
 
   updateWatchList(body: WatchListReq): Observable<any> {
     return this.http
-      .post<any>(
+      .post<WatchListReq>(
         `${environment.baseUrlMovie}account/${environment.accountId}/watchlist`,
         body,
         {

@@ -2,6 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MovieService } from '../../../features/film/services/movie.service';
 import { TMDBTrailer } from '../../../features/film/models/trailer';
 import { Route, Router } from '@angular/router';
+import {
+  FavoriteReq,
+  MovieState,
+  WatchListReq,
+} from 'src/app/core/model/movieDetail';
 
 @Component({
   selector: 'app-film-card',
@@ -18,6 +23,7 @@ export class FilmCardComponent implements OnInit {
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
   @Input() isMenuOpen: boolean = false;
+  movieState?: MovieState;
   constructor(private trailerService: MovieService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -57,5 +63,44 @@ export class FilmCardComponent implements OnInit {
   handleOpenMenu(event: MouseEvent) {
     event.stopPropagation();
     this.openMenu.emit();
+    if (!this.movieState) {
+      this.trailerService.getMovieState(this.movie.id).subscribe({
+        next: (state) => {
+          this.movieState = state;
+        },
+      });
+    }
+  }
+
+  toggleFavorite(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const newState: FavoriteReq = {
+      media_type: 'movie',
+      media_id: this.movie.id,
+      favorite: !this.movieState?.favorite,
+    };
+
+    this.trailerService.updateFavorite(newState).subscribe({
+      next: () => {
+        if (this.movieState) this.movieState.favorite = newState.favorite;
+      },
+    });
+  }
+
+  toggleWatchlist(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const newState: WatchListReq = {
+      media_type: 'movie',
+      media_id: this.movie.id,
+      watchlist: !this.movieState?.favorite,
+    };
+
+    this.trailerService.updateWatchList(newState).subscribe({
+      next: () => {
+        if (this.movieState) this.movieState.watchlist = newState.watchlist;
+      },
+    });
   }
 }

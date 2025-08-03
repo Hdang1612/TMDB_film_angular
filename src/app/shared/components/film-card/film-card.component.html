@@ -39,11 +39,29 @@
         <li class="menu-item">
           <a href=""><img src="assets/icons/star.svg" alt="" />Add to list</a>
         </li>
-        <li class="menu-item">
-          <a href=""><img src="assets/icons/star.svg" alt="" />Favorite</a>
+        <li class="menu-item" (click)="toggleFavorite($event)">
+          <a href=""
+            ><img
+              [src]="
+                movieState?.favorite
+                  ? 'assets/icons/heart-fill.svg'
+                  : 'assets/icons/heart.svg'
+              "
+              alt=""
+            />Favorite</a
+          >
         </li>
-        <li class="menu-item">
-          <a href=""><img src="assets/icons/star.svg" alt="" />Watchlist</a>
+        <li class="menu-item" (click)="toggleWatchlist($event)">
+          <a href=""
+            ><img
+              [src]="
+                movieState?.watchlist
+                  ? 'assets/icons/watch-list-fill.svg'
+                  : 'assets/icons/watch-list.svg'
+              "
+              alt=""
+            />Watchlist</a
+          >
         </li>
         <li class="menu-item">
           <a href=""><img src="assets/icons/star.svg" alt="" />Your rating</a>
