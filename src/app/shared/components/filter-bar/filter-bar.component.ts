@@ -104,9 +104,7 @@ export class FilterBarComponent implements OnInit {
       next: (res) => {
         this.searchResult.emit(res); //
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
 
@@ -138,9 +136,7 @@ export class FilterBarComponent implements OnInit {
         });
         console.log('>>', this.filterSections);
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
   loadListGenres() {
@@ -160,9 +156,7 @@ export class FilterBarComponent implements OnInit {
         });
         console.log('>>', this.filterSections);
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
 }

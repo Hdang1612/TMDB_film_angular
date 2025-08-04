@@ -67,9 +67,7 @@ export class PeopleDetailComponent implements OnInit {
         const section = this.detailSection.find((s) => s.key === 'bio');
         if (section) section.data[0] = this.detail.biography;
       },
-      error: (err) => {
-        alert(err.error);
-      },
+      
     });
   }
 
@@ -79,9 +77,7 @@ export class PeopleDetailComponent implements OnInit {
         const map = loadSocialLinks(res);
         this.subInfoSidebarConfig.socialLinks = map;
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
   loadPeopleMovie(id: string | null) {
@@ -99,9 +95,7 @@ export class PeopleDetailComponent implements OnInit {
         if (section) section.data = mapped;
         if (creditLength) creditLength.value = mapped.length;
       },
-      error: (err) => {
-        alert(err.error);
-      },
+      
     });
   }
 }

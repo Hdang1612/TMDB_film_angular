@@ -6,7 +6,7 @@
     <div class="header__menu">
       <ul class="menu-container">
         <li class="menu-item menu-item--active">
-          <a href="/movies">Movie</a>
+          <a [routerLink]="['/movies']">Movie</a>
           <div class="sub-menu movie-menu">
             <ul>
               <li class="movie-menu-item" *ngFor="let item of movieMenu">
@@ -19,7 +19,7 @@
           </div>
         </li>
         <li class="menu-item">
-          <a href="">TV Show</a>
+          <a [routerLink]="['/tvs/popular']">TV Show</a>
           <div class="sub-menu movie-menu">
             <ul>
               <li class="movie-menu-item" *ngFor="let item of tvShowMenu">

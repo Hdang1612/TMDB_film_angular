@@ -52,9 +52,6 @@ export class HomeComponent implements OnInit {
           trendingSection.data = mappedMovies;
         }
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
     });
   }
 

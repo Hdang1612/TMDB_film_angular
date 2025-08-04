@@ -29,9 +29,7 @@ export class CastListComponent implements OnInit {
         this.totalPages = res.total_pages;
         console.log('people', this.result);
       },
-      error: (err) => {
-        alert(err.error);
-      },
+      
     });
   }
   paginate(page: number) {

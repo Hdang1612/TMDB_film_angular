@@ -37,9 +37,7 @@ export class FilmReviewListComponent implements OnInit {
         this.result = res.results;
         this.totalPages = res.total_pages;
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+    
     });
   }
   paginate(page: number) {

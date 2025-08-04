@@ -55,9 +55,6 @@ export class FilmCardComponent implements OnInit {
           alert('Không tìm thấy trailer.');
         }
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
     });
   }
   get imagePath(): string {

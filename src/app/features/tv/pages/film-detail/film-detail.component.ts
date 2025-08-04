@@ -241,9 +241,7 @@ export class FilmDetailComponent implements OnInit {
           alert('err.');
         }
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
 

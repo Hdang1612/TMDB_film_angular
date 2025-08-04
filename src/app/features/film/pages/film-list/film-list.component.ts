@@ -45,9 +45,7 @@ export class FilmListComponent implements OnInit {
         }));
         this.totalPages = res.total_pages;
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
 

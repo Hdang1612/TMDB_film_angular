@@ -37,9 +37,9 @@
       (click)="$event.stopPropagation()"
     >
       <ul>
-        <li class="menu-item">
+        <!-- <li class="menu-item">
           <a href=""><img src="assets/icons/star.svg" alt="" />Add to list</a>
-        </li>
+        </li> -->
         <li class="menu-item" (click)="toggleFavorite($event)">
           <a href=""
             ><img
@@ -64,9 +64,9 @@
             />Watchlist</a
           >
         </li>
-        <li class="menu-item">
+        <!-- <li class="menu-item">
           <a href=""><img src="assets/icons/star.svg" alt="" />Your rating</a>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div *ngIf="cardType === 'trailer'" class="play-btn">

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, map, switchMap, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, switchMap, of, tap } from 'rxjs';
 import { MovieService } from 'src/app/features/film/services/movie.service';
 import { TrendingFilm } from 'src/app/core/model/trendingMovie';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
@@ -15,6 +15,7 @@ export class FavoriteComponent implements OnInit {
   profile: any;
 
   currentPage$ = new BehaviorSubject<number>(1);
+  loading$ = new BehaviorSubject<boolean>(true);
 
   listType$ =
     this.route.parent?.url.pipe(
@@ -30,6 +31,7 @@ export class FavoriteComponent implements OnInit {
     this.type$,
     this.currentPage$,
   ]).pipe(
+    tap(() => this.loading$.next(true)),
     switchMap(([listType, type, page]) => {
       const mediaType = type === 'movie' ? 'movies' : 'tv';
       return listType === 'watchlist'
@@ -43,7 +45,8 @@ export class FavoriteComponent implements OnInit {
       })),
       totalPages: res.total_pages,
       totalItems: res.total_results,
-    }))
+    })),
+    tap(() => this.loading$.next(false))
   );
 
   constructor(

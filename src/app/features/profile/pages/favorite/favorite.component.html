@@ -24,15 +24,19 @@
           </a>
         </div>
       </h2>
-
-      <div class="favorite-item" *ngFor="let movie of data.results">
-        <app-big-film-card
-          [film]="movie"
-          [type]="type$ | async"
-          [listType]="listType$ | async"
-          (removed)="onRemoved()"
-        ></app-big-film-card>
-      </div>
+      <ng-container *ngIf="!(loading$ | async); else showLoading">
+        <div class="favorite-item" *ngFor="let movie of data.results">
+          <app-big-film-card
+            [film]="movie"
+            [type]="type$ | async"
+            [listType]="listType$ | async"
+            (removed)="onRemoved()"
+          ></app-big-film-card>
+        </div>
+      </ng-container>
+      <ng-template #showLoading>
+        <app-loading></app-loading>
+      </ng-template>
 
       <app-pagination
         [currentPage]="(currentPage$ | async) ?? 1"

@@ -37,9 +37,7 @@ export class DetailHeaderComponent implements OnInit {
         }
         console.log(this.backdropGradient);
       },
-      error: (err) => {
-        alert(err.error?.error);
-      },
+      
     });
   }
 }
