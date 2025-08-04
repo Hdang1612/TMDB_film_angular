@@ -1,6 +1,7 @@
-<ng-container *ngIf="data$ | async as data">
+<ng-container>
   <div class="detail-container">
     <div
+      *ngIf="data$ | async as data; else showLoading"
       class="header-container"
       [style.backgroundImage]="
         data.detail.backdrop_path
@@ -69,28 +70,27 @@
             <div class="creator-container"></div>
           </div>
         </div>
-        <ng-template #showLoading>
-          <app-loading></app-loading>
-        </ng-template>
       </div>
     </div>
-    <div class="content-container">
+
+    <div
+      class="content-container"
+      *ngIf="!(loadingDetail$ | async); else showLoading"
+    >
       <div class="content">
-        <div
-          class="content__main"
-          *ngIf="!(loadingActor$ | async); else showLoading"
-        >
+        <div class="content__main">
           <app-page-section
             *ngFor="let section of detailSection"
             [section]="section"
             (btnClick)="onSectionBtnClick(section.key, $event)"
           ></app-page-section>
         </div>
-        <ng-template #showLoading>
-          <app-loading></app-loading>
-        </ng-template>
+
         <div class="sub__content"></div>
-        <div class="sidebar">
+        <div
+          class="sidebar"
+          *ngIf="!(loadingDetail$ | async); else showLoading"
+        >
           <app-sub-info-sidebar
             [config]="subInfoSidebarConfig"
           ></app-sub-info-sidebar>
@@ -105,4 +105,7 @@
   [isTrailerModalOpen]="isTrailerModalOpen"
   (close)="isTrailerModalOpen = false"
 >
+  <ng-template #showLoading>
+    <app-loading></app-loading>
+  </ng-template>
 </app-trailer-modal>

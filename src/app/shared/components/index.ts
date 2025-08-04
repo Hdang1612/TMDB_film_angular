@@ -1,4 +1,5 @@
 import { ActionFeedbackComponent } from './action-feedback/action-feedback.component';
+import { BigFilmCardComponent } from './big-film-card/big-film-card.component';
 import { DetailHeaderComponent } from './detail-header/detail-header.component';
 import { EditorBarComponent } from './editor-bar/editor-bar.component';
 import { FilmCardComponent } from './film-card/film-card.component';
@@ -42,4 +43,5 @@ export const components = [
   InputRadioComponent,
   InputSelectComponent,
   InputTextComponent,
+  BigFilmCardComponent,
 ];

@@ -1,0 +1,20 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+.container {
+  width: 100%;
+  padding: 14rem 0;
+  @include flexbox($justify: center);
+  .search-list-container {
+    width: 100%;
+    max-width: $maxw-xl;
+    h2 {
+      margin-bottom: 2rem;
+    }
+    .search-list {
+      @include flexbox($gap: 3rem, $direction: column);
+      .search-item {
+        width: 100%;
+      }
+    }
+  }
+}

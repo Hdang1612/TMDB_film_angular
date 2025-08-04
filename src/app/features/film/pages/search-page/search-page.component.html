@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="search-list-container">
+    <div *ngIf="movies$ | async as result">
+      <h2 *ngIf="query">Kết quả tìm kiếm cho: "{{ query }}"</h2>
+      <div class="search-list" *ngIf="result.results.length; else noResult">
+        <div class="search-item" *ngFor="let movie of result.results">
+          <app-big-film-card
+            [film]="movie"
+            [type]="'movie'"
+          ></app-big-film-card>
+        </div>
+      </div>
+      <app-pagination
+        [currentPage]="(currentPage$ | async) ?? 1"
+        [totalPages]="result.totalPages"
+        (pageChange)="paginate($event)"
+        (prev)="prevPage()"
+        (next)="nextPage(result.totalPages)"
+      ></app-pagination>
+    </div>
+  </div>
+
+  <ng-template #noResult>
+    <p>no result</p>
+  </ng-template>
+</div>

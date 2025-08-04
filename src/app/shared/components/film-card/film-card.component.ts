@@ -52,7 +52,7 @@ export class FilmCardComponent implements OnInit {
           this.trailerKey = key;
           this.isTrailerModalOpen = true;
         } else {
-          alert('Không tìm thấy trailer.');
+          alert('not foundd');
         }
       },
     });

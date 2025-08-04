@@ -9,6 +9,7 @@ import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-l
 import { FilmCastListComponent } from './pages/film-cast-list/film-cast-list.component';
 import { MovieDetailLayoutComponent } from './pages/movie-detail-layout/movie-detail-layout.component';
 import { FilmReviewListComponent } from './pages/film-review-list/film-review-list.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'search',
+        component: SearchPageComponent,
       },
       {
         path: 'movie/:id',

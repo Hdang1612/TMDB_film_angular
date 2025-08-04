@@ -6,10 +6,9 @@ import { ProfileLayoutComponent } from './components/profile-layout/profile-layo
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { FavoriteComponent } from './pages/favorite/favorite.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { BigFilmCardComponent } from './components/big-film-card/big-film-card.component';
 
 @NgModule({
-  declarations: [ProfileLayoutComponent, WatchlistComponent, FavoriteComponent, BigFilmCardComponent],
+  declarations: [ProfileLayoutComponent, WatchlistComponent, FavoriteComponent],
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
 })
 export class ProfileModule {}

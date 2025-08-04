@@ -9,34 +9,6 @@ const routes: Routes = [
     path: ':username',
     component: ProfileLayoutComponent,
     children: [
-      // {
-      //   path: 'watchlist',
-      //   children: [
-      //     {
-      //       path: '',
-      //       pathMatch: 'full',
-      //       redirectTo: 'movie',
-      //     },
-      //     {
-      //       path: ':type',
-      //       component: FavoriteComponent,
-      //     },
-      //   ],
-      // },
-      // {
-      //   path: 'favorite',
-      //   children: [
-      //     {
-      //       path: '',
-      //       pathMatch: 'full',
-      //       redirectTo: 'movie',
-      //     },
-      //     {
-      //       path: ':type',
-      //       component: FavoriteComponent,
-      //     },
-      //   ],
-      // },
       {
         path: 'favorite',
         children: [

@@ -247,4 +247,13 @@ export class MovieService {
       )
       .pipe(catchError(this.handleError()));
   }
+
+  searchMovie(query: string, page: number): Observable<any> {
+    return this.http
+      .get<any>(`${environment.baseUrlMovie}search/movie`, {
+        ...this.options,
+        params: this.langParam.set('query', query).set('page', page),
+      })
+      .pipe(catchError(this.handleError()));
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MOVIE_TYPE_MAP } from 'src/app/core/utils/constants/mock-data';
 
 @Component({
@@ -10,6 +11,8 @@ export class HeaderComponent implements OnInit {
   isScrollingDown = false;
   lastScrollTop = 0;
   userData: { username: string } | null = null;
+  isSearchOpen = false;
+  searchQuery = '';
 
   movieMenu = [
     { path: '', label: 'Popular' },
@@ -39,12 +42,23 @@ export class HeaderComponent implements OnInit {
 
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const stored = localStorage.getItem('userProfile');
     if (stored) {
       this.userData = JSON.parse(stored);
     }
+  }
+  toggleSearch() {
+    this.isSearchOpen = !this.isSearchOpen;
+  }
+  onSearch() {
+    if (!this.searchQuery.trim()) return;
+
+    this.isSearchOpen = false;
+    this.router.navigate(['/search'], {
+      queryParams: { query: this.searchQuery.trim() },
+    });
   }
 }

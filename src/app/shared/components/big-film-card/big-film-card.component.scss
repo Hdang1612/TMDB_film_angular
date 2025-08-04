@@ -1,5 +1,5 @@
-@use "../../../../../assets/styles/abtracts/mixin" as *;
-@use "../../../../../assets/styles/base/variables" as *;
+@use "../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../assets/styles/base/variables" as *;
 
 .big-film-card {
   @include flexbox($gap: 2rem); //   background: #fff;

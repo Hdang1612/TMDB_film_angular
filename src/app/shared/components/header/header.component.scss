@@ -32,18 +32,7 @@
       a {
         padding: 1.4rem 2.4rem;
       }
-      // &--active {
-      //   @include text-style($color: #fff, $fweight: 500);
-      //   border-radius: 0.8rem;
-      //   border: 1px solid $black-10;
-      //   background: $black-10;
-      // }
-      // &:hover {
-      //   @include text-style($color: #fff, $fweight: 500);
-      //   border-radius: 0.8rem;
-      //   // border: 1px solid $black-10;
-      //   background: $black-10;
-      // }
+
       &:hover .sub-menu {
         display: block;
       }
@@ -71,7 +60,25 @@
 
   &__icon {
     @include flexbox($gap: 3rem);
-
+    position: relative;
+    .header__search-box {
+      bottom: -7rem;
+      left: -50%;
+      position: absolute;
+      @include flexbox($gap: 1rem);
+      border: 0.1rem solid $grey-65;
+      padding: 1rem;
+      border-radius: 2rem;
+    }
+    input {
+      padding: 6px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      background: transparent;
+      @include text-style();
+    }
     .header__profile-icon {
       position: relative;
       .profile-menu {
