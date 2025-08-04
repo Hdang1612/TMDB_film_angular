@@ -38,7 +38,7 @@
           <ng-container
             *ngIf="section.data && section.data.length > 0; else noData"
           >
-            <ng-container *ngSwitchCase="'social'">
+            <ng-container class="social-section" *ngSwitchCase="'social'">
               <ng-container *ngFor="let movie of section.data.slice(0, 2)">
                 <app-review-card [reviewData]="movie"></app-review-card>
               </ng-container>
@@ -52,6 +52,7 @@
               <ng-container>
                 <ng-container *ngFor="let movie of section.data.slice(0, 10)">
                   <app-film-card
+                    [mediaType]="sectionType === 'tv' ? 'tv' : 'movie'"
                     [cardType]="section.dataType"
                     [movie]="movie"
                     [isMenuOpen]="selectedMenuCardId === movie.id"

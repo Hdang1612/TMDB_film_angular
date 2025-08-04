@@ -40,10 +40,10 @@ export const MOVIE_TYPE_MAP: Record<string, { type: string; title: string }> = {
 };
 export const TV_SHOW_TYPE_MAP: Record<string, { type: string; title: string }> =
   {
-    '': { type: 'popular', title: 'Popular Movies' },
-    upcoming: { type: 'upcoming', title: 'UpComing Movie' },
-    'top-rated': { type: 'top_rated', title: 'Top rated Movies' },
-    'now-playing': { type: 'now_playing', title: 'Now Playing' },
+    '': { type: 'popular', title: 'Popular TV shows' },
+    'airing-today': { type: 'airing_today', title: 'Airing Today' },
+    'top-rated': { type: 'top_rated', title: 'Top rated TV shows' },
+    'on-tv': { type: 'on_the_air', title: 'On TV' },
   };
 
 export const HOME_SECTIONS: SectionModel[] = [

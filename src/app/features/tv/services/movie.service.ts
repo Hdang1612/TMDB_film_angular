@@ -31,7 +31,7 @@ export class MovieService {
   getTrendingList(time_window: string): Observable<TrendingFilmResponse> {
     return this.http
       .get<TrendingFilmResponse>(
-        `${environment.baseUrlMovie}trending/movie/${time_window}`,
+        `${environment.baseUrlMovie}trending/tv/${time_window}`,
         {
           ...this.options,
           params: this.langParam,
@@ -43,7 +43,7 @@ export class MovieService {
 
   getListMovie(page: number, type: string): Observable<TrendingFilmResponse> {
     return this.http.get<TrendingFilmResponse>(
-      `${environment.baseUrlMovie}movie/${type}`,
+      `${environment.baseUrlMovie}tv/${type}`,
       {
         ...this.options,
         params: this.langParam.set('page', page),
@@ -53,7 +53,7 @@ export class MovieService {
 
   getTrailer(id: string | null): Observable<any> {
     return this.http
-      .get<any>(`${environment.baseUrlMovie}movie/${id}/videos`, {
+      .get<any>(`${environment.baseUrlMovie}tv/${id}/videos`, {
         ...this.options,
         params: new HttpParams().set('lang', 'en-US'),
       })
@@ -61,13 +61,13 @@ export class MovieService {
   }
   getImages(id: string | null): Observable<any> {
     return this.http
-      .get<any>(`${environment.baseUrlMovie}movie/${id}/images`)
+      .get<any>(`${environment.baseUrlMovie}tv/${id}/images`)
       .pipe(catchError(this.handleError()));
   }
 
   //  getTrailerRaw(id: number) {
   //   return this.http.get<{ results: TMDBTrailer[] }>(
-  //     `https://api.themoviedb.org/3/movie/${id}/videos?...`
+  //     `https://api.themoviedb.org/3/tv/${id}/videos?...`
   //   );
   // }
 
@@ -92,7 +92,7 @@ export class MovieService {
 
   getDetail(id: string | null): Observable<MovieDetail> {
     return this.http
-      .get<MovieDetail>(`${environment.baseUrlMovie}movie/${id}`, {
+      .get<MovieDetail>(`${environment.baseUrlMovie}tv/${id}`, {
         ...this.options,
         params: this.langParam,
       })
@@ -101,7 +101,7 @@ export class MovieService {
 
   getCredit(id: string | null): Observable<CastResponse> {
     return this.http
-      .get<CastResponse>(`${environment.baseUrlMovie}movie/${id}/credits`, {
+      .get<CastResponse>(`${environment.baseUrlMovie}tv/${id}/credits`, {
         ...this.options,
         params: this.langParam,
       })
@@ -112,7 +112,7 @@ export class MovieService {
   getRecommendation(id: string | null): Observable<RecommendationResponse> {
     return this.http
       .get<RecommendationResponse>(
-        `${environment.baseUrlMovie}movie/${id}/recommendations`,
+        `${environment.baseUrlMovie}tv/${id}/recommendations`,
         { ...this.options, params: this.langParam }
       )
       .pipe(catchError(this.handleError()));
@@ -121,7 +121,7 @@ export class MovieService {
   // review
   getReviews(id: string | null, page: number): Observable<ReviewResponse> {
     return this.http
-      .get<ReviewResponse>(`${environment.baseUrlMovie}movie/${id}/reviews`, {
+      .get<ReviewResponse>(`${environment.baseUrlMovie}tv/${id}/reviews`, {
         ...this.options,
         params: this.langParam.set('page', page),
       })
@@ -131,7 +131,7 @@ export class MovieService {
   //genres
   getGenres(): Observable<any> {
     return this.http
-      .get<any>(`${environment.baseUrlMovie}genre/movie/list`, {
+      .get<any>(`${environment.baseUrlMovie}genre/tv/list`, {
         ...this.options,
         params: this.langParam,
       })
@@ -182,7 +182,7 @@ export class MovieService {
       }
     }
 
-    return this.http.get(`${environment.baseUrlMovie}discover/movie`, {
+    return this.http.get(`${environment.baseUrlMovie}discover/tv`, {
       params: httpParams,
     });
   }
@@ -237,14 +237,11 @@ export class MovieService {
       .pipe(catchError(this.handleError()));
   }
 
-  getMovieState(id: string | null, type: string): Observable<MovieState> {
+  getMovieState(id: string | null): Observable<MovieState> {
     return this.http
-      .get<MovieState>(
-        `${environment.baseUrlMovie}${type}/${id}/account_states`,
-        {
-          ...this.options,
-        }
-      )
+      .get<MovieState>(`${environment.baseUrlMovie}tv/${id}/account_states`, {
+        ...this.options,
+      })
       .pipe(catchError(this.handleError()));
   }
 }

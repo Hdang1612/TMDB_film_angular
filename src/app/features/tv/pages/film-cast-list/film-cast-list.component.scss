@@ -1,0 +1,43 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.content {
+  max-width: $maxw-xl;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  .title {
+    @include text-style(
+      $fsize: $heading-h4,
+      $fweight: 600,
+      $color: $absolute-white
+    );
+    margin-bottom: 2rem;
+    span {
+      margin-left: 1rem;
+      @include text-style($fsize: $heading-h5, $fweight: 500, $color: $grey-65);
+    }
+  }
+  .list {
+    .cast-item {
+      @include flexbox($gap: 1.6rem, $align: center);
+      margin-bottom: 3rem;
+      img {
+        cursor: pointer;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 1rem;
+        object-fit: cover;
+      }
+      .cast-info {
+        .cast-name {
+          cursor: pointer;
+          @include text-style($fsize: 1.8rem, $fweight: 600);
+        }
+        .cast-sub {
+          @include text-style($fsize: 1.4rem, $fweight: 500, $color: $grey-65);
+        }
+      }
+    }
+  }
+}

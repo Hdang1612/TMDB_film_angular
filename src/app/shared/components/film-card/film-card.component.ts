@@ -27,6 +27,7 @@ export class FilmCardComponent implements OnInit {
   @Input() movie!: any;
   @Input() cardType: 'default' | 'trailer' | 'recommendation' | 'cast' =
     'default';
+  @Input() mediaType: 'movie' | 'tv' = 'movie';
   @Input() isHorizontal: boolean = false;
   @Input() isRecommendation: boolean = false;
   @Output() openMenu = new EventEmitter<void>();
@@ -39,7 +40,8 @@ export class FilmCardComponent implements OnInit {
     private trailerService: MovieService,
     private router: Router,
     private eRef: ElementRef,
-    private feedBack: GlobalFeedbackService
+    private feedBack: GlobalFeedbackService,
+    private tvState: MovieService
   ) {}
 
   ngOnInit(): void {}
@@ -72,19 +74,21 @@ export class FilmCardComponent implements OnInit {
     if (this.cardType === 'cast') {
       this.router.navigate(['/person', id]);
     } else {
-      this.router.navigate(['/movie', id]);
+      this.router.navigate([`/${this.mediaType}`, id]);
     }
   }
 
   handleOpenMenu(event: MouseEvent) {
     event.stopPropagation();
     if (!this.movieState) {
-      this.trailerService.getMovieState(this.movie.id).subscribe({
-        next: (state) => {
-          this.movieState = state;
-          this.openMenu.emit();
-        },
-      });
+      this.trailerService
+        .getMovieState(this.movie.id, this.mediaType)
+        .subscribe({
+          next: (state) => {
+            this.movieState = state;
+            this.openMenu.emit();
+          },
+        });
     } else {
       this.openMenu.emit();
     }
@@ -104,7 +108,7 @@ export class FilmCardComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     const newState: FavoriteReq = {
-      media_type: 'movie',
+      media_type: this.mediaType,
       media_id: this.movie.id,
       favorite: !this.movieState?.favorite,
     };
@@ -124,7 +128,7 @@ export class FilmCardComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     const newState: WatchListReq = {
-      media_type: 'movie',
+      media_type: this.mediaType,
       media_id: this.movie.id,
       watchlist: !this.movieState?.watchlist,
     };

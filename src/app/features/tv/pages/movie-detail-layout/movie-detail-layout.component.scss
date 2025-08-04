@@ -1,0 +1,18 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.cast-list-container {
+  padding-top: 14rem;
+  @include flexbox($direction: column, $justify: center);
+  width: 100%;
+  app-detail-header {
+    width: 100%;
+  }
+  .content {
+    max-width: $maxw-xl;
+    width: 100%;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+  }
+ 
+}

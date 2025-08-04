@@ -28,24 +28,6 @@
       margin-bottom: 0.5rem;
       gap: 1.6rem;
 
-      .score-circle {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: #1abc9c;
-        color: white;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
-
-        span {
-          font-size: 0.6em;
-          margin-left: 2px;
-        }
-      }
-
       .titles {
         cursor: pointer;
         h2 {

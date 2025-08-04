@@ -23,7 +23,7 @@
           <div class="sub-menu movie-menu">
             <ul>
               <li class="movie-menu-item" *ngFor="let item of tvShowMenu">
-                <a [routerLink]="item.path ? ['/tv', item.path] : '/tv'">{{
+                <a [routerLink]="item.path ? ['/tvs', item.path] : '/tvs'">{{
                   item.label
                 }}</a>
               </li>

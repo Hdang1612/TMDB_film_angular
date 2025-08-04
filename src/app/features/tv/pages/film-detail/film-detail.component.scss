@@ -1,0 +1,143 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.header-container {
+  // background-image: url(detail.poster_path);
+  background-size: cover;
+  width: 100%;
+  height: 66rem;
+  background-position: left calc((50vw - 170px) - 340px) center;
+  background-repeat: no-repeat;
+  .header {
+    // background-image: $linear;
+    @include flexbox($justify: center, $align: flex-end);
+    padding-bottom: 4rem;
+    height: 100%;
+    &__wrapper {
+      max-width: $maxw-xl;
+      width: 100%;
+      @include flexbox($gap: 3rem);
+
+      .movie-poster {
+        // width: 30rem;
+        // aspect-ratio: 3/4;
+        img {
+          border-radius: 2rem;
+          width: 30rem;
+          aspect-ratio: 3/4;
+        }
+      }
+      .movie-info {
+        @include flexbox($gap: 2.4rem, $direction: column, $align: flex-start);
+        .info-header {
+          .movie-name {
+            @include text-style(
+              $fsize: $heading-h3,
+              $fweight: 700,
+              $lheight: 98%
+            );
+            .release-year {
+              color: $grey-65;
+              font-weight: 500;
+              font-size: 3rem;
+            }
+          }
+          .type {
+            @include flexbox();
+            .movie-type {
+              @include text-style($fsize: 1.4rem, $fweight: 400);
+            }
+          }
+        }
+        .score-wrapper {
+          @include flexbox($gap: 2rem);
+          .icon-wrapper {
+            @include flexbox($gap: 1rem);
+            .score-icon {
+              width: 6rem;
+              height: 6rem;
+              border-radius: 50%;
+              background: #000;
+            }
+            .score-heading {
+              @include text-style(
+                $fweight: 700,
+                $fsize: 1.4rem,
+                $lheight: 170%
+              );
+            }
+          }
+          .score-btn {
+            background: $btn-bg;
+            padding: 1rem 1.4rem;
+            @include text-style($fweight: 700);
+            border-radius: 2rem;
+            span {
+              text-decoration: underline;
+              text-decoration-color: #01b4e4;
+            }
+          }
+        }
+        .option-wrapper ul {
+          @include flexbox($gap: 2rem);
+          .option-btn {
+            width: 4.6rem;
+            height: 4.6rem;
+            @include flexbox($justify: center, $align: center);
+            background-color: $btn-bg;
+            border-radius: 50%;
+            cursor: pointer;
+            a {
+              @include flexbox($justify: center, $align: center);
+              img {
+                width: 2.8rem;
+                height: 2.8rem;
+              }
+            }
+          }
+          .play-btn a {
+            @include flexbox($align: center, $gap: 0.8rem);
+            @include text-style();
+            cursor: pointer;
+          }
+        }
+        .text-container {
+          @include flexbox(
+            $gap: 0.8rem,
+            $direction: column,
+            $align: flex-start
+          );
+          .tag-line {
+            @include text-style(
+              $color: $grey-65,
+              $fstyle: italic,
+              $fsize: 1.6rem
+            );
+          }
+          .overview {
+            font-size: 2rem;
+          }
+          .overview-content {
+            @include text-style($fsize: 1.4rem, $fweight: 400);
+          }
+        }
+      }
+    }
+  }
+}
+.content-container {
+  padding: 4rem 0;
+  width: 100%;
+  @include flexbox($justify: center);
+  .content {
+    @include flexbox($gap: 2rem, $align: flex-start);
+    max-width: $maxw-xl;
+    width: 100%;
+    &__main {
+      width: 80%;
+    }
+    .sidebar {
+      width: 100%;
+    }
+  }
+}

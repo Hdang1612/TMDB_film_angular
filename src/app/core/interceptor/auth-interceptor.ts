@@ -25,10 +25,10 @@ export class AthInterceptor implements HttpInterceptor {
       tap({
         next: (event) => {
           // log hoặc xử lý response nếu cần
-          console.log('✅ Response received');
+          // console.log('✅ Response received');
         },
         error: (error: HttpErrorResponse) => {
-          console.error('❌ HTTP error:', error.message);
+          // console.error('❌ HTTP error:', error.message);
         },
       })
     );

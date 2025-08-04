@@ -13,7 +13,7 @@ const routes: Routes = [
           import('./film/film.module').then((m) => m.FilmModule),
       },
       {
-        path: 'tv',
+        path: '',
         loadChildren: () => import('./tv/tv.module').then((m) => m.TvModule),
       },
       {

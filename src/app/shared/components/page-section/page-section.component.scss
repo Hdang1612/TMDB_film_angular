@@ -66,6 +66,9 @@
 
     .section-content {
       @include flexbox($gap: 2rem);
+      app-review-card {
+        width: 100%;
+      }
       .no-data-text {
         width: 100%;
         @include text-style();

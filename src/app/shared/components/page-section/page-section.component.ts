@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PageSectionComponent implements OnInit {
   @Output() btnClick = new EventEmitter<string>();
   @Input() isLoading: boolean | null = null;
+  @Input() sectionType: 'movie' | 'tv' = 'movie';
   @Input() section: SectionModel = {
     key: '',
     title: '',

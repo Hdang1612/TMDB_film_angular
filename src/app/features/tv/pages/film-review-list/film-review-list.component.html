@@ -1,0 +1,27 @@
+<div class="review-container">
+  <div class="write-review-wrapper">
+    <a (click)="navigateWrite()" class="write-btn"
+      ><img src="assets/icons/write-icon.svg" alt="" />WRITE REVIEW</a
+    >
+  </div>
+  <div class="review-list" *ngIf="result?.length; else noReview">
+    <ng-container *ngFor="let reiview of result">
+      <app-review-card
+        [reviewData]="reiview"
+        [movieId]="id"
+        [type]="'default'"
+      ></app-review-card>
+    </ng-container>
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="paginate($event)"
+      (prev)="prevPage()"
+      (next)="nextPage()"
+    ></app-pagination>
+  </div>
+
+  <ng-template #noReview>
+    <p class="no-review">No review</p>
+  </ng-template>
+</div>

@@ -1,0 +1,64 @@
+@use "../../../../../assets/styles/abtracts/mixin" as *;
+@use "../../../../../assets/styles/base/variables" as *;
+
+.review-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  .write-review-wrapper {
+    @include flexbox($justify: center, $align: flex-start);
+    .write-btn {
+      cursor: pointer;
+      width: 60%;
+      @include flexbox($gap: 1rem);
+      @include text-style($fsize: 1.4rem, $fweight: 600);
+      padding: 1rem 3rem;
+      border-radius: 2rem;
+      background: #e50000;
+      img {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+  .review-list {
+    @include flexbox($gap: 2rem, $direction: column);
+    .review-item {
+      padding: 2rem;
+      border: 1px solid $grey-65;
+      border-radius: 1rem;
+      .author-info {
+        @include flexbox($gap: 2rem);
+        margin-bottom: 2rem;
+        img {
+          width: 5rem;
+          height: 5rem;
+          border-radius: 50%;
+        }
+        .author-name {
+          .name {
+            @include text-style(
+              $fsize: 2rem,
+              $fweight: 700,
+              $color: $absolute-white
+            );
+          }
+          .created-at {
+            @include text-style(
+              $fsize: 1.6rem,
+              $fweight: 500,
+              $color: $grey-65
+            );
+          }
+        }
+      }
+      .content {
+        @include text-style;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

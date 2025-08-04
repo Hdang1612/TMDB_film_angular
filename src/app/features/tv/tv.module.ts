@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { TvRoutingModule } from './movie-list-routing.module';
-
+import { TvRoutingModule } from './tv-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { pages } from './pages';
+import { components } from './components';
+const PAGES = pages;
+const COMPONENTS = components;
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, TvRoutingModule],
+  declarations: [...PAGES, ...COMPONENTS],
+  imports: [TvRoutingModule, SharedModule],
 })
 export class TvModule {}

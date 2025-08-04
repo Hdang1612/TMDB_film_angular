@@ -1,5 +1,6 @@
 <div
   class="media-card-container"
+  *ngIf="media"
   [style.cursor]="media.type === 'video' ? 'pointer' : 'default'"
   (click)="media.type === 'video' ? onClickGetTrailer(media.key) : null"
 >

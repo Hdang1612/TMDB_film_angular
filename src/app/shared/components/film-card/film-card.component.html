@@ -80,12 +80,20 @@
   </div>
   <div class="movie-info">
     <p class="movie-info__name">
-      {{ cardType !== "cast" ? movie.title : movie.name }}
+      {{
+        cardType !== "cast"
+          ? movie.title
+            ? movie.title
+            : movie.name
+          : movie.name
+      }}
     </p>
     <p *ngIf="cardType === 'cast'" class="character-name">
       {{ movie.character }}
     </p>
-    <p class="movie-info__date">{{ movie.release_date }}</p>
+    <p class="movie-info__date">
+      {{ movie.release_date ? movie.release_date : movie.first_air_date }}
+    </p>
   </div>
 </div>
 <app-trailer-modal

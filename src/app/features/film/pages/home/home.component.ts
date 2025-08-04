@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
     this.loadSectionData('popular', () =>
       this.movieService.getListMovie(1, 'popular')
     );
-    this.loadFavorite();
   }
   loadList(time_window: string) {
     this.movieService.getTrendingList(time_window).subscribe({
@@ -58,13 +57,7 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-  loadFavorite() {
-    this.movieService.getFavorite('movies', 1).subscribe({
-      next: (res) => {
-        console.log('favo', res);
-      },
-    });
-  }
+
   loadSectionData(
     sectionKey: string,
     fetchFn: () => Observable<{ results: TrendingFilm[] }>
