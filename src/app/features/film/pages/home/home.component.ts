@@ -88,17 +88,12 @@ export class HomeComponent implements OnInit {
   loadUserProfile() {
     const profile = localStorage.getItem('userProfile');
     if (profile) {
-      console.log('User profile already exists in localStorage');
       return;
     }
 
     this.profileService.getUserProfile().subscribe({
       next: (res) => {
         localStorage.setItem('userProfile', JSON.stringify(res));
-        console.log('User profile saved:', res);
-      },
-      error: (err) => {
-        console.error('Failed to get user profile:', err);
       },
     });
   }

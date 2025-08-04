@@ -1,7 +1,46 @@
 <div class="favorite-container">
   <div class="favorite-list">
-    <div *ngFor="let movie of favoriteMovies">
-      <app-big-film-card [film]="movie"></app-big-film-card>
-    </div>
+    <ng-container *ngIf="favoriteMovies$ | async as data">
+      <h2 class="heading">
+        {{
+          (listType$ | async) === "watchlist" ? "My WatchList" : "My Favorites"
+        }}
+        <span>({{ data.totalItems }})</span>
+
+        <div class="nav-container">
+          <a
+            class="nav-item"
+            [class.active]="(type$ | async) === 'movie'"
+            (click)="navigateTo('movie')"
+          >
+            Movies
+          </a>
+          <a
+            class="nav-item"
+            [class.active]="(type$ | async) === 'tv'"
+            (click)="navigateTo('tv')"
+          >
+            TV
+          </a>
+        </div>
+      </h2>
+
+      <div class="favorite-item" *ngFor="let movie of data.results">
+        <app-big-film-card
+          [film]="movie"
+          [type]="type$ | async"
+          [listType]="listType$ | async"
+          (removed)="onRemoved()"
+        ></app-big-film-card>
+      </div>
+
+      <app-pagination
+        [currentPage]="(currentPage$ | async) ?? 1"
+        [totalPages]="data.totalPages"
+        (pageChange)="paginate($event)"
+        (prev)="prevPage()"
+        (next)="nextPage(data.totalPages)"
+      ></app-pagination>
+    </ng-container>
   </div>
 </div>

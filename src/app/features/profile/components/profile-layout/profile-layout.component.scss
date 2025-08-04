@@ -12,7 +12,7 @@
       @include flexbox($gap: 4rem, $justify: center);
       padding: 3rem 5rem;
       .container-header {
-        @include flexbox($gap: 4rem);
+        @include flexbox($gap: 4rem, $align: flex-start);
         max-width: $maxw-xl;
         width: 100%;
         .user-info-img {
@@ -23,6 +23,10 @@
           width: 15rem;
           height: 15rem;
           object-fit: cover;
+        }
+        .user-info-text {
+          @include text-style($fsize: 2rem);
+          margin-top: 2rem;
         }
       }
     }

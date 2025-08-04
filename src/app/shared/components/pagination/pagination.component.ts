@@ -13,7 +13,7 @@ import {
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnChanges {
-  @Input() currentPage!: number;
+  @Input() currentPage!: number ;
   @Input() totalPages!: number;
 
   @Output() pageChange = new EventEmitter<number>();

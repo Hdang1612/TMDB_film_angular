@@ -72,9 +72,49 @@
   &__icon {
     @include flexbox($gap: 3rem);
 
-    a img {
-      width: 3.4rem;
-      height: 3.4rem;
+    .header__profile-icon {
+      position: relative;
+      .profile-menu {
+        position: absolute;
+        top: 3.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 16rem;
+        border-radius: 0.8rem;
+        background: $black-30;
+        // padding: 2rem;
+        display: none;
+        .profile {
+          padding: 1rem 2rem;
+          cursor: pointer;
+          @include text-style(
+            $fsize: 1.4rem,
+            $color: $absolute-white,
+            $fweight: 700
+          );
+          .view-profile-btn {
+            @include text-style($fsize: 1.4rem, $color: $grey-65);
+          }
+        }
+        ul {
+          li {
+            padding: 1rem 2rem;
+            &:hover {
+              background: $black-10;
+            }
+            a {
+              @include text-style($fsize: 1.4rem, $color: $absolute-white);
+            }
+          }
+        }
+      }
+      img {
+        width: 3.4rem;
+        height: 3.4rem;
+      }
+      &:hover .profile-menu {
+        display: block;
+      }
     }
   }
 }

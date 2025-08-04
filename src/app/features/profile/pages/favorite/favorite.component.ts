@@ -1,32 +1,89 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { BehaviorSubject, combineLatest, map, switchMap, of } from 'rxjs';
 import { MovieService } from 'src/app/features/film/services/movie.service';
+import { TrendingFilm } from 'src/app/core/model/trendingMovie';
+import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteComponent implements OnInit {
-  favoriteMovies: any[] = [];
-  constructor(private movieService: MovieService) {}
+  profile: any;
+
+  currentPage$ = new BehaviorSubject<number>(1);
+
+  listType$ =
+    this.route.parent?.url.pipe(
+      map((params) => params[0]?.path || 'favorite')
+    ) ?? of('favorite');
+
+  type$ = this.route.params.pipe(
+    map((params: Params) => params['type'] ?? 'movie')
+  );
+
+  favoriteMovies$ = combineLatest([
+    this.listType$,
+    this.type$,
+    this.currentPage$,
+  ]).pipe(
+    switchMap(([listType, type, page]) => {
+      const mediaType = type === 'movie' ? 'movies' : 'tv';
+      return listType === 'watchlist'
+        ? this.movieService.getWatchList(mediaType, page)
+        : this.movieService.getFavorite(mediaType, page);
+    }),
+    map((res) => ({
+      results: res.results.map((m: TrendingFilm) => ({
+        ...m,
+        poster_path: getFullImageUrl(m.poster_path),
+      })),
+      totalPages: res.total_pages,
+      totalItems: res.total_results,
+    }))
+  );
+
+  constructor(
+    private movieService: MovieService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.loadFavoriteMovies();
+    const stored = localStorage.getItem('userProfile');
+    if (stored) {
+      this.profile = JSON.parse(stored);
+    }
   }
-  loadFavoriteMovies(): void {
-    this.movieService.getFavorite('movies', 1).subscribe({
-      next: (res) => {
-        this.favoriteMovies = res.results.map((movie: any) => ({
-          title: movie.title,
-          posterUrl: 'https://image.tmdb.org/t/p/w300' + movie.poster_path,
-          releaseDate: movie.release_date,
-          overview: movie.overview,
-          voteAverage: movie.vote_average, // convert to %
-        }));
-      },
-      error: (err) => {
-        console.error('Failed to load favorites:', err);
-      },
-    });
+
+  paginate(page: number) {
+    this.currentPage$.next(page);
+  }
+
+  nextPage(totalPages: number) {
+    const current = this.currentPage$.value;
+    if (current < totalPages) {
+      this.currentPage$.next(current + 1);
+    }
+  }
+
+  prevPage() {
+    const current = this.currentPage$.value;
+    if (current > 1) {
+      this.currentPage$.next(current - 1);
+    }
+  }
+
+  navigateTo(type: string): void {
+    const listType = this.route.parent?.snapshot.url[0]?.path ?? 'favorite';
+    this.router.navigate(['/u', this.profile.username, listType, type]);
+    this.currentPage$.next(1);
+  }
+
+  onRemoved() {
+    this.currentPage$.next(this.currentPage$.value);
   }
 }

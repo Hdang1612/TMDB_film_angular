@@ -50,13 +50,28 @@
       <div class="header__search-icon">
         <img src="./assets/icons/notification.svg" alt="" />
       </div>
-      <a
-        *ngIf="userData?.username"
-        class="header__search-icon"
-        [routerLink]="['/u', userData?.username]"
-      >
+      <div *ngIf="userData?.username" class="header__profile-icon">
         <img src="./assets/icons/user.svg" alt="" />
-      </a>
+        <div class="profile-menu">
+          <div class="profile" [routerLink]="['/u', userData?.username]">
+            <p *ngIf="userData" class="profile-name">{{ userData.username }}</p>
+            <p class="view-profile-btn">view profile</p>
+          </div>
+          <ul>
+            <li class="profile-menu-item">
+              <a [routerLink]="['/u', userData?.username, 'favorite']"
+                >Favorite</a
+              >
+            </li>
+            <li class="profile-menu-item">
+              <a [routerLink]="['/u', userData?.username, 'watchlist']"
+                >WatchList</a
+              >
+            </li>
+            <li class="profile-menu-item"><a>Logout</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

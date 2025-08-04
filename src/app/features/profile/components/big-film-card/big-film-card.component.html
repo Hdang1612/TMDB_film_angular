@@ -8,8 +8,8 @@
       <app-movie-rating-circle
         [score]="film.vote_average"
       ></app-movie-rating-circle>
-      <div class="titles">
-        <h2>{{ film.title }}</h2>
+      <div class="titles" (click)="navigate()">
+        <h2>{{ type === "movie" ? film.title : film.name }}</h2>
         <p class="release-date">{{ film.release_date | date : "longDate" }}</p>
       </div>
     </div>
@@ -17,9 +17,15 @@
     <p class="overview">{{ film.overview }}</p>
 
     <div class="actions">
-      <a><img src="assets/icons/heart-white.svg" /> Favorite</a>
-      <a><img src="assets/icons/watch-list-white.svg" /> Add to list</a>
-      <a><img src="assets/icons/close.svg" /> Remove</a>
+      <div class="action-item">
+        <a><img src="assets/icons/heart-fill.svg" /></a>
+      </div>
+      <!-- <div class="action-item">
+        <a><img src="assets/icons/watch-list-white.svg" /> </a>
+      </div> -->
+      <div class="action-item" (click)="removeFavorite()">
+        <a><img src="assets/icons/close.svg" /> </a>
+      </div>
     </div>
   </div>
 </div>

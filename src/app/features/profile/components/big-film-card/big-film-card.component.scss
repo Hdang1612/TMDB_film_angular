@@ -2,12 +2,11 @@
 @use "../../../../../assets/styles/base/variables" as *;
 
 .big-film-card {
-  display: flex;
-  //   background: #fff;
+  @include flexbox($gap: 2rem); //   background: #fff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  // padding: 1rem;
   border: 1px solid $grey-65;
   .poster {
     flex-shrink: 0;
@@ -21,12 +20,13 @@
 
   .info {
     flex-grow: 1;
-    margin-left: 1rem;
+    // margin-left: 1rem;
 
     .header {
       display: flex;
       align-items: center;
       margin-bottom: 0.5rem;
+      gap: 1.6rem;
 
       .score-circle {
         width: 48px;
@@ -47,6 +47,7 @@
       }
 
       .titles {
+        cursor: pointer;
         h2 {
           margin: 0;
         }
@@ -65,23 +66,18 @@
     .actions {
       display: flex;
       gap: 1rem;
-
-      button {
-        background: none;
-        border: none;
-        color: #444;
+      .action-item {
+        padding: 1rem;
+        @include flexbox($gap: 2rem);
+        border: 0.1rem solid $grey-65;
+        border-radius: 50%;
         cursor: pointer;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-
-        i {
-          font-size: 1rem;
-        }
-
-        &:hover {
-          color: #1abc9c;
+        a {
+          @include flexbox();
+          img {
+            width: 2rem;
+            height: 2rem;
+          }
         }
       }
     }

@@ -4,8 +4,31 @@
 .favorite-container {
   @include flexbox($justify: center, $align: flex-start);
   width: 100%;
+  padding: 6rem 0;
   .favorite-list {
+    .heading {
+      width: 100%;
+      @include flexbox($justify: flex-start, $gap: 1rem);
+      @include text-style($fsize: 2rem, $fweight: 700);
+      span {
+        @include text-style($fsize: 1.6rem, $fweight: 600, $color: $grey-65);
+      }
+      .nav-container {
+        @include flexbox($gap: 2rem);
+        .nav-item {
+          @include text-style($fsize: 1.6rem);
+          cursor: pointer;
+        }
+        .active {
+          border-bottom: 2px solid $grey-65;
+        }
+      }
+    }
     max-width: $maxw-xl;
     width: 100%;
+    @include flexbox($direction: column, $gap: 2rem);
+    .favorite-item {
+      width: 100%;
+    }
   }
 }
