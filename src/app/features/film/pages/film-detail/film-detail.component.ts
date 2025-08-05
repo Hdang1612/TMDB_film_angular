@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DETAIL_SECTIONS } from 'src/app/core/utils/constants/mock-data';
 import { MovieService } from '../../services/movie.service';
@@ -12,7 +17,6 @@ import { getFullImageUrl, loadSocialLinks } from 'src/app/core/utils/img.utils';
 import { CastMember } from '../../../../core/model/credit';
 import { environment } from 'src/environments/environment';
 import {
-  BehaviorSubject,
   Observable,
   combineLatest,
   map,
@@ -29,12 +33,13 @@ import { GlobalFeedbackService } from 'src/app/core/services/feedback.service';
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
   styleUrls: ['./film-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmDetailComponent implements OnInit {
   detailSection = DETAIL_SECTIONS;
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
-  backdropGradient: string = '';
+  backdropGradient$!: Observable<string>;
   media = {
     videos: [],
     backdrops: [],
@@ -72,7 +77,8 @@ export class FilmDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private feedBack: GlobalFeedbackService
+    private feedBack: GlobalFeedbackService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -168,7 +174,8 @@ export class FilmDetailComponent implements OnInit {
             }
           ),
           startWith({ loading: true, data: null }),
-          tap(({ data }) => { // xử lý các dữ liệu liên quan 
+          tap(({ data }) => {
+            // xử lý các dữ liệu liên quan
             if (!data) return;
             const {
               detail,
@@ -202,8 +209,14 @@ export class FilmDetailComponent implements OnInit {
             this.detailSection.find((s) => s.key === 'recommend')!.data =
               recommendations;
 
-            getBackdropGradientFromImage(detail.backdrop_path, (gradient) => {
-              this.backdropGradient = gradient;
+            this.backdropGradient$ = new Observable<string>((observer) => {
+              getBackdropGradientFromImage(
+                data.detail.backdrop_path,
+                (gradient) => {
+                  observer.next(gradient);
+                  observer.complete();
+                }
+              );
             });
 
             this.stateIcon.favorite = movieState.favorite
@@ -296,6 +309,7 @@ export class FilmDetailComponent implements OnInit {
             ? 'assets/icons/heart-fill.svg'
             : 'assets/icons/heart-white.svg';
           this.feedBack.show(res.status_message, 'success');
+          this.cd.markForCheck();
         }
       },
       error: (err) => {
@@ -319,6 +333,7 @@ export class FilmDetailComponent implements OnInit {
             ? 'assets/icons/watch-list-fill.svg'
             : 'assets/icons/watch-list-white.svg';
           this.feedBack.show(res.status_message, 'success');
+          this.cd.markForCheck();
         }
       },
       error: (err) => {

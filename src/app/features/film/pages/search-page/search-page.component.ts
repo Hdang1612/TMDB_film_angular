@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   BehaviorSubject,
@@ -16,6 +16,7 @@ import { getFullImageUrl } from 'src/app/core/utils/img.utils';
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent implements OnInit {
   query: string = '';
@@ -43,7 +44,7 @@ export class SearchPageComponent implements OnInit {
             totalPages: res.total_pages,
           },
         })),
-        startWith({ loading: true, data: null }) 
+        startWith({ loading: true, data: null })
       );
     }),
     tap((res) => console.log('>>>', res))

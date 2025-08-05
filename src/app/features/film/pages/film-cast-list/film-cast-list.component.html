@@ -1,43 +1,48 @@
 <ng-container *ngIf="castList$ | async as castData">
   <div class="content">
-    <div class="cast-cotainer">
-      <h2 class="cast-title title">
-        Cast <span>{{ castData.cast.length }}</span>
-      </h2>
-      <div class="cast-list list">
-        <ng-container *ngIf="castData.cast.length; else noCast">
-          <ng-container *ngFor="let cast of castData?.cast">
-            <div class="cast-item" [routerLink]="['/person', cast.id]">
-              <img [src]="cast.profile_path" alt="{{ cast.name }}" />
-              <div class="cast-info">
-                <p class="cast-name">{{ cast.name }}</p>
-                <p class="cast-character cast-sub">{{ cast.character }}</p>
+    <ng-container *ngIf="castData.loading">
+      <app-loading></app-loading>
+    </ng-container>
+    <ng-container *ngIf="!castData.loading && castData.data">
+      <div class="cast-cotainer">
+        <h2 class="cast-title title">
+          Cast <span>{{ castData.data.cast.length }}</span>
+        </h2>
+        <div class="cast-list list">
+          <ng-container *ngIf="castData.data.cast.length; else noCast">
+            <ng-container *ngFor="let cast of castData.data?.cast">
+              <div class="cast-item" [routerLink]="['/person', cast.id]">
+                <img [src]="cast.profile_path" alt="{{ cast.name }}" />
+                <div class="cast-info">
+                  <p class="cast-name">{{ cast.name }}</p>
+                  <p class="cast-character cast-sub">{{ cast.character }}</p>
+                </div>
               </div>
-            </div>
+            </ng-container>
           </ng-container>
-        </ng-container>
-        <ng-template #noCast>
-          <p>No cast information available.</p>
-        </ng-template>
+          <ng-template #noCast>
+            <p>No cast information available.</p>
+          </ng-template>
+        </div>
       </div>
-    </div>
-    <div class="crew-cotainer">
-      <h2 class="cast-title title">
-        Crew <span>{{ castData.crew.length }}</span>
-      </h2>
-      <div class="crew-list list">
-        <ng-container *ngIf="castData.crew.length; else noCast">
-          <ng-container *ngFor="let crew of castData.crew">
-            <div class="cast-item">
-              <img [src]="crew.profile_path" alt="{{ crew.name }}" />
-              <div class="cast-info">
-                <p class="cast-name">{{ crew.name }}</p>
-                <p class="cast-character cast-sub">{{ crew.department }}</p>
+      <div class="crew-cotainer">
+        <h2 class="cast-title title">
+          Crew <span>{{ castData.data.crew.length }}</span>
+        </h2>
+        <div class="crew-list list">
+          <ng-container *ngIf="castData.data.crew.length; else noCast">
+            <ng-container *ngFor="let crew of castData.data.crew">
+              <div class="cast-item">
+                <img [src]="crew.profile_path" alt="{{ crew.name }}" />
+                <div class="cast-info">
+                  <p class="cast-name">{{ crew.name }}</p>
+                  <p class="cast-character cast-sub">{{ crew.department }}</p>
+                </div>
               </div>
-            </div>
+            </ng-container>
           </ng-container>
-        </ng-container>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </ng-container>

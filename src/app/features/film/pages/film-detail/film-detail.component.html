@@ -14,7 +14,10 @@
             : ''
         "
       >
-        <div class="header" [ngStyle]="{ backgroundImage: backdropGradient }">
+        <div
+          class="header"
+          [ngStyle]="{ backgroundImage: (backdropGradient$ | async) || '' }"
+        >
           <div class="header__wrapper">
             <div class="movie-poster">
               <img src="{{ data.data.detail.poster_path }}" alt="" />
@@ -22,9 +25,9 @@
             <div class="movie-info">
               <div class="info-header">
                 <h1 class="movie-name">
-                  {{ data.data?.detail?.title
+                  {{ data.data.detail.title
                   }}<span class="release-year"
-                    >({{ data.data.detail.release_date?.slice(0, 4) }})</span
+                    >({{ data.data.detail.release_date.slice(0, 4) }})</span
                   >
                 </h1>
                 <div class="type">
