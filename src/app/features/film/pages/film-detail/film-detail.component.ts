@@ -19,6 +19,8 @@ import {
   shareReplay,
   switchMap,
   tap,
+  startWith,
+  of,
 } from 'rxjs';
 import { SubInfoSidebarConfig } from '../../../../core/model/section';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
@@ -44,24 +46,27 @@ export class FilmDetailComponent implements OnInit {
   };
   movieId!: string | null;
   subInfoSidebarConfig!: SubInfoSidebarConfig;
-  loadingDetail$ = new BehaviorSubject<boolean>(true);
-  loadingActor$ = new BehaviorSubject<boolean>(false);
   movieState!: MovieState;
 
   data$!: Observable<{
-    detail: MovieDetail;
-    cast: CastMember[];
-    socialLinks: any;
-    keywords: string[];
-    recommendations: any[];
-    reviews: any[];
-    trailerKey: string;
-    media: {
-      videos: any[];
-      backdrops: any[];
-      posters: any[];
-    };
-    movieState: MovieState;
+    loading: boolean;
+    data: {
+      // genres: string;
+      detail: MovieDetail;
+      genreNames: string;
+      cast: CastMember[];
+      socialLinks: any;
+      keywords: string[];
+      recommendations: any[];
+      reviews: any[];
+      trailerKey: string;
+      media: {
+        videos: any[];
+        backdrops: any[];
+        posters: any[];
+      };
+      movieState: MovieState;
+    } | null;
   }>;
 
   constructor(
@@ -73,9 +78,9 @@ export class FilmDetailComponent implements OnInit {
   ngOnInit(): void {
     this.data$ = this.route.paramMap.pipe(
       map((params) => params.get('id')),
-      tap(() => this.loadingDetail$.next(true)), // bắt đầu loading
-      switchMap((id) =>
-        combineLatest([
+      switchMap((id) => {
+        if (!id) return of({ loading: false, data: null });
+        return combineLatest([
           this.movieService.getDetail(id),
           this.movieService.getCredit(id),
           this.movieService.getExternalId(id, 'movie'),
@@ -136,24 +141,36 @@ export class FilmDetailComponent implements OnInit {
               }));
 
               return {
-                detail: mappedDetail,
-                cast: mappedCast,
-                socialLinks: loadSocialLinks(social),
-                keywords: keywords.keywords.map((k: any) => k.name),
-                recommendations: recommend.results.map((m: any) => ({
-                  ...m,
-                  poster_path: getFullImageUrl(m.poster_path),
-                  backdrop_path: getFullImageUrl(m.backdrop_path),
-                })),
-                reviews: reviews.results,
-                trailerKey,
-                media: { backdrops, posters, videos },
-                movieState,
+                loading: false,
+                data: {
+                  detail: mappedDetail,
+                  genreNames: (() => {
+                    const genres = mappedDetail.genres || [];
+                    const names = genres.slice(0, 2).map((g) => g.name);
+                    return genres.length > 2
+                      ? names.join(', ') + ', ...'
+                      : names.join(', ');
+                  })(),
+                  cast: mappedCast,
+                  socialLinks: loadSocialLinks(social),
+                  keywords: keywords.keywords.map((k: any) => k.name),
+                  recommendations: recommend.results.map((m: any) => ({
+                    ...m,
+                    poster_path: getFullImageUrl(m.poster_path),
+                    backdrop_path: getFullImageUrl(m.backdrop_path),
+                  })),
+                  reviews: reviews.results,
+                  trailerKey,
+                  media: { backdrops, posters, videos },
+                  movieState,
+                },
               };
             }
           ),
-          tap(
-            ({
+          startWith({ loading: true, data: null }),
+          tap(({ data }) => { // xử lý các dữ liệu liên quan 
+            if (!data) return;
+            const {
               detail,
               socialLinks,
               keywords,
@@ -162,50 +179,47 @@ export class FilmDetailComponent implements OnInit {
               reviews,
               recommendations,
               movieState,
-            }) => {
-              // gán data cho các section
-              this.setPopularToSection(media);
-              this.media = media;
-              this.subInfoSidebarConfig = {
-                socialLinks,
-                items: [
-                  { label: 'Status', value: detail.status },
-                  { label: 'Release', value: detail.release_date },
-                  {
-                    label: 'Original Language',
-                    value: detail.original_language,
-                  },
-                  { label: 'Budget', value: detail.budget, isCurrency: true },
-                  { label: 'Revenue', value: detail.revenue, isCurrency: true },
-                ],
-                keywords,
-              };
-              this.detailSection.find((s) => s.key === 'cast')!.data = cast;
-              this.detailSection.find((s) => s.key === 'social')!.data =
-                reviews;
-              this.detailSection.find((s) => s.key === 'recommend')!.data =
-                recommendations;
+            } = data;
+            // gán data cho các section
+            this.setPopularToSection(media);
+            this.media = media;
+            this.subInfoSidebarConfig = {
+              socialLinks,
+              items: [
+                { label: 'Status', value: detail.status },
+                { label: 'Release', value: detail.release_date },
+                {
+                  label: 'Original Language',
+                  value: detail.original_language,
+                },
+                { label: 'Budget', value: detail.budget, isCurrency: true },
+                { label: 'Revenue', value: detail.revenue, isCurrency: true },
+              ],
+              keywords,
+            };
+            this.detailSection.find((s) => s.key === 'cast')!.data = cast;
+            this.detailSection.find((s) => s.key === 'social')!.data = reviews;
+            this.detailSection.find((s) => s.key === 'recommend')!.data =
+              recommendations;
 
-              getBackdropGradientFromImage(detail.backdrop_path, (gradient) => {
-                this.backdropGradient = gradient;
-              });
+            getBackdropGradientFromImage(detail.backdrop_path, (gradient) => {
+              this.backdropGradient = gradient;
+            });
 
-              this.stateIcon.favorite = movieState.favorite
-                ? 'assets/icons/heart-fill.svg'
-                : 'assets/icons/heart-white.svg';
+            this.stateIcon.favorite = movieState.favorite
+              ? 'assets/icons/heart-fill.svg'
+              : 'assets/icons/heart-white.svg';
 
-              this.stateIcon.watchList = movieState.watchlist
-                ? 'assets/icons/watch-list-fill.svg'
-                : 'assets/icons/watch-list-white.svg';
+            this.stateIcon.watchList = movieState.watchlist
+              ? 'assets/icons/watch-list-fill.svg'
+              : 'assets/icons/watch-list-white.svg';
 
-              this.movieState = movieState;
-              this.movieId = detail.id.toString();
-            }
-          ),
-          tap(() => this.loadingDetail$.next(false)),
+            this.movieState = movieState;
+            this.movieId = detail.id.toString();
+          }),
           shareReplay(1)
-        )
-      )
+        );
+      })
     );
   }
 

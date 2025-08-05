@@ -1,15 +1,15 @@
 @use "../../../../../assets/styles/abtracts/mixin" as *;
 @use "../../../../../assets/styles/base/variables" as *;
-
+.loading {
+  padding-top: 20rem;
+}
 .header-container {
-  // background-image: url(detail.poster_path);
   background-size: cover;
   width: 100%;
   height: 66rem;
   background-position: left calc((50vw - 170px) - 340px) center;
   background-repeat: no-repeat;
   .header {
-    // background-image: $linear;
     @include flexbox($justify: center, $align: flex-end);
     padding-bottom: 4rem;
     height: 100%;
@@ -19,8 +19,6 @@
       @include flexbox($gap: 3rem);
 
       .movie-poster {
-        // width: 30rem;
-        // aspect-ratio: 3/4;
         img {
           border-radius: 2rem;
           width: 30rem;
