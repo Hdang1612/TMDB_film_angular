@@ -69,6 +69,7 @@ export class HeaderComponent implements OnInit {
     this.isSearchOpen = !this.isSearchOpen;
   }
   onSearch() {
+    console.log('searchhhh', this.searchQuery);
     if (!this.searchQuery.trim()) return;
     this.isSearchOpen = false;
     this.router.navigate(['/search'], {

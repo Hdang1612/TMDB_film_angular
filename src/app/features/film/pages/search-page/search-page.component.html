@@ -2,9 +2,15 @@
   <div class="search-list-container">
     <div *ngIf="movies$ | async as result">
       <h2 *ngIf="query">Kết quả tìm kiếm cho: "{{ query }}"</h2>
-      <ng-container *ngIf="!(loading$ | async); else showLoading">
-        <div class="search-list" *ngIf="result.results.length; else noResult">
-          <div class="search-item" *ngFor="let movie of result.results">
+      <ng-container *ngIf="result.loading">
+        <app-loading></app-loading>
+      </ng-container>
+      <ng-container *ngIf="!result.loading">
+        <div
+          class="search-list"
+          *ngIf="result?.data?.results?.length; else noResult"
+        >
+          <div class="search-item" *ngFor="let movie of result.data.results">
             <app-big-film-card
               [film]="movie"
               [type]="'movie'"
@@ -13,17 +19,15 @@
         </div>
         <app-pagination
           [currentPage]="(currentPage$ | async) ?? 1"
-          [totalPages]="result.totalPages"
+          [totalPages]="result.data.totalPages"
           (pageChange)="paginate($event)"
           (prev)="prevPage()"
-          (next)="nextPage(result.totalPages)"
+          (next)="nextPage(result.data.totalPages)"
         ></app-pagination>
       </ng-container>
     </div>
   </div>
-  <ng-template #showLoading>
-    <app-loading></app-loading>
-  </ng-template>
+  <!-- <ng-template #showLoading> </ng-template> -->
   <ng-template #noResult>
     <p>no result</p>
   </ng-template>
