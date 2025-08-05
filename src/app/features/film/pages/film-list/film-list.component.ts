@@ -4,7 +4,16 @@ import { MovieService } from '../../services/movie.service';
 import { TrendingFilm } from '../../../../core/model/trendingMovie';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { MOVIE_TYPE_MAP } from 'src/app/core/utils/constants/mock-data';
-import { Observable, of, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  map,
+  Observable,
+  of,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-film-list',
@@ -13,7 +22,15 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 export class FilmListComponent implements OnInit {
   filmList: TrendingFilm[] = [];
-  // filmList$: Observable<{ loading: boolean; data: TrendingFilm | null }>;
+  filmList$!: Observable<{
+    loading: boolean;
+    data: TrendingFilm[];
+    totalPages: number;
+  }>;
+
+  private currentPage$ = new BehaviorSubject<number>(1);
+  private searchParams$ = new BehaviorSubject<any>(null);
+  private selectedRouteType$!: Observable<{ type: string; title: string }>;
   currentPage: number = 1;
   totalPages: number = 0;
   selectedMenuCardId: number | null = null;
@@ -27,75 +44,137 @@ export class FilmListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      const routeType = params.get('type') || '';
-      const mapped = MOVIE_TYPE_MAP[routeType] || MOVIE_TYPE_MAP[''];
-      this.movieType = mapped.type;
-      this.title = mapped.title;
-      this.currentPage = 1;
-      this.getMovies(this.currentPage);
-      // this.filmList$ = this.route.paramMap.pipe(
-      //   map((params) => params.get('type')),
-      //   switchMap((type) => {
-      //     if (!type) return of({ loading: false, data: null });
-      //     return this.movieService.getListMovie(this.currentPage)
-      //   })
-      // );
-    });
+    // this.route.paramMap.subscribe((params: ParamMap) => {
+    //   const routeType = params.get('type') || '';
+    //   const mapped = MOVIE_TYPE_MAP[routeType] || MOVIE_TYPE_MAP[''];
+    //   this.movieType = mapped.type;
+    //   this.title = mapped.title;
+    //   this.currentPage = 1;
+    //   this.getMovies(this.currentPage);
+    // });
+    this.selectedRouteType$ = this.route.paramMap.pipe(
+      map((params: ParamMap) => params.get('type') || ''),
+      map((typeParam) => MOVIE_TYPE_MAP[typeParam] || MOVIE_TYPE_MAP['']),
+      tap((mapped) => {
+        this.movieType = mapped.type;
+        this.title = mapped.title;
+        this.currentPage$.next(1); // reset to page 1 when type changes
+        this.searchParams$.next(null); // clear filters when type changes
+      })
+    );
+
+    // 2. filmList$: main stream
+    this.filmList$ = combineLatest([
+      this.selectedRouteType$,
+      this.currentPage$,
+      this.searchParams$,
+    ]).pipe(
+      switchMap(([mapped, page, params]) => {
+        const fetch$ = params
+          ? this.movieService.getDiscoveryMovies({ ...params, page })
+          : this.movieService.getListMovie(page, mapped.type);
+
+        return fetch$.pipe(
+          map((res) => ({
+            loading: false,
+            data: res.results.map((movie: TrendingFilm) => ({
+              ...movie,
+              poster_path: getFullImageUrl(movie.poster_path),
+              backdrop_path: getFullImageUrl(movie.backdrop_path),
+            })),
+            totalPages: res.total_pages,
+          })),
+          startWith({
+            loading: true,
+            data: [],
+            totalPages: 0,
+          })
+        );
+      }),
+      tap((res) => console.log('filmList$', res))
+    );
   }
 
-  getMovies(page: number) {
-    this.movieService.getListMovie(page, this.movieType).subscribe({
-      next: (res) => {
-        this.filmList = res.results.map((movie: TrendingFilm) => ({
-          ...movie,
-          poster_path: getFullImageUrl(movie.poster_path),
-          backdrop_path: getFullImageUrl(movie.backdrop_path),
-        }));
-        this.totalPages = res.total_pages;
-      },
-    });
-  }
+  // getMovies(page: number) {
+  //   this.movieService.getListMovie(page, this.movieType).subscribe({
+  //     next: (res) => {
+  //       this.filmList = res.results.map((movie: TrendingFilm) => ({
+  //         ...movie,
+  //         poster_path: getFullImageUrl(movie.poster_path),
+  //         backdrop_path: getFullImageUrl(movie.backdrop_path),
+  //       }));
+  //       this.totalPages = res.total_pages;
+  //     },
+  //   });
+  // }
 
-  getMoviesViaParams(param: any, page: number) {
-    this.movieService.getDiscoveryMovies({ ...param, page: page }).subscribe({
-      next: (res) => {
-        this.filmList = res.results.map((movie: TrendingFilm) => ({
-          ...movie,
-          poster_path: getFullImageUrl(movie.poster_path),
-          backdrop_path: getFullImageUrl(movie.backdrop_path),
-        }));
-        this.totalPages = res.total_pages;
-      },
-    });
-  }
+  // getMoviesViaParams(param: any, page: number) {
+  //   this.movieService.getDiscoveryMovies({ ...param, page: page }).subscribe({
+  //     next: (res) => {
+  //       this.filmList = res.results.map((movie: TrendingFilm) => ({
+  //         ...movie,
+  //         poster_path: getFullImageUrl(movie.poster_path),
+  //         backdrop_path: getFullImageUrl(movie.backdrop_path),
+  //       }));
+  //       this.totalPages = res.total_pages;
+  //     },
+  //   });
+  // }
 
+  // paginate(page: number) {
+  //   if (this.params) {
+  //     this.getMoviesViaParams(this.params, page);
+  //     this.currentPage = page;
+  //   } else {
+  //     this.getMovies(page);
+  //     this.currentPage = page;
+  //   }
+  // }
+
+  // nextPage(): void {
+  //   if (this.currentPage < this.totalPages) {
+  //     this.currentPage++;
+  //     if (this.params) {
+  //       this.getMoviesViaParams(this.params, this.currentPage);
+  //     } else this.getMoviesViaParams(this.params, this.currentPage);
+  //     this.getMoviesViaParams(this.params, this.currentPage);
+  //   }
+  // }
+
+  // prevPage(): void {
+  //   if (this.currentPage > 1) {
+  //     this.currentPage--;
+  //     if (this.params) {
+  //       this.getMoviesViaParams(this.params, this.currentPage);
+  //     } else this.getMoviesViaParams(this.params, this.currentPage);
+  //   }
+  // }
+
+  // handleOpenMenu(id: number) {
+  //   this.selectedMenuCardId = this.selectedMenuCardId === id ? null : id;
+  // }
+
+  // handleSearchResult(res: any) {
+  //   console.log(res);
+  //   this.params = res;
+  //   console.log(this.params);
+  //   this.getMoviesViaParams(this.params, 1);
+  // }
   paginate(page: number) {
-    if (this.params) {
-      this.getMoviesViaParams(this.params, page);
-      this.currentPage = page;
-    } else {
-      this.getMovies(page);
-      this.currentPage = page;
+    this.currentPage$.next(page);
+  }
+
+  nextPage(totalPages: number) {
+    const nextPage = this.currentPage$.value + 1;
+    if (nextPage <= totalPages) {
+      this.currentPage$.next(nextPage);
     }
   }
 
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      if (this.params) {
-        this.getMoviesViaParams(this.params, this.currentPage);
-      } else this.getMoviesViaParams(this.params, this.currentPage);
-      this.getMoviesViaParams(this.params, this.currentPage);
-    }
-  }
-
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      if (this.params) {
-        this.getMoviesViaParams(this.params, this.currentPage);
-      } else this.getMoviesViaParams(this.params, this.currentPage);
+  prevPage() {
+    const prevPage = this.currentPage$.value - 1;
+    if (prevPage >= 1) {
+      this.currentPage$.next(prevPage);
     }
   }
 
@@ -104,9 +183,7 @@ export class FilmListComponent implements OnInit {
   }
 
   handleSearchResult(res: any) {
-    console.log(res);
-    this.params = res;
-    console.log(this.params);
-    this.getMoviesViaParams(this.params, 1);
+    this.searchParams$.next(res);
+    this.currentPage$.next(1); // reset to page 1
   }
 }

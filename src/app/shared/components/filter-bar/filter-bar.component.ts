@@ -103,14 +103,8 @@ export class FilterBarComponent implements OnInit {
       } else if (value !== null && value !== '') {
         params[key] = value;
       }
-      // console.log('parammm', params);
     }
 
-    // this.currentService.getDiscoveryMovies(params).subscribe({
-    //   next: (res) => {
-    //     this.searchResult.emit(res); //
-    //   },
-    // });
     this.searchResult.emit(params);
   }
 
