@@ -56,7 +56,7 @@
                     [cardType]="section.dataType"
                     [movie]="movie"
                     [isMenuOpen]="selectedMenuCardId === movie.id"
-                    (openMenu)="handleOpenMenu(movie.id)"
+                    (openMenu)="handleOpenMenu($event)"
                   ></app-film-card>
                 </ng-container>
                 <div

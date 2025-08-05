@@ -36,6 +36,7 @@ export class FilmCardComponent implements OnInit {
   @Input() isMenuOpen: boolean = false;
   // @ViewChild('cardContainer', { static: true }) cardContainer!: ElementRef;
   movieState?: MovieState;
+  isLoadingMovieState = true;
   constructor(
     private trailerService: MovieService,
     private router: Router,
@@ -75,19 +76,24 @@ export class FilmCardComponent implements OnInit {
   }
 
   handleOpenMenu(event: MouseEvent) {
+    console.log('[film-card] clicked menu for id:', this.movie?.id);
     event.stopPropagation();
+    this.isMenuOpen = true;
+    this.openMenu.emit(this.movie.id);
     if (!this.movieState) {
       this.trailerService
         .getMovieState(this.movie.id, this.mediaType)
         .subscribe({
           next: (state) => {
+            // this.openMenu.emit(this.movie.id);
             this.movieState = state;
-            this.openMenu.emit();
+            this.isLoadingMovieState = false;
           },
         });
-    } else {
-      this.openMenu.emit();
     }
+    // else {
+    //   this.openMenu.emit(this.movie.id);
+    // }
   }
   @HostListener('document:click', ['$event']) // lắng nghe sk click trên trang , sau đó truyền mouse event vào hàm
   onClickOutside(event: MouseEvent) {
