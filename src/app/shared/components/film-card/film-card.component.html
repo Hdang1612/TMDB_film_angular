@@ -16,6 +16,9 @@
 >
   <div
     class="img-container"
+    [style.min-height]="
+      cardType != 'trailer' && cardType != 'recommendation' ? '330px' : 'auto'
+    "
     (click)="cardType === 'trailer' && onClickGetTrailer(movie.id)"
   >
     <img class="movie-img" [src]="imagePath" alt="" />

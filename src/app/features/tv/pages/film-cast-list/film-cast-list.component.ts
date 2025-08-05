@@ -5,7 +5,7 @@ import { CastResponse } from '../../../../core/model/credit';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
 import { map, Observable, switchMap } from 'rxjs';
-import { MovieService } from 'src/app/features/film/services/movie.service';
+import { TvService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-film-cast-list',
@@ -19,7 +19,7 @@ export class FilmCastListComponent implements OnInit {
   castList$!: Observable<CastResponse>;
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: TvService
   ) {
     // console.log('cast list >>>>', this.castList$);
   }

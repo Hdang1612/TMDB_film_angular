@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Review, ReviewResponse } from '../../../../core/model/review';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
-import { MovieService } from '../../services/movie.service';
+import { TvService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-film-review-list',
@@ -16,7 +16,7 @@ export class FilmReviewListComponent implements OnInit {
   totalPages: number = 1;
   id!: string | null;
   constructor(
-    private movieService: MovieService,
+    private movieService: TvService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -37,7 +37,6 @@ export class FilmReviewListComponent implements OnInit {
         this.result = res.results;
         this.totalPages = res.total_pages;
       },
-      
     });
   }
   paginate(page: number) {

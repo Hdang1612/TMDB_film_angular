@@ -24,7 +24,7 @@ import { SubInfoSidebarConfig } from '../../../../core/model/section';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { GlobalFeedbackService } from 'src/app/core/services/feedback.service';
-import { MovieService } from '../../services/movie.service';
+import { TvService } from '../../services/movie.service';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -66,7 +66,7 @@ export class FilmDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService, // public loadingService: LoadingService
+    private movieService: TvService, // public loadingService: LoadingService
     private loadingService: LoadingService,
     private feedBack: GlobalFeedbackService
   ) {}
@@ -241,7 +241,6 @@ export class FilmDetailComponent implements OnInit {
           alert('err.');
         }
       },
-      
     });
   }
 

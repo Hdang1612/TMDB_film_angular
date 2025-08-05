@@ -15,7 +15,7 @@ import { RecommendationResponse } from '../models/recomendation';
 import { ReviewResponse } from '../../../core/model/review';
 
 @Injectable({ providedIn: 'root' })
-export class MovieService {
+export class TvService {
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

@@ -6,7 +6,7 @@ import {
   MOVIE_TYPE_MAP,
   TV_SHOW_TYPE_MAP,
 } from 'src/app/core/utils/constants/mock-data';
-import { MovieService } from '../../services/movie.service';
+import { TvService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-film-list',
@@ -22,10 +22,7 @@ export class FilmListComponent implements OnInit {
   movieType: string = 'popular';
   title: string = '';
 
-  constructor(
-    private movieService: MovieService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private movieService: TvService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -48,7 +45,6 @@ export class FilmListComponent implements OnInit {
         }));
         this.totalPages = res.total_pages;
       },
-     
     });
   }
 
