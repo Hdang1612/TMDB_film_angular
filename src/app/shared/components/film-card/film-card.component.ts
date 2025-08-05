@@ -34,14 +34,13 @@ export class FilmCardComponent implements OnInit {
   trailerKey!: string;
   isTrailerModalOpen: boolean = false;
   @Input() isMenuOpen: boolean = false;
-  @ViewChild('cardContainer', { static: true }) cardContainer!: ElementRef;
+  // @ViewChild('cardContainer', { static: true }) cardContainer!: ElementRef;
   movieState?: MovieState;
   constructor(
     private trailerService: MovieService,
     private router: Router,
     private eRef: ElementRef,
-    private feedBack: GlobalFeedbackService,
-    private tvState: MovieService
+    private feedBack: GlobalFeedbackService
   ) {}
 
   ngOnInit(): void {}

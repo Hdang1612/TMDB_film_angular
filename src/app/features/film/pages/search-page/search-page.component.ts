@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  combineLatest,
-  map,
-  Observable,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, map, of, switchMap, tap } from 'rxjs';
 import { MovieService } from '../../services/movie.service';
 import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 
@@ -20,11 +12,12 @@ import { getFullImageUrl } from 'src/app/core/utils/img.utils';
 export class SearchPageComponent implements OnInit {
   query: string = '';
   currentPage$ = new BehaviorSubject<number>(1);
+  loading$ = new BehaviorSubject<boolean>(true);
   movies$ = combineLatest([
     this.route.queryParams.pipe(map((params: Params) => params['query'] || '')),
     this.currentPage$,
   ]).pipe(
-    // tap(() => this.loading$.next(true)),
+    tap(() => this.loading$.next(true)),
     switchMap(([query, page]) => {
       this.query = query;
       if (!query) return of(null);
@@ -38,7 +31,7 @@ export class SearchPageComponent implements OnInit {
       })),
       totalPages: res.total_pages,
     })),
-
+    tap(() => this.loading$.next(false)),
     tap((res) => console.log('>>>', res))
   );
 
@@ -60,7 +53,7 @@ export class SearchPageComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { query: this.query, page },
-      queryParamsHandling: 'merge',
+      queryParamsHandling: 'merge', // giữ lại query param đã có , chỉ thay đổi hoặc thêm cái truyền vào
     });
   }
 

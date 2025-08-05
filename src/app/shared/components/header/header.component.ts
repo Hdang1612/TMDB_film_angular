@@ -1,6 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { MOVIE_TYPE_MAP } from 'src/app/core/utils/constants/mock-data';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +18,7 @@ export class HeaderComponent implements OnInit {
   userData: { username: string } | null = null;
   isSearchOpen = false;
   searchQuery = '';
+  @ViewChild('searchBtn') searchBtn!: ElementRef;
 
   movieMenu = [
     { path: '', label: 'Popular' },
@@ -42,7 +48,16 @@ export class HeaderComponent implements OnInit {
 
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
-  constructor(private router: Router) {}
+  @HostListener('document:click', ['$event'])
+  clickOutsideSearch(event: MouseEvent) {
+    if (
+      this.isSearchOpen &&
+      this.searchBtn.nativeElement &&
+      !this.searchBtn.nativeElement.contains(event.target)
+    )
+      this.isSearchOpen = false;
+  }
+  constructor(private router: Router, private eRef: ElementRef) {}
 
   ngOnInit(): void {
     const stored = localStorage.getItem('userProfile');
@@ -55,7 +70,6 @@ export class HeaderComponent implements OnInit {
   }
   onSearch() {
     if (!this.searchQuery.trim()) return;
-
     this.isSearchOpen = false;
     this.router.navigate(['/search'], {
       queryParams: { query: this.searchQuery.trim() },
