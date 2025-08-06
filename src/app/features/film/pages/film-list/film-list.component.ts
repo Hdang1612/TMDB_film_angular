@@ -28,9 +28,9 @@ export class FilmListComponent implements OnInit {
     totalPages: number;
   }>;
 
-  private currentPage$ = new BehaviorSubject<number>(1);
-  private searchParams$ = new BehaviorSubject<any>(null);
-  private selectedRouteType$!: Observable<{ type: string; title: string }>;
+  currentPage$ = new BehaviorSubject<number>(1);
+  searchParams$ = new BehaviorSubject<any>(null);
+  selectedRouteType$!: Observable<{ type: string; title: string }>;
   currentPage: number = 1;
   totalPages: number = 0;
   selectedMenuCardId: number | null = null;
@@ -58,12 +58,12 @@ export class FilmListComponent implements OnInit {
       tap((mapped) => {
         this.movieType = mapped.type;
         this.title = mapped.title;
-        this.currentPage$.next(1); // reset to page 1 when type changes
-        this.searchParams$.next(null); // clear filters when type changes
+        console.log('type ', mapped.type);
+        this.currentPage$.next(1);
+        this.searchParams$.next(null);
       })
     );
 
-    // 2. filmList$: main stream
     this.filmList$ = combineLatest([
       this.selectedRouteType$,
       this.currentPage$,
@@ -184,6 +184,6 @@ export class FilmListComponent implements OnInit {
 
   handleSearchResult(res: any) {
     this.searchParams$.next(res);
-    this.currentPage$.next(1); // reset to page 1
+    this.currentPage$.next(1);
   }
 }

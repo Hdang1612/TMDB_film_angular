@@ -1,32 +1,38 @@
-<div class="movie-list-container">
-  <p class="header">{{ title }}</p>
-  <div class="content">
-    <div class="filter-bar-container">
-      <app-filter-bar
-        [mediaType]="'tv'"
-        (searchResult)="handleSearchResult($event)"
-      ></app-filter-bar>
-    </div>
-    <div class="movie-list">
-      <div class="film-list">
-        <ng-container *ngFor="let movie of filmList">
-          <app-film-card
-            [mediaType]="'tv'"
-            [cardType]="'default'"
-            [movie]="movie"
-            [isMenuOpen]="selectedMenuCardId === movie.id"
-            (openMenu)="handleOpenMenu(movie.id)"
-          ></app-film-card>
+<ng-container *ngIf="filmList$ | async as movieList">
+  <div class="movie-list-container">
+    <p class="header">{{ title }}</p>
+    <div class="content">
+      <div class="filter-bar-container">
+        <app-filter-bar
+          [mediaType]="'tv'"
+          (searchResult)="handleSearchResult($event)"
+        ></app-filter-bar>
+      </div>
+      <div class="movie-list">
+        <ng-container *ngIf="movieList.loading">
+          <app-loading></app-loading>
+        </ng-container>
+        <div class="film-list">
+          <ng-container *ngFor="let movie of movieList.data">
+            <app-film-card
+              [mediaType]="'tv'"
+              [cardType]="'default'"
+              [movie]="movie"
+              [isMenuOpen]="selectedMenuCardId === movie.id"
+              (openMenu)="handleOpenMenu(movie.id)"
+            ></app-film-card>
+          </ng-container>
+        </div>
+        <ng-container *ngIf="currentPage$ | async as page">
+          <app-pagination
+            [currentPage]="page"
+            [totalPages]="movieList.totalPages"
+            (pageChange)="paginate($event)"
+            (prev)="prevPage()"
+            (next)="nextPage(movieList.totalPages)"
+          ></app-pagination>
         </ng-container>
       </div>
-
-      <app-pagination
-        [currentPage]="currentPage"
-        [totalPages]="totalPages"
-        (pageChange)="paginate($event)"
-        (prev)="prevPage()"
-        (next)="nextPage()"
-      ></app-pagination>
     </div>
   </div>
-</div>
+</ng-container>

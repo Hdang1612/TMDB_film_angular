@@ -9,6 +9,9 @@
         ></app-filter-bar>
       </div>
       <div class="movie-list">
+        <ng-container *ngIf="movieList.loading">
+          <app-loading></app-loading>
+        </ng-container>
         <div class="film-list">
           <ng-container *ngFor="let movie of movieList.data">
             <app-film-card
@@ -19,14 +22,15 @@
             ></app-film-card>
           </ng-container>
         </div>
-
-        <app-pagination
-          [currentPage]="currentPage"
-          [totalPages]="totalPages"
-          (pageChange)="paginate($event)"
-          (prev)="prevPage()"
-          (next)="nextPage(movieList.totalPages)"
-        ></app-pagination>
+        <ng-container *ngIf="currentPage$ | async as page">
+          <app-pagination
+            [currentPage]="page"
+            [totalPages]="movieList.totalPages"
+            (pageChange)="paginate($event)"
+            (prev)="prevPage()"
+            (next)="nextPage(movieList.totalPages)"
+          ></app-pagination>
+        </ng-container>
       </div>
     </div>
   </div>
