@@ -5,7 +5,7 @@ import { FilmReviewListComponent } from './film-review-list/film-review-list.com
 import { HomeComponent } from './home/home.component';
 import { MovieDetailLayoutComponent } from './movie-detail-layout/movie-detail-layout.component';
 import { MovieLayoutComponent } from './movie-layout/movie-layout.component';
-import { MovieListLayoutComponent } from './movie-list-layout/movie-list-layout.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 export const pages = [
   FilmCastListComponent,
@@ -15,5 +15,5 @@ export const pages = [
   HomeComponent,
   MovieDetailLayoutComponent,
   MovieLayoutComponent,
-  MovieListLayoutComponent,
+  SearchPageComponent,
 ];

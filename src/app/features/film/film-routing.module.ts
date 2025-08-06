@@ -5,7 +5,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { FilmDetailComponent } from './pages/film-detail/film-detail.component';
 import { MovieLayoutComponent } from './pages/movie-layout/movie-layout.component';
 import { FilmListComponent } from './pages/film-list/film-list.component';
-import { MovieListLayoutComponent } from './pages/movie-list-layout/movie-list-layout.component';
 import { FilmCastListComponent } from './pages/film-cast-list/film-cast-list.component';
 import { MovieDetailLayoutComponent } from './pages/movie-detail-layout/movie-detail-layout.component';
 import { FilmReviewListComponent } from './pages/film-review-list/film-review-list.component';

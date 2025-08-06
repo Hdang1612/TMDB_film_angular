@@ -1,4 +1,3 @@
-import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileLayoutComponent } from './components/profile-layout/profile-layout.component';
