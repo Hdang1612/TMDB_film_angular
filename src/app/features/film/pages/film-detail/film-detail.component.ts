@@ -25,6 +25,7 @@ import {
   tap,
   startWith,
   of,
+  catchError,
 } from 'rxjs';
 import { SubInfoSidebarConfig } from '../../../../core/model/section';
 import { getBackdropGradientFromImage } from 'src/app/core/utils/backdrop-color.utils';
@@ -89,11 +90,21 @@ export class FilmDetailComponent implements OnInit {
         return combineLatest([
           this.movieService.getDetail(id),
           this.movieService.getCredit(id),
-          this.movieService.getExternalId(id, 'movie'),
-          this.movieService.getKeyword(id, 'movie'),
-          this.movieService.getRecommendation(id),
-          this.movieService.getReviews(id, 1),
-          this.movieService.getBestTrailerKey(id),
+          this.movieService
+            .getExternalId(id, 'movie')
+            .pipe(catchError(() => of({}))),
+          this.movieService
+            .getKeyword(id, 'movie')
+            .pipe(catchError(() => of({ keywords: [] }))),
+          this.movieService
+            .getRecommendation(id)
+            .pipe(catchError(() => of({ results: [] }))),
+          this.movieService
+            .getReviews(id, 1)
+            .pipe(catchError(() => of({ results: [] }))),
+          this.movieService
+            .getBestTrailerKey(id)
+            .pipe(catchError(() => of(''))),
           combineLatest([
             this.movieService.getImages(id),
             this.movieService.getTrailer(id),
