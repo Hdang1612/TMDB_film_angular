@@ -1,33 +1,73 @@
+<!-- <ng-container *ngIf="searchResults$ | async as list"> </ng-container> -->
 <div class="container">
   <div class="search-list-container">
-    <div *ngIf="movies$ | async as result">
+    <div *ngIf="searchResults$ | async as result">
       <h2 *ngIf="query">Kết quả tìm kiếm cho: "{{ query }}"</h2>
-      <ng-container *ngIf="result.loading">
-        <app-loading></app-loading>
-      </ng-container>
-      <ng-container *ngIf="!result.loading">
-        <div
-          class="search-list"
-          *ngIf="result?.data?.results?.length; else noResult"
-        >
-          <div class="search-item" *ngFor="let movie of result.data.results">
-            <app-big-film-card
-              [film]="movie"
-              [type]="'movie'"
-            ></app-big-film-card>
+      <div class="container-list">
+        <div class="side-menu">
+          <div class="heading">
+            <h2>SEARCH RESULT</h2>
+          </div>
+          <div
+            class="menu-item"
+            *ngFor="
+              let type of [
+                'movie',
+                'tv',
+                'person',
+                'collection',
+                'company',
+                'keyword'
+              ]
+            "
+            [class.active]="(selectedType$ | async) === type"
+            (click)="setSelectedType(type)"
+          >
+            {{ type | titlecase }}
+            <span *ngIf="result.data[type]">
+              ({{ result.data[type].total_results }})
+            </span>
           </div>
         </div>
-        <app-pagination
-          [currentPage]="(currentPage$ | async) ?? 1"
-          [totalPages]="result.data.totalPages"
-          (pageChange)="paginate($event)"
-          (prev)="prevPage()"
-          (next)="nextPage(result.data.totalPages)"
-        ></app-pagination>
-      </ng-container>
+        <ng-container *ngIf="result.loading">
+          <app-loading></app-loading>
+        </ng-container>
+        <ng-container *ngIf="!result.loading">
+          <ng-container *ngIf="selectedType$ | async as type">
+            <div
+              class="search-list"
+              *ngIf="result.data[type].results?.length; else noResult"
+            >
+              <div
+                class="search-item"
+                *ngFor="let movie of result.data[type].results"
+              >
+                <ng-container [ngSwitch]="type">
+                  <app-big-film-card
+                    *ngSwitchCase="'movie'"
+                    [film]="movie"
+                    [type]="'movie'"
+                  ></app-big-film-card>
+                  <app-big-film-card
+                    *ngSwitchCase="'tv'"
+                    [film]="movie"
+                    [type]="'tv'"
+                  ></app-big-film-card>
+                </ng-container>
+              </div>
+              <app-pagination
+                [currentPage]="(currentPage$ | async) ?? 1"
+                [totalPages]="result.data[type].totalPages"
+                (pageChange)="paginate($event)"
+                (prev)="prevPage()"
+                (next)="nextPage(result.data[type].totalPages)"
+              ></app-pagination>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
     </div>
   </div>
-  <!-- <ng-template #showLoading> </ng-template> -->
   <ng-template #noResult>
     <p>no result</p>
   </ng-template>

@@ -345,3 +345,12 @@ export const leaderboardMockData = [
     color: '#c11244',
   },
 ];
+
+export const MEDIA_TYPES = [
+  'movie',
+  'tv',
+  'person',
+  'collection',
+  'company',
+  'keyword',
+];

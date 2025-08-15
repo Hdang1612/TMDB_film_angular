@@ -263,6 +263,7 @@ export class FilmDetailComponent implements OnInit {
         if (key) {
           this.trailerKey = key;
           this.isTrailerModalOpen = true;
+          this.cd.markForCheck();
         } else {
           alert('err.');
         }

@@ -1,4 +1,3 @@
-import { ActionFeedbackComponent } from './action-feedback/action-feedback.component';
 import { BigFilmCardComponent } from './big-film-card/big-film-card.component';
 import { DetailHeaderComponent } from './detail-header/detail-header.component';
 import { EditorBarComponent } from './editor-bar/editor-bar.component';
@@ -37,7 +36,6 @@ export const components = [
   TrailerModalComponent,
   UserLeaderboardItemComponent,
   VideoCardComponent,
-  ActionFeedbackComponent,
   InputDateRangeComponent,
   InputMultiSelectComponent,
   InputRadioComponent,

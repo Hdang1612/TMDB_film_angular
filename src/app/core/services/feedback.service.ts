@@ -1,15 +1,26 @@
 // src/app/core/services/global-feedback.service.ts
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-
-export type FeedbackType = 'success' | 'error' | 'info';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({ providedIn: 'root' })
 export class GlobalFeedbackService {
-   messageSubject = new Subject<{ message: string; type: FeedbackType }>();
-   message$: Observable<{ message: string; type: FeedbackType }> = this.messageSubject.asObservable();
-
-  show(message: string, type: FeedbackType = 'success') {
-    this.messageSubject.next({ message, type });
+  constructor(private toastr: ToastrService) {}
+  show(
+    message: string,
+    type: 'success' | 'error' | 'info' | 'warning' = 'success'
+  ) {
+    switch (type) {
+      case 'success':
+        this.toastr.success(message);
+        break;
+      case 'error':
+        this.toastr.error(message);
+        break;
+      case 'info':
+        this.toastr.info(message);
+        break;
+      case 'warning':
+        this.toastr.warning(message);
+        break;
+    }
   }
 }

@@ -10,10 +10,39 @@
     h2 {
       margin-bottom: 2rem;
     }
-    .search-list {
-      @include flexbox($gap: 3rem, $direction: column);
-      .search-item {
-        width: 100%;
+    .container-list {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+      .side-menu {
+        width: 25%;
+        border: 1px solid $grey-65;
+        padding: 2rem 0;
+        .heading {
+          padding: 2rem;
+        }
+        // @include flexbox($direction: column, $gap: 2rem);
+        border-radius: 2rem;
+        .menu-item {
+          width: 100%;
+          padding: 1.4rem 2rem;
+          @include flexbox($justify: space-between);
+          @include text-style();
+          cursor: pointer;
+          &:hover {
+            background-color: $grey-65;
+          }
+        }
+        .active {
+          background-color: $grey-65;
+        }
+      }
+      .search-list {
+        @include flexbox($gap: 3rem, $direction: column);
+        width: 75%;
+        .search-item {
+          width: 100%;
+        }
       }
     }
   }
